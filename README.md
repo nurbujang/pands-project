@@ -10,7 +10,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 ## **analysis.py**
 
-### Task 1 Description:
+### Task Description:
 *The task is to write a program called analysis.py that:*
 
 *1. Outputs a summary of each variable to a single text file,*
