@@ -2,9 +2,11 @@
 Pands project for Programming and Scripting
 
 ### Dataset Summary
-Dataset iris.data (1) contains 5 columns and 150 lines (replicates). A quick look through the data file indicates that it is four measurement of a particular external flower structure to determine/identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. However, a closer look at the description file indicates that 
-Why? assess biodiversity in an ecosystem. Perhaps to rectify previously misidentified species. While there are other 
-which species are more closely related to each other
+Dataset iris.data (1) contains 5 columns and 150 lines (replicates). A quick look through the data file indicates that it is four measurement of a particular external flower structure to morphologically determine/identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. However, a closer look at the description file indicates that these measurements are the length and width of two structures: the sepal and petal. The color attribute is probably unreliable because of color polymorphism within the species or population.
+
+Morphological analysis for species determination is used to assess biodiversity in an ecosystem. It could be used to identidy new species or rectify previously misidentified species. While there are other more accurate methods for species identification such as DNA Barcoding and protein-based methods, morphological analysis is quick, cheap and particularly useful for researchers in the field. 
+
+This data can be used to develop Interactive Identification Keys for future taxonomists and researchers, which species are more closely related to each other
 
 ## **analysis.py**
 
