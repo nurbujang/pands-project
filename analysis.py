@@ -8,7 +8,7 @@
 # 4. Perform any other analysis I think is appropriate
 
 # import modules
-import pands as pd
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -16,7 +16,7 @@ import matplotlib.lines as mlines
 
 
 # 1. Summary
-
+# add column header
 
 
 

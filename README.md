@@ -19,7 +19,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 	
 *3. Outputs a scatter plot of each pair of variables.*
 	
-*4. Perform any other analysis I think is appropriate*
+*4. Performs any other analysis I think is appropriate*
 
 ### Method:
 1. 
