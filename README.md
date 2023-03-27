@@ -26,6 +26,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 2. First, I imported the necessary packages/modules for the project (3-6).
 3. Then, I defined the column names, loaded the data (7) and added the column header to the dataframe (8).
 4. checked for missing value using the isna() function that returns a True/false if a value is missing (9).
+5. print out df.describe into csv (10)
 
 
 ### Conclusion:
@@ -41,6 +42,8 @@ This data can be used to develop Interactive Identification Keys for future taxo
 7. https://www.w3schools.com/python/pandas/pandas_csv.asp
 8. https://stackoverflow.com/questions/34091877/how-to-add-header-row-to-a-pandas-dataframe
 9. https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
+10. https://towardsdatascience.com/how-to-export-pandas-dataframe-to-csv-2038e43d9c03
+11. 
 
 
 

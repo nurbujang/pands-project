@@ -25,12 +25,14 @@ df = pd.read_csv('iris.data', names=columns) # read the csv file and assign each
 df.head(151) 
 
 # check for missing values
-df.info()
+df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
 df.isna().sum()
-# returns RangeIndex: 150 entries, 0 to 149, so no missing values
 
-
-# 1. Summary into text file
+# 1. Summary into text file, containing basic statistical analysis
+df.describe()
+print (df.describe())
+# export into text file called summary
+df.describe().to_txt('summary.txt')
 
 # 2. Histogram into png file
 
