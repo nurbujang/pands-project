@@ -6,7 +6,7 @@ Dataset iris.data (1) contains 5 columns and 150 lines (replicates). A quick loo
 
 Morphological analysis for species determination is used to assess biodiversity in an ecosystem. It could be used to identify new species or rectify previously misidentified species. While there are other more accurate methods for species identification such as DNA Barcoding and protein-based methods, morphological analysis is quick, cheap and particularly useful for researchers in the field. 
 
-This data can be used to develop Interactive Identification Keys for future taxonomists and researchers. It can also be used to which species are more closely related to each other and share a common ancestor. Pattern recognition machine learning
+This data can be used to develop Interactive Identification Keys for future taxonomists and researchers and species determination based on pattern recognition in Machine Learning. It can also be used to which species are more closely related to each other and share a common ancestor. 
 
 ## **analysis.py**
 
@@ -22,11 +22,20 @@ This data can be used to develop Interactive Identification Keys for future taxo
 *4. Performs any other analysis I think is appropriate*
 
 ### Method:
-1. 
+1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (2).
+2. First, I imported the necessary packages/modules for the project (2-)
+
 
 ### Conclusion:
 
 
 ### References:
-1. http://archive.ics.uci.edu/ml/datasets/Iris
-2. 
+1. https://data-flair.training/blogs/iris-flower-classification/
+2. https://www.w3schools.com/python/pandas/default.asp
+3. https://www.w3schools.com/python/numpy/numpy_intro.asp
+4. https://www.w3schools.com/python/matplotlib_pyplot.asp
+4. 
+
+
+http://archive.ics.uci.edu/ml/datasets/Iris
+

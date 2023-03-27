@@ -7,15 +7,19 @@
 # 3. Outputs a scatter plot of each pair of variables.
 # 4. Perform any other analysis I think is appropriate
 
-# import modules
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import matplotlib.lines as mlines
-
+# General Process: Load data, Analyze/visualize dataset, Model training, Model Evaluation, Model Testing, 
 
 # 1. Summary
+# LOADING THE DATA
+
+# import modules
+import pandas as pd # for data loading from other sources and processing
+import numpy as np # for computational operations
+import matplotlib.pyplot as plt # for data visualization
+import matplotlib.patches as mpatches # for data visualization
+import matplotlib.lines as mlines # for data visualization
+import seaborn as sns # for data visualization
+
 # add column header
 
 
