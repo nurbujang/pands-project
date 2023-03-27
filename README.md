@@ -22,8 +22,8 @@ This data can be used to develop Interactive Identification Keys for future taxo
 *4. Performs any other analysis I think is appropriate*
 
 ### Method:
-1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (2).
-2. First, I imported the necessary packages/modules for the project (2-)
+1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
+2. First, I imported the necessary packages/modules for the project (3-6)
 
 
 ### Conclusion:
@@ -31,11 +31,13 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 ### References:
 1. https://data-flair.training/blogs/iris-flower-classification/
-2. https://www.w3schools.com/python/pandas/default.asp
-3. https://www.w3schools.com/python/numpy/numpy_intro.asp
-4. https://www.w3schools.com/python/matplotlib_pyplot.asp
-4. 
+2. http://archive.ics.uci.edu/ml/datasets/Iris
+3. https://www.w3schools.com/python/pandas/default.asp
+4. https://www.w3schools.com/python/numpy/numpy_intro.asp
+5. https://www.w3schools.com/python/matplotlib_pyplot.asp
+6. https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp
+7. 
 
 
-http://archive.ics.uci.edu/ml/datasets/Iris
+
 

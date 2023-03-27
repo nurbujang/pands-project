@@ -9,8 +9,8 @@
 
 # General Process: Load data, Analyze/visualize dataset, Model training, Model Evaluation, Model Testing, 
 
-# 1. Summary
 # LOADING THE DATA
+# save iris.data file from UCI website and upload into pands-project folder
 
 # import modules
 import pandas as pd # for data loading from other sources and processing
@@ -23,7 +23,7 @@ import seaborn as sns # for data visualization
 # add column header
 
 
-
+# 1. Summary
 
 # 2. Histogram
 
