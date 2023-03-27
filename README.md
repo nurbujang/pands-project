@@ -23,7 +23,9 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
-2. First, I imported the necessary packages/modules for the project (3-6)
+2. First, I imported the necessary packages/modules for the project (3-6).
+3. Then, I defined the column names, loaded the data (7) and added the column header to the dataframe (8).
+4. checked for missing value using the isna() function that returns a True/false if a value is missing (9).
 
 
 ### Conclusion:
@@ -36,7 +38,10 @@ This data can be used to develop Interactive Identification Keys for future taxo
 4. https://www.w3schools.com/python/numpy/numpy_intro.asp
 5. https://www.w3schools.com/python/matplotlib_pyplot.asp
 6. https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp
-7. 
+7. https://www.w3schools.com/python/pandas/pandas_csv.asp
+8. https://stackoverflow.com/questions/34091877/how-to-add-header-row-to-a-pandas-dataframe
+9. https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
+
 
 
 
