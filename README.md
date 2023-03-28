@@ -57,6 +57,11 @@ https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_string.html
 https://www.geeksforgeeks.org/overlapping-histograms-with-matplotlib-in-python/
 https://datavizpyr.com/overlapping-histograms-with-matplotlib-in-python/
 https://softwarenotebook.com/2022/03/07/overlapping-histograms-with-matplotlib-library-in-python/
+https://medium.com/@ooemma83/how-to-construct-cool-multiple-histogram-plots-using-seaborn-and-matplotlib-in-python-6c6c7ba6c10b
+https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
+https://seaborn.pydata.org/tutorial/distributions.html
+https://www.statology.org/seaborn-title/
+https://towardsdatascience.com/histograms-with-pythons-matplotlib-b8b768da9305
 
 
  

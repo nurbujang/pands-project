@@ -46,43 +46,12 @@ sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 
 sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of the subplot
 sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
 sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
+#plt.title('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold', loc='top') # customize plot title
 fig.tight_layout()
 plt.savefig('iris.png')
 plt.show()
-# fig = plt.figure(figsize = (5,6))
-# ax = fig.gca()
-# df.hist(ax=ax, color = "skyblue", edgecolor = "gold")
-# plt.show()
-# fig = plt.figure(figsize=(10,6)) # 20 width. 15 height
-# plt.title('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize plot title
-# plt.xlabel('Measurement (cm)', color ='#00008B', style='oblique', fontweight='bold') # x-axis
-# # to create a little space between y label and y-axis
-# plt.ylabel('Frequency', color ='#00008B', style='oblique', fontweight='bold', labelpad=12) # y-axis
-# plt.hist(df['Sepal length (cm)'], alpha=0.5, label='Sepal length (cm)', color='olive', edgecolor='gainsboro') # alpha is transparency parameter to visualize overlapping histograms better
-# plt.hist(df['Sepal width (cm)'], alpha=0.5, label='Sepal width (cm)', color='lime', edgecolor='gainsboro')
-# plt.hist(df['Petal length (cm)'], alpha=0.5, label='Petal length (cm)', color='red', edgecolor='gainsboro')
-# plt.hist(df['Petal width (cm)'], alpha=0.5, label='Petal width (cm)', color='fuchsia', edgecolor='gainsboro')
-# plt.legend(loc='upper right')
 
-
-
-
-
-
-
-
-
-
-
-# # add grid on y-axis
-# plt.grid(axis = 'y', color = '#8FBC8F', linestyle = '--', linewidth = 0.3)
-# # show plot
-# plt.show()
-
-
-
-
-# # 3. Scatter plot
+# 3. Scatter plot
 
 
 
