@@ -40,14 +40,15 @@ n = text_file.write(df.describe().to_string()) # export into text file called su
 text_file.close() # always close file
 
 # 2. Histogram into png file - Visualizing 4 histograms of each column is not very informative, so overlapping histogram is chosen
-sns.set(style="whitegrid")  
-fig,axs = plt.subplots(2,2, figsize = (8,10))
-sns.histplot(data=df, x="Sepal length (cm)", kde=True, color=["fuschia"], ax=axs[0, 0])
-sns.histplot(data=df, x="Sepal width (cm)", kde=True, color=["blueviolet"], ax=axs[0, 1])
-sns.histplot(data=df, x="Petal length (cm)", kde=True, color=["chartreuse"], ax=axs[1, 0])
-sns.histplot(data=df, x="Petal width (cm)", kde=True, color=["forestgreen"], ax=axs[1, 1])
+sns.set(style="whitegrid") # set background
+fig,axs = plt.subplots(2,2, figsize = (5,6)) # set arrangement and size of each subplot
+sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
+sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of the subplot
+sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
+sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
 fig.tight_layout()
-
+plt.savefig('iris.png')
+plt.show()
 # fig = plt.figure(figsize = (5,6))
 # ax = fig.gca()
 # df.hist(ax=ax, color = "skyblue", edgecolor = "gold")
@@ -62,8 +63,7 @@ fig.tight_layout()
 # plt.hist(df['Petal length (cm)'], alpha=0.5, label='Petal length (cm)', color='red', edgecolor='gainsboro')
 # plt.hist(df['Petal width (cm)'], alpha=0.5, label='Petal width (cm)', color='fuchsia', edgecolor='gainsboro')
 # plt.legend(loc='upper right')
-# plt.show()
-# plt.savefig('Iris.png')
+
 
 
 
