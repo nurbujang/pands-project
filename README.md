@@ -39,7 +39,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 4. https://www.w3schools.com/python/numpy/numpy_intro.asp
 5. https://www.w3schools.com/python/matplotlib_pyplot.asp
 6. https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp
-https://matplotlib.org/stable/tutorials/intermediate/legend_guide.html
+7. https://matplotlib.org/stable/tutorials/intermediate/legend_guide.html
 https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html
 https://www.w3schools.com/python/pandas/pandas_csv.asp
 https://towardsdatascience.com/how-to-read-csv-file-using-pandas-ab1f5e7e7b58
