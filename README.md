@@ -40,10 +40,24 @@ This data can be used to develop Interactive Identification Keys for future taxo
 5. https://www.w3schools.com/python/matplotlib_pyplot.asp
 6. https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp
 https://matplotlib.org/stable/tutorials/intermediate/legend_guide.html
+https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html
+https://www.w3schools.com/python/pandas/pandas_csv.asp
+https://towardsdatascience.com/how-to-read-csv-file-using-pandas-ab1f5e7e7b58
+https://stackoverflow.com/questions/34091877/how-to-add-header-row-to-a-pandas-dataframe
+https://www.geeksforgeeks.org/how-to-add-header-row-to-a-pandas-dataframe/
 https://practicaldatascience.co.uk/data-science/https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
 https://datatofish.com/count-nan-pandas-dataframe/
 https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html
 https://towardsdatascience.com/handling-missing-values-with-pandas-b876bf6f008f
+https://www.w3schools.com/python/pandas/ref_df_describe.asp
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html
+https://pythonexamples.org/python-write-string-to-text-file/
+https://www.tutorialkart.com/python/python-write-string-to-text-file/
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_string.html
+https://www.geeksforgeeks.org/overlapping-histograms-with-matplotlib-in-python/
+https://datavizpyr.com/overlapping-histograms-with-matplotlib-in-python/
+https://softwarenotebook.com/2022/03/07/overlapping-histograms-with-matplotlib-library-in-python/
+
 
  
 
