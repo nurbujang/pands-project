@@ -18,9 +18,17 @@ import matplotlib.pyplot as plt # for data visualization
 import matplotlib.patches as mpatches # for data visualization
 import matplotlib.lines as mlines # for data visualization
 import seaborn as sns # for data visualization
+import matplotlib.patches as mpatches # to custom legend
+import matplotlib.lines as mlines # to custom legend
 
 # Load data and add column header
+FILENAME="iris.data" # define filename
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # define column headers
+# open the file read-only
+with open(FILENAME, 'w+t') as f: # write + read in text mode for text files
+    file_content = f.read()
+
+
 df = pd.read_csv('iris.data', names=columns) # read the csv file and assign each column name
 df.head(151) 
 
@@ -29,6 +37,9 @@ df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
 df.isna().sum()
 
 # 1. Summary into text file, containing basic statistical analysis
+with open('input.txt', 'rt') as input_file:
+     with open('output.txt', 'wt') as output_file: 
+
 df.describe()
 print (df.describe())
 # export into text file called summary
