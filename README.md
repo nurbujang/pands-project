@@ -55,10 +55,10 @@ https://pythonexamples.org/python-write-string-to-text-file/
 https://www.tutorialkart.com/python/python-write-string-to-text-file/
 https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_string.html
 https://stackoverflow.com/questions/68948981/create-a-subplot-of-multiple-histograms-with-titles
+https://www.statology.org/seaborn-title/
 https://medium.com/@ooemma83/how-to-construct-cool-multiple-histogram-plots-using-seaborn-and-matplotlib-in-python-6c6c7ba6c10b
 https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
 https://seaborn.pydata.org/tutorial/distributions.html
-https://www.statology.org/seaborn-title/
 https://towardsdatascience.com/histograms-with-pythons-matplotlib-b8b768da9305
 
 
