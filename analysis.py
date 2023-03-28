@@ -18,32 +18,28 @@ import matplotlib.pyplot as plt # for data visualization
 import matplotlib.patches as mpatches # for data visualization
 import matplotlib.lines as mlines # for data visualization
 import seaborn as sns # for data visualization
-import matplotlib.patches as mpatches # to custom legend
-import matplotlib.lines as mlines # to custom legend
+import matplotlib.patches as mpatches # to customize legend
+import matplotlib.lines as mlines # to customize legend
 
 # Load data and add column header
-FILENAME="iris.data" # define filename
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # define column headers
-# open the file read-only
-with open(FILENAME, 'w+t') as f: # write + read in text mode for text files
-    file_content = f.read()
-
-
-df = pd.read_csv('iris.data', names=columns) # read the csv file and assign each column name
-df.head(151) 
+df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each column name
+print(df.head(5))
 
 # check for missing values
 df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
-df.isna().sum()
+print(df.info())
+df.isna().sum() # get number of missing values in each column
+print(df.isna().sum())
+# count_nan = df.isna().sum().sum() ##############################################
+# print ('Count of NaN: ' + str(count_nan)) # get total count of NaN
 
 # 1. Summary into text file, containing basic statistical analysis
-with open('input.txt', 'rt') as input_file:
-     with open('output.txt', 'wt') as output_file: 
-
-df.describe()
+df.describe() # to get basic statistical analysis data
 print (df.describe())
-# export into text file called summary
-df.describe().to_txt('summary.txt')
+text_file = open("summary.txt", "wt") # to write the string into a text file
+n = text_file.write(df.describe().to_string()) # export into text file called summary, convert pandas dataframe to string
+text_file.close()
 
 # 2. Histogram into png file
 
@@ -65,5 +61,4 @@ df.describe().to_txt('summary.txt')
 # # show plot
 # plt.show()
 
-
-# # 4. Other analysis
+# 4. Other analysis

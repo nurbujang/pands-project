@@ -39,12 +39,12 @@ This data can be used to develop Interactive Identification Keys for future taxo
 4. https://www.w3schools.com/python/numpy/numpy_intro.asp
 5. https://www.w3schools.com/python/matplotlib_pyplot.asp
 6. https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp
-7. https://www.freecodecamp.org/news/file-handling-in-python/
-https://realpython.com/read-write-files-python/#appending-to-a-file
-https://stackoverflow.com/questions/23051062/open-files-in-rt-and-wt-modes
-https://stackoverflow.com/questions/34091877/how-to-add-header-row-to-a-pandas-dataframe
-https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
-https://towardsdatascience.com/how-to-export-pandas-dataframe-to-csv-2038e43d9c03
+https://matplotlib.org/stable/tutorials/intermediate/legend_guide.html
+https://practicaldatascience.co.uk/data-science/https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
+https://datatofish.com/count-nan-pandas-dataframe/
+https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html
+https://towardsdatascience.com/handling-missing-values-with-pandas-b876bf6f008f
+
  
 
 
