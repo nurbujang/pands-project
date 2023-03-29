@@ -61,6 +61,9 @@ https://medium.com/@ooemma83/how-to-construct-cool-multiple-histogram-plots-usin
 https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
 https://seaborn.pydata.org/tutorial/distributions.html
 https://towardsdatascience.com/histograms-with-pythons-matplotlib-b8b768da9305
+https://matplotlib.org/stable/tutorials/intermediate/tight_layout_guide.html
+https://www.kaggle.com/code/dronio/iris-plots-correlation-matrix
+https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
 
 
 
