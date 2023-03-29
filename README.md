@@ -13,11 +13,11 @@ This data can be used to develop Interactive Identification Keys for future taxo
 ### Task Description:
 *The task is to write a program called analysis.py that:*
 
-*1. Outputs a summary of each variable to a single text file,*
+*1. Outputs a SUMMARY OF EACH VARIABLE to a single text file,*
 	
-*2. Saves a histogram of each variable to png files,*
+*2. Saves a HISTOGRAM OF EACH VARIABLE to png files,*
 	
-*3. Outputs a scatter plot of each pair of variables.*
+*3. Outputs a SCATTER PLOT OF EACH PAIR OF VARIABLES.*
 	
 *4. Performs any other analysis I think is appropriate*
 
