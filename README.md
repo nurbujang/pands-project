@@ -19,7 +19,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 	
 *3. Outputs a SCATTER PLOT OF EACH PAIR OF VARIABLES.*
 	
-*4. Performs any other analysis I think is appropriate*
+*4. Performs any other analysis that I think is appropriate*
 
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
