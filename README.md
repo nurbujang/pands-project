@@ -2,7 +2,7 @@
 Pands project for Programming and Scripting
 
 ### Dataset Summary
-Dataset iris.data (1) contains 5 columns and 150 lines (replicates). A quick look through the data file indicates that it is four measurement of a particular external flower structure to morphologically determine/identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. However, a closer look at the description file indicates that these measurements are the length (in cm) and width (in cm) of two structures: the sepal and petal. The color attribute is probably unreliable because of color polymorphism within the species or population. The dataset itself is complete and contains mo missing values.
+Dataset iris.data (1) contains 5 columns and 150 lines (replicates). From that, it contains 3 classes of 50 instances each. A quick look through the data file indicates that it is four measurement of a particular external flower structure to morphologically determine/identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. However, a closer look at the description file indicates that these measurements are the length (in cm) and width (in cm) of two structures: the sepal and petal. The color attribute is probably unreliable because of color polymorphism within the species or population. The dataset itself is complete and contains mo missing values.
 
 Morphological analysis for species determination is used to assess biodiversity in an ecosystem. It could be used to identify new species or rectify previously misidentified species. While there are other more accurate methods for species identification such as DNA Barcoding and protein-based methods, morphological analysis is quick, cheap and particularly useful for researchers in the field. 
 
@@ -28,6 +28,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 4. checked for missing value using the isna() function that returns a True/false if a value is missing ().
 5. print out df.describe into csv ()
 
+visualize the whole dataset using sns.pairplot(1)
 
 ### Conclusion:
 
@@ -60,6 +61,7 @@ https://medium.com/@ooemma83/how-to-construct-cool-multiple-histogram-plots-usin
 https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
 https://seaborn.pydata.org/tutorial/distributions.html
 https://towardsdatascience.com/histograms-with-pythons-matplotlib-b8b768da9305
+
 
 
  
