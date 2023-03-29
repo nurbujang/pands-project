@@ -63,7 +63,7 @@ fig.tight_layout() # to fit all subplots into one figure nicely automatically
 corr = df.corr()
 fig, ax = plt.subplots(figsize=(8,4)) # set size of whole figure (4 width, 8 height)
 fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', linewidths = .1)
+sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = .1, linecolor='yellow', cbar_kws={'label': 'range', 'orientation': 'vertical'})
 plt.show() # show plot
 
 
