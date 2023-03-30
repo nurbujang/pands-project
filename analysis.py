@@ -20,6 +20,14 @@ import matplotlib.lines as mlines # for data visualization
 import seaborn as sns # for data visualization
 import matplotlib.patches as mpatches # to customize legend
 import matplotlib.lines as mlines # to customize legend
+from sklearn.linear_model import LogisticRegression  # for Logistic Regression algorithm
+from sklearn.model_selection import train_test_split # to split the dataset into training and testing
+from sklearn.neighbors import KNeighborsClassifier  # for K nearest neighbours
+from sklearn.metrics import confusion_matrix # to describe performance of model on the test data
+from sklearn import svm  #for Support Vector Machine (SVM) Algorithm
+from sklearn import metrics #for checking the model accuracy
+from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
+
 
 # Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # define column headers
@@ -30,7 +38,7 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
 #print(df.info()) # print out data info
 
-df.isna().sum() # get number of missing values in each column
+df.isna().sum() # get number of missing values in each column. df.isnull().sum() can also be used
 #print(df.isna().sum()) # print out number of missing values
 
 # 1. Summary into text file, containing basic statistical analysis
@@ -57,6 +65,8 @@ text_file.close() # always close file
 # # 3. Scatter plot of each pair of variables
 # # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
+
+# # Correlation analysis and correlation matrix to understand the dataset better
 # # Perform correlation analysis to determine the degree of linear relationship between 2 variables
 # # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 inticates a strong -ve
 # df.groupby("Iris species").corr()
@@ -76,7 +86,7 @@ text_file.close() # always close file
 # # for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
 # h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
 # h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
-# h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the xticks "upright" in any figure size
+# h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
 # plt.show() # show plot
 # # results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
 
@@ -87,8 +97,43 @@ text_file.close() # always close file
 # # hue distinguishes different colors, palette is set to brg palette
 # # marker o is circle, s is square, D is diamond
 # plt.show() # show plot
-# # I. setosa seems distincintly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
+# # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
+# # The petal length and width of I. setosa have much narrower distribution compared to the other two species. 
+# # there are overlaps in sepal length and width of all three species.
 
 # 4. Other analysis
+# split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
+y = df.iloc[:,4] # store the target variable as label into an array y
+print(X.shape, y.shape) # display number of rows and columns
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
+# random_state is the seed of randomness to help reproduce the same results everytime
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
+# kNN calculates the distance between the data points and predict the correct species class for the datapoint
+# k = number of neighbors/points closest to the test data
+# Create KNN Classifier
+kNN = KNeighborsClassifier(n_neighbors = 3)
+
+# Train the model using the training sets
+kNN.fit(X_train, y_train)
+
+# Predict the response for test dataset
+y_pred = kNN.predict(X_test)
+
+# evaluate model accuracy
+print("Accuracy: {:.2f}".format(metrics.accuracy_score(y_test, y_pred)))
+
+# Confusion matrix to describe model performance on the test data when we already know the true values/labels
+# Call a method predict by using an object classifier 'cls_svm'
+y_predict = kNN.predict(X_test)
+
+# Calculate cm by calling a method named as 'confusion_matrix'
+cm = confusion_matrix(y_test, y_predict)
+
+# # Call a method heatmap() to plot confusion matrix
+fig.suptitle('Confusion matrix') # customize figure's main title
+sns.heatmap(cm, annot = True, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow')
+cm.set_yticklabels(cm.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
+plt.show() # show plot
 
