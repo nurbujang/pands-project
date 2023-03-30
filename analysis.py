@@ -104,14 +104,14 @@ text_file.close() # always close file
 
 # 4. Other analysis
 
-# split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
-from sklearn.model_selection import train_test_split # to split the dataset into training and testing
-X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
-y = df.iloc[:,4] # store the target variable as label into an array y
-print(X.shape, y.shape) # display number of rows and columns
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
-# random_state is the seed of randomness to help reproduce the same results everytime
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
+# # split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+# from sklearn.model_selection import train_test_split # to split the dataset into training and testing
+# X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
+# y = df.iloc[:,4] # store the target variable as label into an array y
+# print(X.shape, y.shape) # display number of rows and columns
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
+# # random_state is the seed of randomness to help reproduce the same results everytime
+# print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
 # # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # # k = number of neighbors/points closest to the test data
@@ -136,6 +136,15 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the sh
 # plt.title("Confusion Matrix",fontsize=20)
 # plt.show() # show plot
 
+# #classification report
+# from sklearn.metrics import classification_report
+
+# # Display the classification report
+# print(classification_report(y_test, y_predict))
+
+# # hyperparameters
+
+# kNN Classification
 from matplotlib.colors import ListedColormap
 from sklearn import neighbors, datasets
 from sklearn.inspection import DecisionBoundaryDisplay
@@ -145,8 +154,7 @@ n_neighbors = 15
 # import some data to play with
 iris = datasets.load_iris()
 
-# we only take the first two features. We could avoid this ugly
-# slicing by using a two-dim dataset
+# we only take the first two features. We could avoid this ugly slicing by using a two-dim dataset
 X = iris.data[:, :2]
 y = iris.target
 
