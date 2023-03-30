@@ -31,7 +31,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 visualize the whole dataset using sns.pairplot(1)
 
 ### Conclusion:
-A program that outputs all the above was written. Additional analyses done were correlation, k-Nearest Neighbor and regression.
+A program that outputs all the above was written. Additional analyses done were correlation, k-Nearest Neighbor and regression. Correlation analysis was done to .K-Nearest Neighbor was done to . Regression was done to .
 
 ### References:
 1. https://data-flair.training/blogs/iris-flower-classification/
