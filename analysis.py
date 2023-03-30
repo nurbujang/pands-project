@@ -54,26 +54,18 @@ text_file.close() # always close file
 # plt.savefig('iris.png') # save output into png file
 # plt.show() # show plot
 
-# 3. Scatter plot of each pair of variables
-# df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
-# within that, the variables are Petal length, Petal width, Sepal length and Sepal width
-# but which 2 variables should be paired up? Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
-sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
-# kind='reg' applies a linear regression line to identify the relationship within the scatter plot
-# to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
-# hue distinguishes different colors, palette is set to brg palette
-# marker o is circle, s is square, D is diamond
-plt.show() # show plot
-# I. setosa seems distincintly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
-# Perform correlation analysis to determine the degree of linear relationship between 2 variables
-# correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 inticates a strong -ve
-df.groupby("Iris species").corr()
-print (df.groupby("Iris species").corr())
-# output shows high correlation between Sepal length and Sepal width for Iris setosa only
-# high correlation between Petal length and Petal width for Iris versicolor only
+# # 3. Scatter plot of each pair of variables
+# # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
+# # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
+# # Perform correlation analysis to determine the degree of linear relationship between 2 variables
+# # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 inticates a strong -ve
+# df.groupby("Iris species").corr()
+# print (df.groupby("Iris species").corr())
+# # Output results:
+# # Iris setosa: high correlation between Sepal length & Sepal width
+# # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length, Petal length & Petal width
+# # Iris virginica: high correlation between Petal length & Sepal length
 
-
-# # 4. Other analysis
 # # correlation matrix will find the parameters which best correlate with each other
 # # correlation value ranges from -1 to 1, and if 2 variables are highly correlated, we can neglect one
 # corr = df.corr()
@@ -81,9 +73,22 @@ print (df.groupby("Iris species").corr())
 # fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
 # # customize heatmap
 # # Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
-# #  for color bar, default is vertical, but add 'orientation': 'horizontal' to move it to the bottom
+# # for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
 # h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
 # h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
 # h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the xticks "upright" in any figure size
 # plt.show() # show plot
+# # results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
+
+# # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
+# sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
+# # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
+# # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
+# # hue distinguishes different colors, palette is set to brg palette
+# # marker o is circle, s is square, D is diamond
+# plt.show() # show plot
+# # I. setosa seems distincintly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
+
+# 4. Other analysis
+
 
