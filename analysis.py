@@ -20,10 +20,9 @@ import matplotlib.lines as mlines # for data visualization
 import seaborn as sns # for data visualization
 import matplotlib.patches as mpatches # to customize legend
 import matplotlib.lines as mlines # to customize legend
-from sklearn.linear_model import LogisticRegression  # for Logistic Regression algorithm
-from sklearn.model_selection import train_test_split # to split the dataset into training and testing
-from sklearn.neighbors import KNeighborsClassifier  # for K nearest neighbours
-from sklearn.metrics import confusion_matrix # to describe performance of model on the test data
+#from sklearn.linear_model import LogisticRegression  # for Logistic Regression algorithm
+
+
 from sklearn import svm  #for Support Vector Machine (SVM) Algorithm
 from sklearn import metrics #for checking the model accuracy
 from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
@@ -68,10 +67,10 @@ text_file.close() # always close file
 
 # # Correlation analysis and correlation matrix to understand the dataset better
 # # Perform correlation analysis to determine the degree of linear relationship between 2 variables
-# # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 inticates a strong -ve
+# # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 intdicates a strong -ve relationship
 # df.groupby("Iris species").corr()
 # print (df.groupby("Iris species").corr())
-# # Output results:
+# # Results:
 # # Iris setosa: high correlation between Sepal length & Sepal width
 # # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length, Petal length & Petal width
 # # Iris virginica: high correlation between Petal length & Sepal length
@@ -92,17 +91,21 @@ text_file.close() # always close file
 
 # # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 # sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
+# # Where:
 # # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
 # # hue distinguishes different colors, palette is set to brg palette
 # # marker o is circle, s is square, D is diamond
 # plt.show() # show plot
+# # Results:
 # # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
 # # The petal length and width of I. setosa have much narrower distribution compared to the other two species. 
 # # there are overlaps in sepal length and width of all three species.
 
 # 4. Other analysis
+
 # split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+from sklearn.model_selection import train_test_split # to split the dataset into training and testing
 X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
 y = df.iloc[:,4] # store the target variable as label into an array y
 print(X.shape, y.shape) # display number of rows and columns
@@ -110,29 +113,76 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 # random_state is the seed of randomness to help reproduce the same results everytime
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
-# kNN calculates the distance between the data points and predict the correct species class for the datapoint
-# k = number of neighbors/points closest to the test data
-# Create KNN Classifier
-kNN = KNeighborsClassifier(n_neighbors = 3)
+# # kNN calculates the distance between the data points and predict the correct species class for the datapoint
+# # k = number of neighbors/points closest to the test data
+# from sklearn.neighbors import KNeighborsClassifier  # for K nearest neighbours
+# # Create KNN Classifier
+# kNN = KNeighborsClassifier(n_neighbors = 10)
+# # Train the model using the training sets
+# kNN.fit(X_train, y_train)
+# # Predict the response for test dataset
+# y_pred = kNN.predict(X_test)
+# # evaluate model accuracy
+# print("Accuracy: {:.2f}".format(metrics.accuracy_score(y_test, y_pred)))
 
-# Train the model using the training sets
-kNN.fit(X_train, y_train)
+# # Confusion matrix to describe model performance on the test data when we already know the true values/labels
+# from sklearn.metrics import confusion_matrix # to describe performance of model on the test data
+# # Call a method predict by using an object classifier 'cls_svm'
+# y_predict = kNN.predict(X_test)
+# # Calculate cm by calling a method named as 'confusion_matrix'
+# cm = confusion_matrix(y_test, y_predict)
+# # # Call a method heatmap() to plot confusion matrix
+# sns.heatmap(cm, annot=True, linewidths=0.1, cmap="YlGnBu", cbar_kws={'label': 'Scale'})
+# plt.title("Confusion Matrix",fontsize=20)
+# plt.show() # show plot
 
-# Predict the response for test dataset
-y_pred = kNN.predict(X_test)
+from matplotlib.colors import ListedColormap
+from sklearn import neighbors, datasets
+from sklearn.inspection import DecisionBoundaryDisplay
 
-# evaluate model accuracy
-print("Accuracy: {:.2f}".format(metrics.accuracy_score(y_test, y_pred)))
+n_neighbors = 15
 
-# Confusion matrix to describe model performance on the test data when we already know the true values/labels
-# Call a method predict by using an object classifier 'cls_svm'
-y_predict = kNN.predict(X_test)
+# import some data to play with
+iris = datasets.load_iris()
 
-# Calculate cm by calling a method named as 'confusion_matrix'
-cm = confusion_matrix(y_test, y_predict)
+# we only take the first two features. We could avoid this ugly
+# slicing by using a two-dim dataset
+X = iris.data[:, :2]
+y = iris.target
 
-# # Call a method heatmap() to plot confusion matrix
-sns.heatmap(cm, annot=True, linewidths=0.1, cmap="YlGnBu", cbar_kws={'label': 'Scale'})
-plt.title("Confusion Matrix")
-plt.show() # show plot
+# Create color maps
+cmap_light = ListedColormap(["orange", "cyan", "cornflowerblue"])
+cmap_bold = ["darkorange", "c", "darkblue"]
 
+for weights in ["uniform", "distance"]:
+    # we create an instance of Neighbours Classifier and fit the data.
+    clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
+    clf.fit(X, y)
+
+    _, ax = plt.subplots()
+    DecisionBoundaryDisplay.from_estimator(
+        clf,
+        X,
+        cmap=cmap_light,
+        ax=ax,
+        response_method="predict",
+        plot_method="pcolormesh",
+        xlabel=iris.feature_names[0],
+        ylabel=iris.feature_names[1],
+        shading="auto",
+    )
+
+    # Plot also the training points
+    sns.scatterplot(
+        x=X[:, 0],
+        y=X[:, 1],
+        hue=iris.target_names[y],
+        palette=cmap_bold,
+        alpha=1.0,
+        edgecolor="black",
+    )
+    plt.title(
+        "3-Class classification (k = %i, weights = '%s')" % (n_neighbors, weights)
+    )
+
+plt.show()
