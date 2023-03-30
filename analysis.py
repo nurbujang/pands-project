@@ -43,31 +43,41 @@ text_file.close() # always close file
 
 # 2. Histogram of each variable into png file
 # Visualizing 4 histograms of each column is not very informative, so overlapping histogram is chosen
-sns.set(style="whitegrid") # set background
-fig,axs = plt.subplots(2,2, figsize = (7,8)) # set arrangement of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
-sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
-sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
-sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
-fig.tight_layout() # to fit all subplots into one figure nicely automatically
+# sns.set(style="whitegrid") # set background
+# fig,axs = plt.subplots(2,2, figsize = (7,8)) # set arrangement of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
+# fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
+# sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
+# sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
+# sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
+# sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
+# fig.tight_layout() # to fit all subplots into one figure nicely automatically
 # plt.savefig('iris.png') # save output into png file
 # plt.show() # show plot
 
 # 3. Scatter plot of each pair of variables
 # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
-# i will use pairplot, and pair up Petal length and width, and Sepal length and width, but confirm with correlation matrix
-# correlation matrix will find the parameters which best correlate with each other
-# correlation value ranges from -1 to 1, and if 2 variables are highly correlated, we can neglect one
-corr = df.corr()
-fig, ax = plt.subplots(figsize=(8,4)) # set size of whole figure (4 width, 8 height)
-fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = .1, linecolor='yellow', cbar_kws={'label': 'range', 'orientation': 'vertical'})
-plt.show() # show plot
+# but which 2 variables should be paired up? Perform a Scatter Plot matrix to see the relationship between a pair of variables within a combination of variables
+
+
+
+# i will use pairplot, and pair up Petal length and width, and Sepal length and width
 
 
 # 
 # plt.show()
 
 # 4. Other analysis
+# correlation matrix will find the parameters which best correlate with each other
+# correlation value ranges from -1 to 1, and if 2 variables are highly correlated, we can neglect one
+corr = df.corr()
+fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (11 width, 6 height)
+fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
+# customize heatmap
+# Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
+#  for color bar, default is vertical, but add 'orientation': 'horizontal' to move it to the bottom
+h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
+h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
+h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the xticks "upright" in any figure size
+plt.show() # show plot
+
