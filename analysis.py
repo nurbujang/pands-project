@@ -132,8 +132,7 @@ y_predict = kNN.predict(X_test)
 cm = confusion_matrix(y_test, y_predict)
 
 # # Call a method heatmap() to plot confusion matrix
-fig.suptitle('Confusion matrix') # customize figure's main title
-sns.heatmap(cm, annot = True, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow')
-cm.set_yticklabels(cm.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
+sns.heatmap(cm, annot=True, linewidths=0.1, cmap="YlGnBu", cbar_kws={'label': 'Scale'})
+plt.title("Confusion Matrix")
 plt.show() # show plot
 
