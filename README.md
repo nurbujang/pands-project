@@ -23,7 +23,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
-2. First, I imported the necessary packages/modules for the project (3-6).
+2. First, I imported the necessary packages/modules for the first part of the project (3-6).
 3. Then, I defined the column names, loaded the data () and added the column header to the dataframe ().
 4. checked for missing value using the isna() function that returns a True/false if a value is missing ().
 5. print out df.describe into csv ()
