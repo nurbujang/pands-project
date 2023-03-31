@@ -15,11 +15,9 @@
 import pandas as pd # for data loading from other sources and processing
 import numpy as np # for computational operations
 import matplotlib.pyplot as plt # for data visualization
-import matplotlib.patches as mpatches # for data visualization
-import matplotlib.lines as mlines # for data visualization
 import seaborn as sns # for data visualization
-import matplotlib.patches as mpatches # to customize legend
-import matplotlib.lines as mlines # to customize legend
+#import matplotlib.patches as mpatches # to customize legend
+#import matplotlib.lines as mlines # to customize legend
 #from sklearn.linear_model import LogisticRegression  # for Logistic Regression algorithm
 
 
@@ -33,20 +31,28 @@ columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal 
 df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each column name
 #print(df.head(5)) # print out first 5 lines
 
-# check for missing values
-df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
-#print(df.info()) # print out data info
+# # check for missing values
+# df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
+# #print(df.info()) # print out data info
 
-df.isna().sum() # get number of missing values in each column. df.isnull().sum() can also be used
-#print(df.isna().sum()) # print out number of missing values
+# df.isna().sum() # get number of missing values in each column. df.isnull().sum() can also be used
+# #print(df.isna().sum()) # print out number of missing values
 
-# 1. Summary into text file, containing basic statistical analysis
-df.describe() # to get basic statistical analysis data
-#print (df.describe()) # print out description of data
+# df.drop_duplicates() # remove duplicates
+# print(df.drop_duplicates()) # print out remove duplicates
+# # output: 150 lines remain, no duplicates exist
 
-text_file = open("summary.txt", "wt") # to write the string into a text file
-n = text_file.write(df.describe().to_string()) # export into text file called summary, convert pandas dataframe to string
-text_file.close() # always close file
+# df.value_counts("Iris species") # how many lines for each species
+# print(df.value_counts("Iris species")) # print how many lines for each species
+# # output: 50 lines for each species
+
+# # 1. Summary into text file, containing basic statistical analysis
+# df.describe() # to get basic statistical analysis data
+# #print (df.describe()) # print out description of data
+
+# text_file = open("summary.txt", "wt") # to write the string into a text file
+# n = text_file.write(df.describe().to_string()) # export into text file called summary, convert pandas dataframe to string
+# text_file.close() # always close file
 
 # 2. Histogram of each variable into png file
 # Visualizing 4 histograms of each column is not very informative, so overlapping histogram is chosen
@@ -65,30 +71,6 @@ text_file.close() # always close file
 # # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 
-# # Correlation analysis and correlation matrix to understand the dataset better
-# # Perform correlation analysis to determine the degree of linear relationship between 2 variables
-# # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 intdicates a strong -ve relationship
-# df.groupby("Iris species").corr()
-# print (df.groupby("Iris species").corr())
-# # Results:
-# # Iris setosa: high correlation between Sepal length & Sepal width
-# # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length, Petal length & Petal width
-# # Iris virginica: high correlation between Petal length & Sepal length
-
-# # correlation matrix will find the parameters which best correlate with each other
-# # correlation value ranges from -1 to 1, and if 2 variables are highly correlated, we can neglect one
-# corr = df.corr()
-# fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (11 width, 6 height)
-# fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-# # customize heatmap
-# # Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
-# # for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
-# h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
-# h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
-# h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
-# plt.show() # show plot
-# # results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
-
 # # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 # sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
 # # Where:
@@ -103,6 +85,40 @@ text_file.close() # always close file
 # # there are overlaps in sepal length and width of all three species.
 
 # 4. Other analysis
+# Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
+# correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
+corr = df.corr(method="pearson") # 
+bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool) # eliminate upper triangle for better readibility
+corr = corr.where(bool_upper_matrix)
+print(corr)
+# Results:
+# High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
+
+# A Correlation matrix to easily visualize the parameters which best correlate with each other
+fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (11 width, 6 height)
+fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
+# customize heatmap
+# Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
+# for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
+h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
+h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
+h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
+plt.show() # show plot
+# results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
+
+# if I group by species:
+df.groupby("Iris species").corr(method="pearson")
+print (df.groupby("Iris species").corr(method="pearson"))
+# Results:
+# Iris setosa: high correlation between Sepal length & Sepal width
+# Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
+# Iris virginica: high correlation between Petal length & Sepal length
+
+
+
+# Exploratory data analysis - visual techniques to detect outliers, trends/pattern
+
+
 
 # # split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
 # from sklearn.model_selection import train_test_split # to split the dataset into training and testing
@@ -112,6 +128,8 @@ text_file.close() # always close file
 # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
 # # random_state is the seed of randomness to help reproduce the same results everytime
 # print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
+
+
 
 # # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # # k = number of neighbors/points closest to the test data
@@ -144,53 +162,53 @@ text_file.close() # always close file
 
 # # hyperparameters
 
-# kNN Classification
-from matplotlib.colors import ListedColormap
-from sklearn import neighbors, datasets
-from sklearn.inspection import DecisionBoundaryDisplay
+# # kNN Classification
+# from matplotlib.colors import ListedColormap
+# from sklearn import neighbors, datasets
+# from sklearn.inspection import DecisionBoundaryDisplay
 
-n_neighbors = 15
+# n_neighbors = 15
 
-# import some data to play with
-iris = datasets.load_iris()
+# # import some data to play with
+# iris = datasets.load_iris()
 
-# we only take the first two features. We could avoid this ugly slicing by using a two-dim dataset
-X = iris.data[:, :2]
-y = iris.target
+# # we only take the first two features. We could avoid this ugly slicing by using a two-dim dataset
+# X = iris.data[:, :2]
+# y = iris.target
 
-# Create color maps
-cmap_light = ListedColormap(["orange", "cyan", "cornflowerblue"])
-cmap_bold = ["darkorange", "c", "darkblue"]
+# # Create color maps
+# cmap_light = ListedColormap(["orange", "cyan", "cornflowerblue"])
+# cmap_bold = ["darkorange", "c", "darkblue"]
 
-for weights in ["uniform", "distance"]:
-    # we create an instance of Neighbours Classifier and fit the data.
-    clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
-    clf.fit(X, y)
+# for weights in ["uniform", "distance"]:
+#     # we create an instance of Neighbours Classifier and fit the data.
+#     clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
+#     clf.fit(X, y)
 
-    _, ax = plt.subplots()
-    DecisionBoundaryDisplay.from_estimator(
-        clf,
-        X,
-        cmap=cmap_light,
-        ax=ax,
-        response_method="predict",
-        plot_method="pcolormesh",
-        xlabel=iris.feature_names[0],
-        ylabel=iris.feature_names[1],
-        shading="auto",
-    )
+#     _, ax = plt.subplots()
+#     DecisionBoundaryDisplay.from_estimator(
+#         clf,
+#         X,
+#         cmap=cmap_light,
+#         ax=ax,
+#         response_method="predict",
+#         plot_method="pcolormesh",
+#         xlabel=iris.feature_names[0],
+#         ylabel=iris.feature_names[1],
+#         shading="auto",
+#     )
 
-    # Plot also the training points
-    sns.scatterplot(
-        x=X[:, 0],
-        y=X[:, 1],
-        hue=iris.target_names[y],
-        palette=cmap_bold,
-        alpha=1.0,
-        edgecolor="black",
-    )
-    plt.title(
-        "3-Class classification (k = %i, weights = '%s')" % (n_neighbors, weights)
-    )
+#     # Plot also the training points
+#     sns.scatterplot(
+#         x=X[:, 0],
+#         y=X[:, 1],
+#         hue=iris.target_names[y],
+#         palette=cmap_bold,
+#         alpha=1.0,
+#         edgecolor="black",
+#     )
+#     plt.title(
+#         "3-Class classification (k = %i, weights = '%s')" % (n_neighbors, weights)
+#     )
 
-plt.show()
+# plt.show()
