@@ -115,119 +115,81 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 # # Iris virginica: high correlation between Petal length & Sepal length
 
 # # 4.4 Box plot
-def graph(y): # define graph of Iris species as y axis
-    sns.boxplot(x="Iris species", y=y, data=df)
-    sns.stripplot(x="Iris species", y=y, data=df, jitter=True, edgecolor="gray", alpha=0.35)# add stripplot/jitter plot, set transparency (alpha)
-plt.figure(figsize=(10,10))
-plt.subplot(221) # grid position top left (2 rows, 2 columns, first top)
-graph('Sepal length (cm)')
-plt.subplot(222) # grid position top right (2 rows, 2 columns, second top)
-graph('Sepal width (cm)')
-plt.subplot(223) # grid position bottom left (2 rows, 2 columns, first bottom)
-graph('Petal length (cm)')
-plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
-graph('Petal width (cm)')
-plt.show() # show plot
-# Results:
-# Iris setosa has the least distributed and smallest petal size
-# Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
-# Sepal size may not be a good variable to differentiate species
+# def graph(y): # define graph of Iris species as y axis
+#     sns.boxplot(x="Iris species", y=y, data=df)
+#     sns.stripplot(x="Iris species", y=y, data=df, jitter=True, edgecolor="gray", alpha=0.35)# add stripplot/jitter plot, set transparency (alpha)
+# plt.figure(figsize=(10,10))
+# plt.subplot(221) # grid position top left (2 rows, 2 columns, first top)
+# graph('Sepal length (cm)')
+# plt.subplot(222) # grid position top right (2 rows, 2 columns, second top)
+# graph('Sepal width (cm)')
+# plt.subplot(223) # grid position bottom left (2 rows, 2 columns, first bottom)
+# graph('Petal length (cm)')
+# plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
+# graph('Petal width (cm)')
+# plt.show() # show plot
+# # Results:
+# # Iris setosa has the least distributed and smallest petal size
+# # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
+# # Sepal size may not be a good variable to differentiate species
 
-# Decision Tree classification
+# # split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+# from sklearn.model_selection import train_test_split # to split the dataset into training and testing
+# X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
+# y = df.iloc[:,4] # store the target variable as label into an array y
+# print(X.shape, y.shape) # display number of rows and columns
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
+# # random_state is the seed of randomness to help reproduce the same results everytime
+# print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
-# split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
-from sklearn.model_selection import train_test_split # to split the dataset into training and testing
-X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
-y = df.iloc[:,4] # store the target variable as label into an array y
-print(X.shape, y.shape) # display number of rows and columns
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
-# random_state is the seed of randomness to help reproduce the same results everytime
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
-
-
-
-
-
-
-
+# # Create kNN Classification to plot the species boundaries
 # # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # # k = number of neighbors/points closest to the test data
-# from sklearn.neighbors import KNeighborsClassifier  # for K nearest neighbours
-# # Create KNN Classifier
-# kNN = KNeighborsClassifier(n_neighbors = 10)
-# # Train the model using the training sets
-# kNN.fit(X_train, y_train)
-# # Predict the response for test dataset
-# y_pred = kNN.predict(X_test)
-# # evaluate model accuracy
-# print("Accuracy: {:.2f}".format(metrics.accuracy_score(y_test, y_pred)))
+from matplotlib.colors import ListedColormap
+from sklearn import neighbors, datasets
+from sklearn.inspection import DecisionBoundaryDisplay
 
-# # Confusion matrix to describe model performance on the test data when we already know the true values/labels
-# from sklearn.metrics import confusion_matrix # to describe performance of model on the test data
-# # Call a method predict by using an object classifier 'cls_svm'
-# y_predict = kNN.predict(X_test)
-# # Calculate cm by calling a method named as 'confusion_matrix'
-# cm = confusion_matrix(y_test, y_predict)
-# # # Call a method heatmap() to plot confusion matrix
-# sns.heatmap(cm, annot=True, linewidths=0.1, cmap="YlGnBu", cbar_kws={'label': 'Scale'})
-# plt.title("Confusion Matrix",fontsize=20)
-# plt.show() # show plot
+ir = datasets.load_iris() # load dataset from sklearn
+k = 20 # decide on the number of neighbor (k)
+X = ir.data[:,:2] # use the first 2 columns (sepal length and sepal width) as a 2 dimensional dataset
+y = ir.target
+targets = ir.target_names# define target name (species name)
+print(targets) # print target name (species name)
 
-# #classification report
-# from sklearn.metrics import classification_report
+# Create color maps
+cmap_light = ListedColormap(["orange", "cyan", "cornflowerblue"]) # define boundary area color
+cmap_bold = ["darkorange", "c", "darkblue"] # define 
 
-# # Display the classification report
-# print(classification_report(y_test, y_predict))
+for weights in ["uniform", "distance"]:
+    # we create an instance of Neighbours Classifier and fit the data.
+    clf = neighbors.KNeighborsClassifier(k, weights=weights)
+    clf.fit(X, y)
 
-# # hyperparameters
+    _, ax = plt.subplots()
+    DecisionBoundaryDisplay.from_estimator(
+        clf,
+        X,
+        cmap=cmap_light,
+        ax=ax,
+        response_method="predict",
+        plot_method="pcolormesh",
+        xlabel=ir.feature_names[0],
+        ylabel=ir.feature_names[1],
+        shading="auto",
+    )
 
-# # kNN Classification
-# from matplotlib.colors import ListedColormap
-# from sklearn import neighbors, datasets
-# from sklearn.inspection import DecisionBoundaryDisplay
+    # Plot also the training points
+    sns.scatterplot(
+        x=X[:, 0],
+        y=X[:, 1],
+        hue=ir.target_names[y],
+        palette=cmap_bold,
+        alpha=1.0,
+        edgecolor="black",
+    )
+    plt.title(
+        "3-Class classification (k = %i, weights = '%s')" % (k, weights)
+    )
 
-# n_neighbors = 15
-
-# # import some data to play with
-# iris = datasets.load_iris()
-
-# # we only take the first two features. We could avoid this ugly slicing by using a two-dim dataset
-# X = iris.data[:, :2]
-# y = iris.target
-
-# # Create color maps
-# cmap_light = ListedColormap(["orange", "cyan", "cornflowerblue"])
-# cmap_bold = ["darkorange", "c", "darkblue"]
-
-# for weights in ["uniform", "distance"]:
-#     # we create an instance of Neighbours Classifier and fit the data.
-#     clf = neighbors.KNeighborsClassifier(n_neighbors, weights=weights)
-#     clf.fit(X, y)
-
-#     _, ax = plt.subplots()
-#     DecisionBoundaryDisplay.from_estimator(
-#         clf,
-#         X,
-#         cmap=cmap_light,
-#         ax=ax,
-#         response_method="predict",
-#         plot_method="pcolormesh",
-#         xlabel=iris.feature_names[0],
-#         ylabel=iris.feature_names[1],
-#         shading="auto",
-#     )
-
-#     # Plot also the training points
-#     sns.scatterplot(
-#         x=X[:, 0],
-#         y=X[:, 1],
-#         hue=iris.target_names[y],
-#         palette=cmap_bold,
-#         alpha=1.0,
-#         edgecolor="black",
-#     )
-#     plt.title(
-#         "3-Class classification (k = %i, weights = '%s')" % (n_neighbors, weights)
-#     )
-
-# plt.show()
+plt.show()
+# Decision Tree classification
