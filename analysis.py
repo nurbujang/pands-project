@@ -16,15 +16,6 @@ import pandas as pd # for data loading from other sources and processing
 import numpy as np # for computational operations
 import matplotlib.pyplot as plt # for data visualization
 import seaborn as sns # for data visualization
-#import matplotlib.patches as mpatches # to customize legend
-#import matplotlib.lines as mlines # to customize legend
-#from sklearn.linear_model import LogisticRegression  # for Logistic Regression algorithm
-
-
-from sklearn import svm  #for Support Vector Machine (SVM) Algorithm
-
-from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
-
 
 # Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # define column headers
@@ -180,8 +171,7 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 # plt.show() # show plot
 # # outputs 2 plots (distance and uniform), and Iris setosa is distinctly different from others based on sepal attribute
 
-
-# split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+# Split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
 from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
 X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
 y = df.iloc[:,4] # store the target variable as label into an array y
@@ -190,31 +180,43 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 # random_state is the seed of randomness to help reproduce the same results everytime
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
-# 4.6 Decision Tree Classification model
-classifier = DecisionTreeClassifier() # define Decision Tree classifer object
-classifier.fit(X_train, y_train) # Train Decision Tree Classifer
-y_pred = classifier.predict(X_test) # Predict the response for test dataset
+# # 4.6 Decision Tree Classification model
+# from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
+# dtclassifier = DecisionTreeClassifier() # define Decision Tree classifer object
+# dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
+# y_pred = dtclassifier.predict(X_test) # Predict the response for test dataset
 
-# Evaluate the model
-from sklearn.metrics import confusion_matrix # import metrics for evaluation
-from sklearn.metrics import classification_report # import metrics for evaluation
-print(classification_report(y_test, y_pred)) # print out predictions made by the classifier
-print(confusion_matrix(y_test, y_pred))
-from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Decision Tree Classification model accuracy is',accuracy_score(y_pred,y_test)*100) # print out accuracy score
+# # Evaluate the model
+# from sklearn.metrics import confusion_matrix # import metrics for evaluation
+# from sklearn.metrics import classification_report # import metrics for evaluation
+# print(classification_report(y_test, y_pred)) # print out predictions made by the classifier
+# print(confusion_matrix(y_test, y_pred))
+# from sklearn.metrics import accuracy_score # import module to check model accuracy score
+# print('Decision Tree Classification model accuracy is',accuracy_score(y_pred,y_test)*100) # print out accuracy score
 
-# 4.7 Support Vector Machine
-from sklearn.svm import SVC # import Support Vector Machine from sklearn
-classifier = SVC()
-classifier.fit(X_train, y_train)
-y_pred = classifier.predict(X_test)
+# # 4.7 Support Vector Machine
+# from sklearn.svm import SVC # import Support Vector Machine from sklearn
+# svclassifier = SVC()
+# svclassifier.fit(X_train, y_train)
+# y_pred = svclassifier.predict(X_test)
 
-# Summary of the predictions made by the classifier
-from sklearn.metrics import confusion_matrix # import metrics for evaluation
-from sklearn.metrics import classification_report # import metrics for evaluation
-print(classification_report(y_test, y_pred))
-print(confusion_matrix(y_test, y_pred))
+# # Summary of the predictions made by the classifier
+# from sklearn.metrics import confusion_matrix # import metrics for evaluation
+# from sklearn.metrics import classification_report # import metrics for evaluation
+# print(classification_report(y_test, y_pred))
+# print(confusion_matrix(y_test, y_pred))
+# # Accuracy score
+# from sklearn.metrics import accuracy_score # import module to check model accuracy score
+# print('Support Vector Machine model accuracy is',accuracy_score(y_pred,y_test)*100) # print out accuracy score
+
+# 4.8 Random Forest
+# to create a cluster of decision trees
+# each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+
+from sklearn.ensemble import RandomForestClassifier
+rf = RandomForestClassifier(n_estimators=5)
+rf.fit(X_train, y_train)
 # Accuracy score
-from sklearn.metrics import accuracy_score
-print('Support Vector Machine model accuracy is',accuracy_score(y_pred,y_test)*100)
-
+from sklearn.metrics import accuracy_score # import module to check model accuracy score
+print('Random Forest model accuracy score is',accuracy_score(X_train, y_train)*100)
+#print(f'Mean accuracy score: {accuracy:.3}'*100)
