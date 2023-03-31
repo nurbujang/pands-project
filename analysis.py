@@ -22,7 +22,7 @@ import seaborn as sns # for data visualization
 
 
 from sklearn import svm  #for Support Vector Machine (SVM) Algorithm
-from sklearn import metrics #for checking the model accuracy
+
 from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
 
 
@@ -133,60 +133,88 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 # # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
 # # Sepal size may not be a good variable to differentiate species
 
-# # split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
-# from sklearn.model_selection import train_test_split # to split the dataset into training and testing
-# X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
-# y = df.iloc[:,4] # store the target variable as label into an array y
-# print(X.shape, y.shape) # display number of rows and columns
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
-# # random_state is the seed of randomness to help reproduce the same results everytime
-# print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
-
-# # Create kNN Classification to plot the species boundaries
+# # 4.5 Create kNN Classification to plot the species boundaries
 # # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # # k = number of neighbors/points closest to the test data
-from matplotlib.colors import ListedColormap
-from sklearn import neighbors, datasets
-from sklearn.inspection import DecisionBoundaryDisplay
+# from matplotlib.colors import ListedColormap
+# from sklearn import neighbors, datasets
+# from sklearn.inspection import DecisionBoundaryDisplay
 
-ir = datasets.load_iris() # load dataset from sklearn
-k = 20 # decide on the number of neighbor (k)
-X = ir.data[:,:2] # use the first 2 columns (sepal length and sepal width) as a 2 dimensional dataset
-y = ir.target
-targets = ir.target_names# define target name (species name)
-print(targets) # print target name (species name)
+# ir = datasets.load_iris() # load dataset from sklearn
+# k = 20 # decide on the number of neighbor (k)
+# X = ir.data[:,:2] # use the first 2 columns (sepal length and sepal width) as a 2 dimensional dataset
+# y = ir.target
+# targets = ir.target_names# define target name (species name)
+# print(targets) # print target name (species name)
 
-# Create color maps
-cmap_light = ListedColormap(["mediumorchid", "orange", "steelblue"]) # define boundary area color
-cmap_bold = ["fuchsia", "darkorange", "navy"] # define 
+# # Create color maps
+# cmap_light = ListedColormap(["mediumorchid", "orange", "steelblue"]) # define boundary area color
+# cmap_bold = ["fuchsia", "darkorange", "navy"] # define 
 
-for weights in ["uniform", "distance"]: # (distance=closer neighbor weighted more than farther ones and uniform=all points are weighted equally
-    # we create an instance of Neighbours Classifier and fit the data.
-    clf = neighbors.KNeighborsClassifier(k, weights=weights) # define classifier
-    clf.fit(X, y)
-    _, ax = plt.subplots()
-    DecisionBoundaryDisplay.from_estimator(clf, X, cmap=cmap_light, ax=ax, response_method="predict", plot_method="pcolormesh", xlabel=ir.feature_names[0], ylabel=ir.feature_names[1], shading="auto")
-# clf =
-# X =
-# cmap=cmap_light =
-# ax=ax =
-# response_method="predict" =
-# plot_method="pcolormesh" =
-# xlabel=ir.feature_names[0] =
-# ylabel=ir.feature_names[1] =
-# shading="auto" =
+# for weights in ["uniform", "distance"]: # (distance=closer neighbor weighted more than farther ones and uniform=all points are weighted equally
+#     # we create an instance of Neighbours Classifier and fit the data.
+#     clf = neighbors.KNeighborsClassifier(k, weights=weights) # define classifier
+#     clf.fit(X, y)
+#     _, ax = plt.subplots()
+#     DecisionBoundaryDisplay.from_estimator(clf, X, cmap=cmap_light, ax=ax, response_method="predict", plot_method="pcolormesh", xlabel=ir.feature_names[0], ylabel=ir.feature_names[1], shading="auto")
+# # clf =
+# # X =
+# # cmap=cmap_light =
+# # ax=ax =
+# # response_method="predict" =
+# # plot_method="pcolormesh" =
+# # xlabel=ir.feature_names[0] =
+# # ylabel=ir.feature_names[1] =
+# # shading="auto" =
 
-    sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=ir.target_names[y], palette=cmap_bold, alpha=1.0, edgecolor="black") # Plot the Training plots (points)
-    plt.title("3-Class classification (k = %i, weights = '%s')" % (k, weights))
-# x=X[:, 0] =
-# y=X[:, 1] =
-# hue =
-# palette=cmap_bold =
-# alpha=1.0 =
-# edgecolor="black" =
-# %i =
-# %s =
-plt.show() # show plot
-# outputs 2 plots (distance and uniform), and Iris setosa is distinctly different from others based on sepal attribute
+#     sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=ir.target_names[y], palette=cmap_bold, alpha=1.0, edgecolor="black") # Plot the Training plots (points)
+#     plt.title("3-Class classification (k = %i, weights = '%s')" % (k, weights))
+# # x=X[:, 0] =
+# # y=X[:, 1] =
+# # hue =
+# # palette=cmap_bold =
+# # alpha=1.0 =
+# # edgecolor="black" =
+# # %i =
+# # %s =
+# plt.show() # show plot
+# # outputs 2 plots (distance and uniform), and Iris setosa is distinctly different from others based on sepal attribute
 
-# Decision Tree classification
+
+# split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
+X = df.iloc[:,:2] # store the first two columns (Sepal length and Sepal width) in an array X 
+y = df.iloc[:,4] # store the target variable as label into an array y
+print(X.shape, y.shape) # display number of rows and columns
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
+# random_state is the seed of randomness to help reproduce the same results everytime
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
+
+# 4.6 Decision Tree Classification model
+classifier = DecisionTreeClassifier() # define Decision Tree classifer object
+classifier.fit(X_train, y_train) # Train Decision Tree Classifer
+y_pred = classifier.predict(X_test) # Predict the response for test dataset
+
+# Evaluate the model
+from sklearn.metrics import confusion_matrix # import metrics for evaluation
+from sklearn.metrics import classification_report # import metrics for evaluation
+print(classification_report(y_test, y_pred)) # print out predictions made by the classifier
+print(confusion_matrix(y_test, y_pred))
+from sklearn.metrics import accuracy_score # import module to check model accuracy score
+print('Decision Tree Classification model accuracy is',accuracy_score(y_pred,y_test)*100) # print out accuracy score
+
+# 4.7 Support Vector Machine
+from sklearn.svm import SVC # import Support Vector Machine from sklearn
+classifier = SVC()
+classifier.fit(X_train, y_train)
+y_pred = classifier.predict(X_test)
+
+# Summary of the predictions made by the classifier
+from sklearn.metrics import confusion_matrix # import metrics for evaluation
+from sklearn.metrics import classification_report # import metrics for evaluation
+print(classification_report(y_test, y_pred))
+print(confusion_matrix(y_test, y_pred))
+# Accuracy score
+from sklearn.metrics import accuracy_score
+print('Support Vector Machine model accuracy is',accuracy_score(y_pred,y_test)*100)
+
