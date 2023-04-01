@@ -23,10 +23,11 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
-2. First, I imported the necessary packages/modules for the first part of the project (3-6).
+2. First, I imported the necessary packages/modules for the first part of the project (3-6). I will import more as needed.
 3. Then, I defined the column names, loaded the data () and added the column header to the dataframe ().
 4. checked for missing value using the isna() function that returns a True/false if a value is missing ().
 5. print out df.describe into csv ()
+
 
 visualize the whole dataset using sns.pairplot(1)
 
@@ -69,6 +70,7 @@ https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
 
 
  
+
 
 
 
