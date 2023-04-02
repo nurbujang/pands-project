@@ -127,7 +127,7 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 # # 4.5 Create kNN Classification to plot the species boundaries
 # # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # # k = number of neighbors/points closest to the test data
-# Split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+# First, split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
 # Later, the testing dataset will be used to check the accuracy of the model.
 from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
 # X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
@@ -139,6 +139,15 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 # random_state is the seed of randomness to help reproduce the same results everytime
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
+from sklearn.neighbors import KNeighborsClassifier
+knn = KNeighborsClassifier(n_neighbors=7)  
+knn.fit(X_train, y_train)   
+# Calculate the accuracy of the model using testing dataset
+from sklearn.metrics import accuracy_score # import module to check model accuracy score
+for i in np.arange(7, 26):
+    knn2 = KNeighborsClassifier(n_neighbors=i)
+    knn2.fit(X_train, y_train)
+    print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn2.score(X_test,y_test)*100)
 
 # from matplotlib.colors import ListedColormap
 # from sklearn import neighbors, datasets
@@ -184,9 +193,19 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the sh
 # plt.show() # show plot
 # # outputs 2 plots (distance and uniform), and Iris setosa is distinctly different from others based on sepal attribute
 
+# Logistic Regression
+# to estimate the relationship between 1 dependent variable and 1 or more independent variables
+from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
+# lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
+#lr = LogisticRegression()
+lr=LogisticRegression(C=0.02) # C value is a hyperparameter. 
+# High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
+lr.fit(X_train,y_train) # train the model
+y_pred=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
+from sklearn.metrics import accuracy_score # import module to check model accuracy score
+print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred)*100)
 
-
-# 4.6 Decision Tree Classification model
+# 4.6 Decision Tree Classification
 from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
 dtclassifier = DecisionTreeClassifier() # define Decision Tree classifer object
 dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
