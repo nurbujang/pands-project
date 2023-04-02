@@ -29,7 +29,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 5. print out df.describe into txt.file ()
 
 
-visualize the whole dataset using sns.pairplot(1)
+visualize the entire dataset using sns.pairplot(1)
 
 ### Conclusion:
 A program that outputs all the above was written. Additional analyses done were correlation, k-Nearest Neighbor and regression. Correlation analysis was done to .K-Nearest Neighbor was done to . Regression was done to .
