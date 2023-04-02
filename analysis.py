@@ -140,10 +140,9 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
 from sklearn.neighbors import KNeighborsClassifier
-knn = KNeighborsClassifier(n_neighbors=7)  
-knn.fit(X_train, y_train)   
+from sklearn.metrics import confusion_matrix, classification_report,f1_score, ConfusionMatrixDisplay,accuracy_score # import metrics for evaluation
+
 # Calculate the accuracy of the model using testing dataset
-from sklearn.metrics import accuracy_score # import module to check model accuracy score
 for i in np.arange(7, 26):
     knn2 = KNeighborsClassifier(n_neighbors=i)
     knn2.fit(X_train, y_train)
@@ -201,44 +200,50 @@ from sklearn.linear_model import LogisticRegression # import Logistic Regression
 lr=LogisticRegression(C=0.02) # C value is a hyperparameter. 
 # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
 lr.fit(X_train,y_train) # train the model
-y_pred=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
+y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
 from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred)*100)
+print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
+f1_score(y_test, y_pred_lr, average='macro')
 
-# 4.6 Decision Tree Classification
+# # 4.6 Decision Tree Classification
 from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
-dtclassifier = DecisionTreeClassifier() # define Decision Tree classifer object
+dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
 dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
-y_pred = dtclassifier.predict(X_test) # Predict the response for test dataset
+y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
 # Evaluate the model using testing dataset
 from sklearn.metrics import confusion_matrix # import metrics for evaluation
 from sklearn.metrics import classification_report # import metrics for evaluation
-print(classification_report(y_test, y_pred)) # print out predictions made by the classifier
-print(confusion_matrix(y_test, y_pred))
+ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
+f1_score(y_test, y_pred_dt, average='macro')
 from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred)*100) # print out accuracy score
+print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
 
 # 4.7 Support Vector Machine
 from sklearn.svm import SVC # import Support Vector Machine from sklearn
 svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
-y_pred = svclassifier.predict(X_test) # Predict from the test dataset
+y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
 # Summary of the predictions made by the classifier
-from sklearn.metrics import confusion_matrix # import metrics for evaluation
-from sklearn.metrics import classification_report # import metrics for evaluation
-print(classification_report(y_test, y_pred))
-print(confusion_matrix(y_test, y_pred))
+
+
+print(classification_report(y_test, y_pred_svc))
+print(confusion_matrix(y_test, y_pred_svc))
 # Accuracy score using testing dataset
 from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred)*100) # print out accuracy score
+print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
+f1_score(y_test, y_pred_svc, average='macro')
 
 # # 4.8 Random Forest
 # # to create a cluster of decision trees
 # # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
-# from sklearn.ensemble import RandomForestClassifier # import Random FOrest Classifier from sklearn
-# rf = RandomForestClassifier(n_estimators=5)
-# rf.fit(X_train, y_train)
-# # Accuracy score using testing dataset
-# from sklearn.metrics import accuracy_score # import module to check model accuracy score
-# print('Random Forest model accuracy score is',accuracy_score(X_train, y_train)*100)
-# #print(f'Mean accuracy score: {accuracy:.3}'*100)
+from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
+from sklearn.metrics import confusion_matrix, f1_score, accuracy_score
+rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
+rf.fit(X_train, y_train) # train the model
+y_pred_rf =rf.predict(X_test) # compare model’s output (y_pred) with the target values that we already have (y_test)
+# Random Forest visualization using confusion matrix
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
+# Accuracy score using testing dataset
+print('Random Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
+f1_score(y_test, y_pred_rf, average='macro')
