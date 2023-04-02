@@ -124,9 +124,7 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 # # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
 # # Sepal size may not be a good variable to differentiate species
 
-# # 4.5 Create kNN Classification to plot the species boundaries
-# # kNN calculates the distance between the data points and predict the correct species class for the datapoint
-# # k = number of neighbors/points closest to the test data
+# SPLITTING THE DATA FOR TRAINING AND TESTING
 # First, split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
 # Later, the testing dataset will be used to check the accuracy of the model.
 from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
@@ -139,14 +137,33 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 # random_state is the seed of randomness to help reproduce the same results everytime
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
+# 4.5 Create kNN Classification to plot the species boundaries
+# kNN calculates the distance between the data points and predict the correct species class for the datapoint
+# k = number of neighbors/points closest to the test data
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, classification_report,f1_score, ConfusionMatrixDisplay,accuracy_score # import metrics for evaluation
-
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
 # Calculate the accuracy of the model using testing dataset
-for i in np.arange(7, 26):
-    knn2 = KNeighborsClassifier(n_neighbors=i)
-    knn2.fit(X_train, y_train)
-    print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn2.score(X_test,y_test)*100)
+for i in np.arange(7, 10):
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, y_train)
+    print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
+    ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
+    plt.show()
+# results from confusion matrix:
+# 
+    # fig,axs = plt.subplots(2,2, figsize = (7,8)) # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
+# fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
+# sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
+# sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
+# sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
+# sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
+# fig.tight_layout() # to fit all subplots into one figure nicely automatically
+# plt.savefig('iris.png') # save output into png file
+# plt.show() # show plot
+
+
+    # print(classification_report(y_test, y_pred_svc))
+# print(confusion_matrix(y_test, y_pred_svc))
 
 # from matplotlib.colors import ListedColormap
 # from sklearn import neighbors, datasets
@@ -192,58 +209,56 @@ for i in np.arange(7, 26):
 # plt.show() # show plot
 # # outputs 2 plots (distance and uniform), and Iris setosa is distinctly different from others based on sepal attribute
 
-# Logistic Regression
-# to estimate the relationship between 1 dependent variable and 1 or more independent variables
-from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
-# lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
-#lr = LogisticRegression()
-lr=LogisticRegression(C=0.02) # C value is a hyperparameter. 
-# High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
-lr.fit(X_train,y_train) # train the model
-y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
-from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
-f1_score(y_test, y_pred_lr, average='macro')
+# # Logistic Regression
+# # to estimate the relationship between 1 dependent variable and 1 or more independent variables
+# from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
+# # lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
+# #lr = LogisticRegression()
+# lr=LogisticRegression(C=0.02) # C value is a hyperparameter. 
+# # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
+# lr.fit(X_train,y_train) # train the model
+# y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
+# print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
+# f1_score(y_test, y_pred_lr, average='macro')
 
-# # 4.6 Decision Tree Classification
-from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
-dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
-dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
-y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
-# Evaluate the model using testing dataset
-from sklearn.metrics import confusion_matrix # import metrics for evaluation
-from sklearn.metrics import classification_report # import metrics for evaluation
-ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
-f1_score(y_test, y_pred_dt, average='macro')
-from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
+# # # 4.6 Decision Tree Classification
+# from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
+# dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
+# dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
+# y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
+# # Evaluate the model using testing dataset
+# from sklearn.metrics import confusion_matrix # import metrics for evaluation
+# from sklearn.metrics import classification_report # import metrics for evaluation
+# ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
+# f1_score(y_test, y_pred_dt, average='macro')
+# from sklearn.metrics import accuracy_score # import module to check model accuracy score
+# print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
 
-# 4.7 Support Vector Machine
-from sklearn.svm import SVC # import Support Vector Machine from sklearn
-svclassifier = SVC()
-svclassifier.fit(X_train, y_train)
-y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
-# Summary of the predictions made by the classifier
+# # 4.7 Support Vector Machine
+# from sklearn.svm import SVC # import Support Vector Machine from sklearn
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
+# svclassifier = SVC()
+# svclassifier.fit(X_train, y_train)
+# y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
+# # Summary of the predictions made by the classifier
+# print(classification_report(y_test, y_pred_svc))
+# print(confusion_matrix(y_test, y_pred_svc))
+# # Accuracy score using testing dataset
+# print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
+# f1_score(y_test, y_pred_svc, average='macro')
 
-
-print(classification_report(y_test, y_pred_svc))
-print(confusion_matrix(y_test, y_pred_svc))
-# Accuracy score using testing dataset
-from sklearn.metrics import accuracy_score # import module to check model accuracy score
-print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
-f1_score(y_test, y_pred_svc, average='macro')
-
-# # 4.8 Random Forest
-# # to create a cluster of decision trees
-# # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
-from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
-from sklearn.metrics import confusion_matrix, f1_score, accuracy_score
-rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
-rf.fit(X_train, y_train) # train the model
-y_pred_rf =rf.predict(X_test) # compare model’s output (y_pred) with the target values that we already have (y_test)
-# Random Forest visualization using confusion matrix
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
-# Accuracy score using testing dataset
-print('Random Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
-f1_score(y_test, y_pred_rf, average='macro')
+# # # 4.8 Random Forest
+# # # to create a cluster of decision trees
+# # # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+# from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
+# rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
+# rf.fit(X_train, y_train) # train the model
+# y_pred_rf =rf.predict(X_test) # compare model’s output (y_pred) with the target values that we already have (y_test)
+# # Random Forest visualization using confusion matrix
+# ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
+# # Accuracy score using testing dataset
+# print('Random Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
+# f1_score(y_test, y_pred_rf, average='macro')
