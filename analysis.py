@@ -130,84 +130,61 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
 # X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
 # y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
-# X = df.iloc[:, :-1].values
-# y = df.iloc[:, 4].values
-# print(X.shape, y.shape) # display number of rows and columns
-# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
-# # random_state is the seed of randomness to help reproduce the same results everytime
-# print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
+X = df.iloc[:, :-1].values
+y = df.iloc[:, 4].values
+print(X.shape, y.shape) # display number of rows and columns
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
+# random_state is the seed of randomness to help reproduce the same results everytime
+print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
-# # 4.5 Create kNN Classification to plot the species boundaries
-# # kNN calculates the distance between the data points and predict the correct species class for the datapoint
-# # k = number of neighbors/points closest to the test data
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
-# # Calculate the accuracy of the model using testing dataset
-# for i in np.arange(7, 10):
-#     knn = KNeighborsClassifier(n_neighbors=i)
+# 4.5 Create kNN Classification to plot the species boundaries
+# kNN calculates the distance between the data points and predict the correct species class for the datapoint
+# k = number of neighbors/points closest to the test data
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
+# Calculate the accuracy of the model using testing dataset
+for i in np.arange(7, 10):
+    knn = KNeighborsClassifier(n_neighbors=i)
+    knn.fit(X_train, y_train)
+    print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
+    ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
+plt.show()
+
+# for count,k in enumerate(np.arange(7,10)):
+#     print(count,k)
+#     knn = KNeighborsClassifier(n_neighbors=k)
 #     knn.fit(X_train, y_train)
-#     print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
-#     ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
-#     plt.show()
-# # results from confusion matrix:
+#     axes.plot=ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
+# plt.show()
+#     # fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(4,12))
+
+# for cls, ax in zip(classifiers, axes.flatten()):
+#     plot_confusion_matrix(cls, 
+#                           X_test, 
+#                           y_test, 
+#                           ax=ax, 
+#                           cmap='Blues',
+#                          display_labels=data.target_names)
+#     ax.title.set_text(type(cls).__name__)
+# plt.tight_layout()  
+
+
+
+# results from confusion matrix:
+
+    # 
 # 
-    # fig,axs = plt.subplots(2,2, figsize = (7,8)) # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-# fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
 # sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
 # sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
 # sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
 # sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
-# fig.tight_layout() # to fit all subplots into one figure nicely automatically
+# 
 # plt.savefig('iris.png') # save output into png file
 # plt.show() # show plot
 
 
     # print(classification_report(y_test, y_pred_svc))
 # print(confusion_matrix(y_test, y_pred_svc))
-
-# from matplotlib.colors import ListedColormap
-# from sklearn import neighbors, datasets
-# from sklearn.inspection import DecisionBoundaryDisplay
-
-# ir = datasets.load_iris() # load dataset from sklearn
-# k = 7 # decide on the number of neighbor (k)
-# X = ir.data[:,:2] # use the first 2 columns (sepal length and sepal width) as a 2 dimensional dataset
-# y = ir.target
-# targets = ir.target_names# define target name (species name)
-# print(targets) # print target name (species name)
-
-# # Create color maps
-# cmap_light = ListedColormap(["mediumorchid", "orange", "steelblue"]) # define boundary area color
-# cmap_bold = ["fuchsia", "darkorange", "navy"] # define 
-
-# for weights in ["uniform", "distance"]: # (distance=closer neighbor weighted more than farther ones and uniform=all points are weighted equally
-#     # we create an instance of Neighbours Classifier and fit the data.
-#     clf = neighbors.KNeighborsClassifier(k, weights=weights) # define classifier
-#     clf.fit(X, y)
-#     _, ax = plt.subplots()
-#     DecisionBoundaryDisplay.from_estimator(clf, X, cmap=cmap_light, ax=ax, response_method="predict", plot_method="pcolormesh", xlabel=ir.feature_names[0], ylabel=ir.feature_names[1], shading="auto")
-# # clf =
-# # X =
-# # cmap=cmap_light =
-# # ax=ax =
-# # response_method="predict" =
-# # plot_method="pcolormesh" =
-# # xlabel=ir.feature_names[0] =
-# # ylabel=ir.feature_names[1] =
-# # shading="auto" =
-
-#     sns.scatterplot(x=X[:, 0], y=X[:, 1], hue=ir.target_names[y], palette=cmap_bold, alpha=1.0, edgecolor="black") # Plot the Training plots (points)
-#     plt.title("3-Class classification (k = %i, weights = '%s')" % (k, weights))
-# # x=X[:, 0] =
-# # y=X[:, 1] =
-# # hue =
-# # palette=cmap_bold =
-# # alpha=1.0 =
-# # edgecolor="black" =
-# # %i =
-# # %s =
-# plt.show() # show plot
-# # outputs 2 plots (distance and uniform), and Iris setosa is distinctly different from others based on sepal attribute
 
 # # Logistic Regression
 # # to estimate the relationship between 1 dependent variable and 1 or more independent variables
