@@ -130,26 +130,26 @@ df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each c
 from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
 # X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
 # y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
-X = df.iloc[:, :-1].values
-y = df.iloc[:, 4].values
-print(X.shape, y.shape) # display number of rows and columns
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
-# random_state is the seed of randomness to help reproduce the same results everytime
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
+# X = df.iloc[:, :-1].values
+# y = df.iloc[:, 4].values
+# print(X.shape, y.shape) # display number of rows and columns
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42) # split the dataset into training (80%) and testing (20%)
+# # random_state is the seed of randomness to help reproduce the same results everytime
+# print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
-# 4.5 Create kNN Classification to plot the species boundaries
-# kNN calculates the distance between the data points and predict the correct species class for the datapoint
-# k = number of neighbors/points closest to the test data
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
-# Calculate the accuracy of the model using testing dataset
-for i in np.arange(7, 10):
-    knn = KNeighborsClassifier(n_neighbors=i)
-    knn.fit(X_train, y_train)
-    print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
-    ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
-    plt.show()
-# results from confusion matrix:
+# # 4.5 Create kNN Classification to plot the species boundaries
+# # kNN calculates the distance between the data points and predict the correct species class for the datapoint
+# # k = number of neighbors/points closest to the test data
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
+# # Calculate the accuracy of the model using testing dataset
+# for i in np.arange(7, 10):
+#     knn = KNeighborsClassifier(n_neighbors=i)
+#     knn.fit(X_train, y_train)
+#     print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
+#     ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
+#     plt.show()
+# # results from confusion matrix:
 # 
     # fig,axs = plt.subplots(2,2, figsize = (7,8)) # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
 # fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
@@ -170,7 +170,7 @@ for i in np.arange(7, 10):
 # from sklearn.inspection import DecisionBoundaryDisplay
 
 # ir = datasets.load_iris() # load dataset from sklearn
-# k = 20 # decide on the number of neighbor (k)
+# k = 7 # decide on the number of neighbor (k)
 # X = ir.data[:,:2] # use the first 2 columns (sepal length and sepal width) as a 2 dimensional dataset
 # y = ir.target
 # targets = ir.target_names# define target name (species name)
