@@ -31,6 +31,10 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 visualize the entire dataset using sns.pairplot(1)
 
+k-Nearest Neighbor Classification
+Logistic Regression
+
+
 ### Conclusion:
 A program that outputs all the above was written. Additional analyses done were correlation, k-Nearest Neighbor and regression. Correlation analysis was done to .K-Nearest Neighbor was done to . Regression was done to .
 
