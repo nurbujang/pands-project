@@ -33,6 +33,9 @@ visualize the entire dataset using sns.pairplot(1)
 
 k-Nearest Neighbor Classification
 Logistic Regression
+Decision Tree Classification
+Support Vector Machine
+Random Forest
 
 
 ### Conclusion:
