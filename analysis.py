@@ -16,18 +16,19 @@ import pandas as pd # for data loading from other sources and processing
 import numpy as np # for computational operations
 import matplotlib.pyplot as plt # for data visualization
 import seaborn as sns # for data visualization
+from matplotlib import rcParams
 from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier # import k-Nearest Neighbor Classifier from sklearn
 from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
-from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
+from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm from sklearn
 from sklearn.svm import SVC # import Support Vector Machine from sklearn
 from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
 
 # Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # define column headers
-df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each column name
-#print(df.head(5)) # print out first 5 lines
+df=pd.read_csv('iris.data', names=columns) # read the csv file and assign a name to each column
+print(df.head(2)) # print out first 2 lines
 
 # check for missing values
 df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
@@ -70,6 +71,8 @@ plt.show() # show plot
 
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
+plt.suptitle('Pair Plot for sepal and petal attributes of three Iris species', fontweight='bold', size=15)
+#rcParams['axes.titlepad'] = 20 
 # Where:
 # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
@@ -124,6 +127,7 @@ plt.subplot(223) # grid position bottom left (2 rows, 2 columns, first bottom)
 graph('Petal length (cm)')
 plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
 graph('Petal width (cm)')
+plt.suptitle('Box Plot for sepal and petal attributes of three Iris species', fontweight='bold', size=15)
 plt.show() # show plot
 # Results:
 # Iris setosa has the least distributed and smallest petal size
