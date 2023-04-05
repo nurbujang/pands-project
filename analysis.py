@@ -16,118 +16,123 @@ import pandas as pd # for data loading from other sources and processing
 import numpy as np # for computational operations
 import matplotlib.pyplot as plt # for data visualization
 import seaborn as sns # for data visualization
+from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
+from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
+from sklearn.svm import SVC # import Support Vector Machine from sklearn
+from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
 
 # Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # define column headers
 df=pd.read_csv('iris.data', names=columns) # read the csv file and assign each column name
 #print(df.head(5)) # print out first 5 lines
 
-# # check for missing values
-# df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
-# #print(df.info()) # print out data info
+# check for missing values
+df.info() # returns RangeIndex: 150 entries, 0 to 149, so no missing values
+#print(df.info()) # print out data info
 
-# df.isna().sum() # get number of missing values in each column. df.isnull().sum() can also be used
-# #print(df.isna().sum()) # print out number of missing values
+df.isna().sum() # get number of missing values in each column. df.isnull().sum() can also be used
+#print(df.isna().sum()) # print out number of missing values
 
-# df.drop_duplicates() # remove duplicates
-# print(df.drop_duplicates()) # print out remove duplicates
-# # output: 150 lines remain, no duplicates exist
+df.drop_duplicates() # remove duplicates
+print(df.drop_duplicates()) # print out remove duplicates
+# output: 150 lines remain, no duplicates exist
 
-# df.value_counts("Iris species") # how many lines for each species
-# print(df.value_counts("Iris species")) # print how many lines for each species
-# # output: 50 lines for each species
+df.value_counts("Iris species") # how many lines for each species
+print(df.value_counts("Iris species")) # print how many lines for each species
+# output: 50 lines for each species
 
-# # 1. Summary into text file, containing basic statistical analysis
-# df.describe() # to get basic statistical analysis data
-# #print (df.describe()) # print out description of data
+# 1. Summary into text file, containing basic statistical analysis
+df.describe() # to get basic statistical analysis data
+#print (df.describe()) # print out description of data
 
-# text_file = open("summary.txt", "wt") # to write the string into a text file
-# n = text_file.write(df.describe().to_string()) # export into text file called summary, convert pandas dataframe to string
-# text_file.close() # always close file
+text_file = open("summary.txt", "wt") # to write the string into a text file
+n = text_file.write(df.describe().to_string()) # export into text file called summary, convert pandas dataframe to string
+text_file.close() # always close file
 
 # 2. Histogram of each variable into png file
-# Visualizing 4 histograms of each column is not very informative, so overlapping histogram is chosen
-# sns.set(style="whitegrid") # set background
-# fig,axs = plt.subplots(2,2, figsize = (7,8)) # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-# fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-# sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
-# sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
-# sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
-# sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
-# fig.tight_layout() # to fit all subplots into one figure nicely automatically
-# plt.savefig('iris.png') # save output into png file
-# plt.show() # show plot
+sns.set(style="whitegrid") # set background
+fig,axs = plt.subplots(2,2, figsize = (7,8)) # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
+fig.suptitle('Petal and sepal dimensions of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
+sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
+sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
+sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
+sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
+fig.tight_layout() # to fit all subplots into one figure nicely automatically
+plt.savefig('iris.png') # save output into png file
+plt.show() # show plot
 
-# # 3. Scatter plot of each pair of variables
-# # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
-# # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
+# 3. Scatter plot of each pair of variables
+# df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
+# within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 
-# # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
-# sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
-# # Where:
-# # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
-# # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
-# # hue distinguishes different colors, palette is set to brg palette
-# # marker o is circle, s is square, D is diamond
-# plt.show() # show plot
-# # Results:
-# # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
-# # The petal length and width of I. setosa have much narrower distribution compared to the other two species. 
-# # there are overlaps in sepal length and width of all three species.
+# Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
+sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
+# Where:
+# kind='reg' applies a linear regression line to identify the relationship within the scatter plot
+# to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
+# hue distinguishes different colors, palette is set to brg palette
+# marker o is circle, s is square, D is diamond
+plt.show() # show plot
+# Results:
+# I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
+# The petal length and width of I. setosa have much narrower distribution compared to the other two species. 
+# there are overlaps in sepal length and width of all three species.
 
-# # 4. Other analysis, Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
-# # 4a. Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
-# # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
-# corr = df.corr(method="pearson") # 
-# bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool) # eliminate upper triangle for better readibility
-# corr = corr.where(bool_upper_matrix)
-# print(corr)
-# # Results:
-# # High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
+# 4. Other analysis, Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
+# 4a. Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
+# correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
+corr = df.corr(method="pearson") # 
+bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool) # eliminate upper triangle for better readibility
+corr = corr.where(bool_upper_matrix)
+print(corr)
+# Results:
+# High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
 
-# # 4.2 A Correlation matrix to easily visualize the parameters which best correlate with each other
-# fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (11 width, 6 height)
-# fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-# # customize heatmap
-# # Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
-# # for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
-# h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
-# h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
-# h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
-# plt.show() # show plot
-# # results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
+# 4.2 A Correlation matrix to easily visualize the parameters which best correlate with each other
+fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (11 width, 6 height)
+fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
+# customize heatmap
+# Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
+# for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
+h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
+h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
+h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
+plt.show() # show plot
+# results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
 
-# # 4.3 If I group by species:
-# df.groupby("Iris species").corr(method="pearson")
-# print (df.groupby("Iris species").corr(method="pearson"))
-# # Results:
-# # Iris setosa: high correlation between Sepal length & Sepal width
-# # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
-# # Iris virginica: high correlation between Petal length & Sepal length
+# 4.3 If I group by species:
+df.groupby("Iris species").corr(method="pearson")
+print (df.groupby("Iris species").corr(method="pearson"))
+# Results:
+# Iris setosa: high correlation between Sepal length & Sepal width
+# Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
+# Iris virginica: high correlation between Petal length & Sepal length
 
-# # 4.4 Box plot
-# def graph(y): # define graph of Iris species as y axis
-#     sns.boxplot(x="Iris species", y=y, data=df)
-#     sns.stripplot(x="Iris species", y=y, data=df, jitter=True, edgecolor="gray", alpha=0.35)# add stripplot/jitter plot, set transparency (alpha)
-# plt.figure(figsize=(10,10))
-# plt.subplot(221) # grid position top left (2 rows, 2 columns, first top)
-# graph('Sepal length (cm)')
-# plt.subplot(222) # grid position top right (2 rows, 2 columns, second top)
-# graph('Sepal width (cm)')
-# plt.subplot(223) # grid position bottom left (2 rows, 2 columns, first bottom)
-# graph('Petal length (cm)')
-# plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
-# graph('Petal width (cm)')
-# plt.show() # show plot
-# # Results:
-# # Iris setosa has the least distributed and smallest petal size
-# # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
-# # Sepal size may not be a good variable to differentiate species
+# 4.4 Box plot
+def graph(y): # define graph of Iris species as y axis
+    sns.boxplot(x="Iris species", y=y, data=df)
+    sns.stripplot(x="Iris species", y=y, data=df, jitter=True, edgecolor="gray", alpha=0.35)# add stripplot/jitter plot, set transparency (alpha)
+plt.figure(figsize=(10,10))
+plt.subplot(221) # grid position top left (2 rows, 2 columns, first top)
+graph('Sepal length (cm)')
+plt.subplot(222) # grid position top right (2 rows, 2 columns, second top)
+graph('Sepal width (cm)')
+plt.subplot(223) # grid position bottom left (2 rows, 2 columns, first bottom)
+graph('Petal length (cm)')
+plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
+graph('Petal width (cm)')
+plt.show() # show plot
+# Results:
+# Iris setosa has the least distributed and smallest petal size
+# Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
+# Sepal size may not be a good variable to differentiate species
 
 # SPLITTING THE DATA FOR TRAINING AND TESTING
 # First, split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
 # Later, the testing dataset will be used to check the accuracy of the model.
-from sklearn.model_selection import train_test_split # import model to split the dataset into training and testing
 # X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
 # y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
 X = df.iloc[:, :-1].values
@@ -140,102 +145,52 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the sh
 # 4.5 Create kNN Classification to plot the species boundaries
 # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # k = number of neighbors/points closest to the test data
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
 # Calculate the accuracy of the model using testing dataset
 for i in np.arange(7, 10):
     knn = KNeighborsClassifier(n_neighbors=i)
     knn.fit(X_train, y_train)
     print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
-    ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
+    
+# Logistic Regression
+# to estimate the relationship between 1 dependent variable and 1 or more independent variables
+# lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
+#lr = LogisticRegression()
+lr=LogisticRegression(C=0.02) # C value is a hyperparameter. 
+# High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
+lr.fit(X_train,y_train) # train the model
+y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
+print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
+print ('Logistic Regression model F1 score is', f1_score(y_test, y_pred_lr, average='macro'))
+
+# # 4.6 Decision Tree Classification
+dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
+dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
+y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
+# Evaluate the model using testing dataset
+ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
+print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
+print ('Decision Tree Classification model F1 score is', f1_score(y_test, y_pred_dt, average='macro'))
+
+# 4.7 Support Vector Machine
+svclassifier = SVC()
+svclassifier.fit(X_train, y_train)
+y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
+# Summary of the predictions made by the classifier
+print(classification_report(y_test, y_pred_svc))
+print(confusion_matrix(y_test, y_pred_svc))
+# Accuracy score using testing dataset
+print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
+print ('Support Vector Machine model F1 score is', f1_score(y_test, y_pred_svc, average='macro'))
+
+# # 4.8 Random Forest
+# # to create a cluster of decision trees
+# # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
+rf.fit(X_train, y_train) # train the model
+y_pred_rf =rf.predict(X_test) # compare model’s output (y_pred) with the target values that we already have (y_test)
+# Random Forest visualization using confusion matrix
+ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
 plt.show()
-
-# for count,k in enumerate(np.arange(7,10)):
-#     print(count,k)
-#     knn = KNeighborsClassifier(n_neighbors=k)
-#     knn.fit(X_train, y_train)
-#     axes.plot=ConfusionMatrixDisplay.from_estimator(knn, X_test, y_test)
-# plt.show()
-#     # fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(4,12))
-
-# for cls, ax in zip(classifiers, axes.flatten()):
-#     plot_confusion_matrix(cls, 
-#                           X_test, 
-#                           y_test, 
-#                           ax=ax, 
-#                           cmap='Blues',
-#                          display_labels=data.target_names)
-#     ax.title.set_text(type(cls).__name__)
-# plt.tight_layout()  
-
-
-
-# results from confusion matrix:
-
-    # 
-# 
-# sns.histplot(data=df, x="Sepal length (cm)", kde=True, color="olive", ax=axs[0, 0]) # Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
-# sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", ax=axs[0, 1]) # ax is the coordinate of each subplot on the figure
-# sns.histplot(data=df, x="Petal length (cm)", kde=True, color="blue", ax=axs[1, 0])
-# sns.histplot(data=df, x="Petal width (cm)", kde=True, color="purple", ax=axs[1, 1])
-# 
-# plt.savefig('iris.png') # save output into png file
-# plt.show() # show plot
-
-
-    # print(classification_report(y_test, y_pred_svc))
-# print(confusion_matrix(y_test, y_pred_svc))
-
-# # Logistic Regression
-# # to estimate the relationship between 1 dependent variable and 1 or more independent variables
-# from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
-# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
-# # lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
-# #lr = LogisticRegression()
-# lr=LogisticRegression(C=0.02) # C value is a hyperparameter. 
-# # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
-# lr.fit(X_train,y_train) # train the model
-# y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
-# print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
-# f1_score(y_test, y_pred_lr, average='macro')
-
-# # # 4.6 Decision Tree Classification
-# from sklearn.tree import DecisionTreeClassifier #for using Decision Tree Algorithm
-# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
-# dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
-# dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
-# y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
-# # Evaluate the model using testing dataset
-# from sklearn.metrics import confusion_matrix # import metrics for evaluation
-# from sklearn.metrics import classification_report # import metrics for evaluation
-# ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
-# f1_score(y_test, y_pred_dt, average='macro')
-# from sklearn.metrics import accuracy_score # import module to check model accuracy score
-# print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
-
-# # 4.7 Support Vector Machine
-# from sklearn.svm import SVC # import Support Vector Machine from sklearn
-# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
-# svclassifier = SVC()
-# svclassifier.fit(X_train, y_train)
-# y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
-# # Summary of the predictions made by the classifier
-# print(classification_report(y_test, y_pred_svc))
-# print(confusion_matrix(y_test, y_pred_svc))
-# # Accuracy score using testing dataset
-# print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
-# f1_score(y_test, y_pred_svc, average='macro')
-
-# # # 4.8 Random Forest
-# # # to create a cluster of decision trees
-# # # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
-# from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
-# from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import metrics for evaluation
-# rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
-# rf.fit(X_train, y_train) # train the model
-# y_pred_rf =rf.predict(X_test) # compare model’s output (y_pred) with the target values that we already have (y_test)
-# # Random Forest visualization using confusion matrix
-# ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
-# # Accuracy score using testing dataset
-# print('Random Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
-# f1_score(y_test, y_pred_rf, average='macro')
+# Accuracy score using testing dataset
+print('Random Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
+print ('Random Forest model F1 score is', f1_score(y_test, y_pred_rf, average='macro'))
