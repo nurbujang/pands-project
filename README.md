@@ -30,7 +30,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 
 visualize the entire dataset using sns.pairplot(1)
-
+Pearson Correlation
 k-Nearest Neighbor Classification
 Logistic Regression
 Decision Tree Classification
