@@ -28,7 +28,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 4. I also checked for missing value using the isna() function that returns a True/false if a value is missing () and duplicates
 5. print out df.describe into txt.file ()
 
-
+png
 visualize the entire dataset using sns.pairplot(1)
 boxplot
 Pearson Correlation
