@@ -27,6 +27,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 3. Then, I defined the column names, loaded the data () and added the column header to the dataframe ().
 4. I also checked for missing value using the isna() function that returns a True/false if a value is missing () and duplicates
 5. print out df.describe into txt.file ()
+6. histogram
 
 png
 visualize the entire dataset using sns.pairplot(1)
