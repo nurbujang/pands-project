@@ -69,15 +69,16 @@ plt.show() # show plot
 # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
-sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
+pp=sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
 plt.suptitle('Pair Plot for sepal and petal attributes of three Iris species', fontweight='bold', size=15)
 # Where:
 # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
 # hue distinguishes different colors, palette is set to brg palette
 # marker o is circle, s is square, D is diamond
-plt.tight_layout()
-plt.legend(loc='lower right')
+# handles = pp._legend_data.values()
+# labels = pp._legend_data.keys()
+pp.fig.subplots_adjust(top=0.92, bottom=0.08)
 plt.show() # show plot
 # Results:
 # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
@@ -156,7 +157,7 @@ for i in np.arange(7, 10):
     knn.fit(X_train, y_train)
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
     
-# Logistic Regression
+# 4.6 Logistic Regression
 # to estimate the relationship between 1 dependent variable and 1 or more independent variables
 # lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
 #lr = LogisticRegression()
@@ -167,7 +168,7 @@ y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target val
 print('\nLogistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
 print ('Logistic Regression model F1 score is', f1_score(y_test, y_pred_lr, average='macro'))
 
-# 4.6 Decision Tree Classification
+# 4.7 Decision Tree Classification
 dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
 dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
 y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
@@ -177,7 +178,7 @@ plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of t
 print('\nDecision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
 print ('Decision Tree Classification model F1 score is', f1_score(y_test, y_pred_dt, average='macro'))
 
-# 4.7 Support Vector Machine
+# 4.8 Support Vector Machine
 svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
 y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
@@ -188,7 +189,7 @@ print(confusion_matrix(y_test, y_pred_svc))
 print('\nSupport Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
 print ('Support Vector Machine model F1 score is', f1_score(y_test, y_pred_svc, average='macro'))
 
-# 4.8 Random Forest
+# 4.9 Random Forest
 # to create a cluster of decision trees
 # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
 rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
