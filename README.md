@@ -6,7 +6,7 @@ Dataset iris.data (1) contains 5 columns and 150 lines (replicates). From that, 
 
 Morphological analysis for species determination is used to assess biodiversity in an ecosystem. It could be used to identify new species or rectify previously misidentified species. While there are other more accurate methods for species identification such as DNA Barcoding and protein-based methods, morphological analysis is quick, cheap and particularly useful for researchers in the field. 
 
-This data can be used to develop Interactive Identification Keys for future taxonomists and researchers and species determination based on pattern recognition in Machine Learning. It can also be used to identify which species are more closely related to each other and share a common ancestor. 
+This data can be used to develop Interactive Identification Keys for future taxonomists and field researchers and also species determination based on pattern recognition in Machine Learning. It can also be used to identify which species are more closely related to each other and share a common ancestor. 
 
 ## **analysis.py**
 
