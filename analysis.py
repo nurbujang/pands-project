@@ -68,16 +68,16 @@ plt.show() # show plot
 # 3. Scatter plot of each pair of variables
 # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
-
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 sns.pairplot(df, hue='Iris species', markers=["o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws':{'color':'blue'}})
 plt.suptitle('Pair Plot for sepal and petal attributes of three Iris species', fontweight='bold', size=15)
-#rcParams['axes.titlepad'] = 20 
 # Where:
 # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
 # hue distinguishes different colors, palette is set to brg palette
 # marker o is circle, s is square, D is diamond
+plt.tight_layout()
+plt.legend(loc='lower right')
 plt.show() # show plot
 # Results:
 # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
@@ -85,7 +85,8 @@ plt.show() # show plot
 # there are overlaps in sepal length and width of all three species.
 
 # 4. Other analysis, Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
-# 4a. Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
+
+# 4.1 Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
 # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 corr = df.corr(method="pearson") # 
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool) # eliminate upper triangle for better readibility
@@ -153,7 +154,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the sh
 for i in np.arange(7, 10):
     knn = KNeighborsClassifier(n_neighbors=i)
     knn.fit(X_train, y_train)
-    print("k-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
+    print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
     
 # Logistic Regression
 # to estimate the relationship between 1 dependent variable and 1 or more independent variables
@@ -163,16 +164,17 @@ lr=LogisticRegression(C=0.02) # C value is a hyperparameter.
 # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
 lr.fit(X_train,y_train) # train the model
 y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target values that we already have (y_test)
-print('Logistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
+print('\nLogistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
 print ('Logistic Regression model F1 score is', f1_score(y_test, y_pred_lr, average='macro'))
 
-# # 4.6 Decision Tree Classification
+# 4.6 Decision Tree Classification
 dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
 dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
 y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
 # Evaluate the model using testing dataset
 ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
-print('Decision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
+plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species', fontweight='bold', size=10)
+print('\nDecision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
 print ('Decision Tree Classification model F1 score is', f1_score(y_test, y_pred_dt, average='macro'))
 
 # 4.7 Support Vector Machine
@@ -183,18 +185,19 @@ y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
 print(classification_report(y_test, y_pred_svc))
 print(confusion_matrix(y_test, y_pred_svc))
 # Accuracy score using testing dataset
-print('Support Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
+print('\nSupport Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
 print ('Support Vector Machine model F1 score is', f1_score(y_test, y_pred_svc, average='macro'))
 
-# # 4.8 Random Forest
-# # to create a cluster of decision trees
-# # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+# 4.8 Random Forest
+# to create a cluster of decision trees
+# each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
 rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
 rf.fit(X_train, y_train) # train the model
 y_pred_rf =rf.predict(X_test) # compare model’s output (y_pred) with the target values that we already have (y_test)
 # Random Forest visualization using confusion matrix
 ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
+plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species', fontweight='bold', size=10)
 plt.show()
 # Accuracy score using testing dataset
-print('Random Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
+print('\nRandom Forest model accuracy score is',accuracy_score(y_test, y_pred_rf)*100)
 print ('Random Forest model F1 score is', f1_score(y_test, y_pred_rf, average='macro'))
