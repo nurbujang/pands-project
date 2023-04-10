@@ -78,7 +78,7 @@ plt.suptitle('Pair Plot for sepal and petal attributes of three Iris species', f
 # marker o is circle, s is square, D is diamond
 # handles = pp._legend_data.values()
 # labels = pp._legend_data.keys()
-pp.fig.subplots_adjust(top=0.92, bottom=0.08)
+pp.fig.subplots_adjust(top=0.92, bottom=0.08) # shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
 plt.show() # show plot
 # Results:
 # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
@@ -89,34 +89,39 @@ plt.show() # show plot
 
 # 4.1 Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
 # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
-corr = df.corr(method="pearson") # 
+corr = df.corr() # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool) # eliminate upper triangle for better readibility
-corr = corr.where(bool_upper_matrix)
-print(corr)
-# Results:
+# Numpy tril function to extract lower triangle or triu to extract upper triangle
+# np.ones returns an array of 1 to create a boolean matrix with the same size as the correlation matrix
+# astype converts the upper triangle values to False, while the lower triangle will have the True values
+corr = corr.where(bool_upper_matrix) # Pandas where() returns same-sized dataframe, but False is converted to NaN on the upper triangle
+print(corr) # print as terminal output 
+# Results: 
 # High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
 
-# 4.2 A Correlation matrix to easily visualize the parameters which best correlate with each other
-fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (11 width, 6 height)
+# OR, build a Correlation matrix to visualize the parameters which best correlate with each other easier
+fig, ax = plt.subplots(figsize=(9,6)) # set size of whole figure (9 width, 6 height)
 fig.suptitle('Correlation matrix of petal and sepal of three Iris species', color ='#191970', fontweight='bold') # customize figure's main title
-# customize heatmap
-# Adjust the axes attribute to “equal” if True so that each cell gets square-shaped.
-# for color bar, default is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
-h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) 
-h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size
+h=sns.heatmap(corr, annot=True, ax=ax, cmap = 'coolwarm', square=True, linewidths = 0.1, linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9}) # customize heatmap
+# annot=True: if True display the data value in each cell
+# square = True: cell is square-shaped
+# default color bar is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
+# name color bar label as range and make the color bar smaller to 0.9 the original size
+h.set_xticklabels(h.get_xticklabels(), rotation = 0, fontsize = 10) # This sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
 h.set_yticklabels(h.get_yticklabels(),rotation = 0, fontsize = 10) # This sets the yticks "upright" in any figure size
 plt.show() # show plot
-# results show a strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width
+# Results:
+# Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
 
-# 4.3 If I group by species:
+# 4.2 If I group by species, I will get more insights on which attributes are highly correlated for each species:
 df.groupby("Iris species").corr(method="pearson")
-print (df.groupby("Iris species").corr(method="pearson"))
+print (df.groupby("Iris species").corr(method="pearson")) # print as terminal output
 # Results:
 # Iris setosa: high correlation between Sepal length & Sepal width
 # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
 # Iris virginica: high correlation between Petal length & Sepal length
 
-# 4.4 Box plot
+# 4.3 Box plot
 def graph(y): # define graph of Iris species as y axis
     sns.boxplot(x="Iris species", y=y, data=df)
     sns.stripplot(x="Iris species", y=y, data=df, jitter=True, edgecolor="gray", alpha=0.35)# add stripplot/jitter plot, set transparency (alpha)
@@ -148,7 +153,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, rando
 # random_state is the seed of randomness to help reproduce the same results everytime
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape) # display the shape and label of training and testing set
 
-# 4.5 Create kNN Classification to plot the species boundaries
+# 4.4 Create kNN Classification to plot the species boundaries
 # kNN calculates the distance between the data points and predict the correct species class for the datapoint
 # k = number of neighbors/points closest to the test data
 # Calculate the accuracy of the model using testing dataset
@@ -157,7 +162,7 @@ for i in np.arange(7, 10):
     knn.fit(X_train, y_train)
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is"%i,knn.score(X_test,y_test)*100) # keep k small because there are only 3 species, to prevent overfitting
     
-# 4.6 Logistic Regression
+# 4.5 Logistic Regression
 # to estimate the relationship between 1 dependent variable and 1 or more independent variables
 # lr = LogisticRegression(random_state=0, solver='lbfgs',multi_class='multinomial').fit(X, y)
 #lr = LogisticRegression()
@@ -168,7 +173,9 @@ y_pred_lr=lr.predict(X_test) # compare model’s output (y_pred) with target val
 print('\nLogistic Regression model accuracy is', accuracy_score(y_test,y_pred_lr)*100)
 print ('Logistic Regression model F1 score is', f1_score(y_test, y_pred_lr, average='macro'))
 
-# 4.7 Decision Tree Classification
+# 4.6 Decision Tree Classification
+# to build a classification in a form of tree structure with decision nodes and leaf nodes
+# branches bifurcate based on Y/N or T/F
 dtclassifier = DecisionTreeClassifier(random_state=42) # define Decision Tree classifer object
 dtclassifier.fit(X_train, y_train) # Train Decision Tree Classifer
 y_pred_dt = dtclassifier.predict(X_test) # Predict the response for test dataset
@@ -178,7 +185,9 @@ plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of t
 print('\nDecision Tree Classification model accuracy is',accuracy_score(y_test, y_pred_dt)*100) # print out accuracy score
 print ('Decision Tree Classification model F1 score is', f1_score(y_test, y_pred_dt, average='macro'))
 
-# 4.8 Support Vector Machine
+# 4.7 Support Vector Machine
+# for regression and classification
+# to create the best boundary to separate data into classes by creating a line with the most margin from the data point
 svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
 y_pred_svc = svclassifier.predict(X_test) # Predict from the test dataset
@@ -189,7 +198,7 @@ print(confusion_matrix(y_test, y_pred_svc))
 print('\nSupport Vector Machine model accuracy is',accuracy_score(y_test, y_pred_svc)*100) # print out accuracy score
 print ('Support Vector Machine model F1 score is', f1_score(y_test, y_pred_svc, average='macro'))
 
-# 4.9 Random Forest
+# 4.8 Random Forest
 # to create a cluster of decision trees
 # each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
 rf = RandomForestClassifier(n_estimators = 10, n_jobs = -1)
