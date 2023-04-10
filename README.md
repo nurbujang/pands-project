@@ -30,7 +30,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 6. histogram
 scatterplot
 png
-visualize the entire dataset using sns.pairplot(1)
+visualize the entire dataset using sns.pairplot(1) adjust figsize
 boxplot
 While most MA examples available uses only 2 variables (sepal length and width only or petal length and width only) to simplify analysis, I used all 4 variables because the best determinants are still unknown at this stage.
 Pearson Correlation
