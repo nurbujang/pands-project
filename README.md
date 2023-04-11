@@ -29,11 +29,11 @@ This data can be used to develop Interactive Identification Keys for future taxo
 2. First, I imported the necessary packages/modules for the project as shown in W3Schools (3-6) and scikit-learn (7).
 3. Then, I created a list of column names, read the data (8-10) and added the column header to the dataframe (11-13).
 4. I looked at the first 2 lines (14) to see if the column names were added correctly.
-5. A quick lookover the dataset was done to see the replicates on each species (15).
-basic information (16)
-4. I also checked for missing value using the isna() function that returns a True/false if a value is missing () and duplicates
-5. print out df.describe into txt.file [abd](https://www.w3schools.com/python/pandas/ref_df_info.asp)
-6. histogram
+5. A quick lookover the dataset was done to see the replicates on each species (15) and other basic information about the dataset (16)
+6. I also checked for missing value using the isnull and isna function that returns a True/false if a value is missing (17-21) and duplicates (22-23).
+
+print out df.describe into txt.file 
+histogram
 scatterplot
 png
 visualize the entire dataset using sns.pairplot(1) adjust figsize
@@ -67,6 +67,13 @@ A program that outputs a summary of each variable to a single text file, saves a
 14. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html
 15. https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html
 16. https://www.w3schools.com/python/pandas/ref_df_info.asp
+17. https://note.nkmk.me/en/python-pandas-nan-judge-count/
+18. https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
+19. https://datatofish.com/count-nan-pandas-dataframe/
+20. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html
+21. https://towardsdatascience.com/handling-missing-values-with-pandas-b876bf6f008f
+22. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html
+23. https://notebook.community/mnnit-workspace/Logical-Rhythm-17/Class-4/Introduction%20to%20Pandas%20and%20Exploring%20Iris%20Dataset
 
 
 

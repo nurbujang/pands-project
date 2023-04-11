@@ -48,7 +48,7 @@ print(df.value_counts("Iris species"))  # print how many lines for each species
 # Output: 50 lines for each species
 
 # basic info about the dataset, column numbers, data types, non-null values
-# can also be used to see of there are missing values
+# can also be used to see of there are missing values from the number of non-null values
 df.info()  # basic information about the dataframe
 print(df.info()) # print out data info
 # Output: RangeIndex: 150 entries, 0 to 149
