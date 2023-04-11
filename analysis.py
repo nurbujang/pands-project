@@ -231,7 +231,7 @@ Later, the testing dataset will be used to check the accuracy of the model.
 Most ML examples available use sepal length and width only to avoid clutter:
 X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
 y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
-But, I decided to look at the 4 attributes as a whole because it is unknown whether sepal or petal attribute is better than the other
+But, I decided to look at the 4 attributes as a whole because at this point, it is unknown whether sepal or petal attribute is better than the other
 '''
 
 X = df.iloc[:, :-1].values # everything up until the last column but not including the last column (Iris species) 
