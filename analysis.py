@@ -68,7 +68,7 @@ print(df.drop_duplicates().shape)  # print out remove duplicates
 Question 1. Summary into text file, containing basic statistical analysis
 '''
 df.describe()  # to get basic statistical analysis data
-# print (df.describe()) # print out description of data in terminal output, but I don't want this
+# print (df.describe()) # print out description of data in terminal output, but I do not want this
 
 # So, export data into a .txt file called summary.txt
 # use the built-in open() function

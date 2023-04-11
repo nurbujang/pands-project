@@ -31,8 +31,9 @@ This data can be used to develop Interactive Identification Keys for future taxo
 4. I looked at the first 2 lines (14) to see if the column names were added correctly.
 5. A quick lookover the dataset was done to see the replicates on each species (15) and other basic information about the dataset (16)
 6. I also checked for missing value using the isnull and isna function that returns a True/false if a value is missing (17-21) and duplicates (22-23).
+7. For Question 1, I used df.describe to get a summary of each variable (24-25). Then I used a built-in open function, converted pandas dataframe to string (26-28) and exported/wrote the converted string into a text file (29-30).
+8. 
 
-print out df.describe into txt.file 
 histogram
 scatterplot
 png
@@ -74,6 +75,13 @@ A program that outputs a summary of each variable to a single text file, saves a
 21. https://towardsdatascience.com/handling-missing-values-with-pandas-b876bf6f008f
 22. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html
 23. https://notebook.community/mnnit-workspace/Logical-Rhythm-17/Class-4/Introduction%20to%20Pandas%20and%20Exploring%20Iris%20Dataset
+24. https://www.w3schools.com/python/pandas/ref_df_describe.asp
+25. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html
+26. https://pythonexamples.org/python-write-string-to-text-file/
+27. https://www.tutorialkart.com/python/python-write-string-to-text-file/
+28. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_string.html
+29. https://phoenixnap.com/kb/file-handling-in-python
+30. https://www.freecodecamp.org/news/file-handling-in-python/
 
 
 
