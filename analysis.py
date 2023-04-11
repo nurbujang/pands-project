@@ -1,4 +1,4 @@
-"""
+'''
 Pands project for Programming and Scripting
 analysis.py
 Author: Nur Bujang
@@ -11,11 +11,11 @@ To write a program called analysis.py that:
 
 Save iris.data file from UCI website and upload into pands-project folder
 General Process: Load data, Analyze/visualize dataset, Model training, Model Evaluation, Model Testing, 
-"""
+'''
 
-"""
+'''
 IMPORT MODULES
-"""
+'''
 
 import numpy as np # for computational operations
 import pandas as pd # for data loading from other sources and processing
@@ -29,9 +29,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 
-"""
+'''
 Load data and add column header
-"""
+'''
 # create a list of column names 
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
 # create a pandas dataframe object called df, read the csv file and assign a name to each column
@@ -76,16 +76,11 @@ text_file = open("summary.txt", "wt") # open a new file called summary, mode is 
 
 # export into text file called summary, convert pandas dataframe to string
 n = text_file.write(df.describe().to_string()) # write the converted df.describe() string into a text file
-text_file.close()  # always close file when done
+text_file.close()  # ALWAYS close file when done
 
-"""
-3. DATA VISUALISATION: HISTOGRAM
-
-add comments
-"""
-
-
-# 2. Histogram of each variable into png file
+'''
+Question 2. DATA VISUALISATION: Histogram of each variable into png file
+'''
 sns.set(style="whitegrid")  # set background
 # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
 fig, axs = plt.subplots(2, 2, figsize=(7, 8))
@@ -104,16 +99,16 @@ fig.tight_layout()  # to fit all subplots into one figure nicely automatically
 plt.savefig('iris.png')  # save output into png file
 plt.show()  # show plot
 
-"""
-3.2 VISUALISATION: SCATTERPLOT MATRIX
-"""
+'''
+Question 3. DATA VISUALISATION: SCATTER PLOT MATRIX
+'''
 # 3. Scatter plot of each pair of variables
 # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 pp = sns.pairplot(df, hue='Iris species', markers=[
                   "o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws': {'color': 'blue'}})
-plt.suptitle('Pair Plot for sepal and petal attributes of three Iris species',
+plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15)
 # Where:
 # kind='reg' applies a linear regression line to identify the relationship within the scatter plot
@@ -130,17 +125,14 @@ plt.show()  # show plot
 # The petal length and width of I. setosa have much narrower distribution compared to the other two species.
 # there are overlaps in sepal length and width of all three species.
 
+'''
+4. Other analysis, Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
+'''
 
-"""
-4. CORRELATION ANALYSIS
-
-...
-
-Other analysis, Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
-"""
-
+'''
 # 4.1 Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
 # correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
+'''
 corr = df.corr()  # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(
     bool)  # eliminate upper triangle for better readibility
@@ -171,7 +163,9 @@ plt.show()  # show plot
 # Results:
 # Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
 
+'''
 # 4.2 If I group by species, I will get more insights on which attributes are highly correlated for each species:
+'''
 df.groupby("Iris species").corr(method="pearson")
 # print as terminal output
 print(df.groupby("Iris species").corr(method="pearson"))
@@ -180,11 +174,9 @@ print(df.groupby("Iris species").corr(method="pearson"))
 # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
 # Iris virginica: high correlation between Petal length & Sepal length
 
-"""
+'''
 4.3 Box plot
-"""
-
-
+'''
 def graph(y):  # define graph of Iris species as y axis
     sns.boxplot(x="Iris species", y=y, data=df)
     # add stripplot/jitter plot, set transparency (alpha)
@@ -210,22 +202,21 @@ plt.show()  # show plot
 # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
 # Sepal size may not be a good variable to differentiate species
 
-"""
-5. DATA PREPARATION FOR BASIC MACHINE LEARNING
+'''
+*************DATA PREPARATION FOR BASIC MACHINE LEARNING***************
 
-5.1 SPLITTING ....
+SPLITTING THE DATA FOR TRAINING AND TESTING
+First, split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
+Later, the testing dataset will be used to check the accuracy of the model.
 
-# SPLITTING THE DATA FOR TRAINING AND TESTING
-# First, split the data into training (80%) and testing (20%) to detect overfitting (model learned the training data very well but fails on testing)
-# Later, the testing dataset will be used to check the accuracy of the model.
-# Most ML examples available use this:
-# X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
-# y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
+Most ML examples available use sepal length and width only to avoid clutter:
+X = df.iloc[:,:2] # take everything until the second column (columns 0 and 1) and store the first two columns (Sepal length and Sepal width) into attributes (X)
+y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
+But, I decided to look at the 4 attributes as a whole because it is unknown whether sepal or petal attribute is better than the other
+'''
 
-"""
-
-X = df.iloc[:, :-1].values
-y = df.iloc[:, 4].values
+X = df.iloc[:, :-1].values # everything up until the last column but not including the last column (Iris species) 
+y = df.iloc[:, 4].values # # get the 5th column (target variable (Iris species) into labels (y))
 print(X.shape, y.shape)  # display number of rows and columns
 # split the dataset into training (80%) and testing (20%)
 X_train, X_test, y_train, y_test = train_test_split(
@@ -234,26 +225,23 @@ X_train, X_test, y_train, y_test = train_test_split(
 # display the shape and label of training and testing set
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
-
-"""
-5.2 kNN ...
-# 4.4 Create kNN Classification to plot the species boundaries
-# kNN calculates the distance between the data points and predict the correct species class for the datapoint
-# where k = number of neighbors/points closest to the test data
-# Calculate the accuracy of the model using testing dataset
-"""
+'''
+4.4 kNN Classifier
+kNN calculates the distance between the data points and predict the correct species class for the datapoint
+where k = number of neighbors/points closest to the test data
+Calculate the accuracy of the model using testing dataset
+'''
 for i in np.arange(7, 10):
     knn = KNeighborsClassifier(n_neighbors=i)
     knn.fit(X_train, y_train)
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
           y_test)*100)  # keep k small because there are only 3 species, to prevent overfitting
 
-"""
-# 4.5 Logistic Regression
-# to estimate the relationship between 1 dependent variable and 1 or more independent variables
-# used for classification and prediction
-"""
-
+'''
+4.5 Logistic Regression
+To estimate the relationship between 1 dependent variable and 1 or more independent variables
+Used for classification and prediction analysis
+'''
 lr = LogisticRegression(C=0.02)  
 # C value is a model hyperparameter, which is a model criteria outside of the model and its value cannot be estimated from the data
 # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
@@ -265,9 +253,11 @@ print('\nLogistic Regression model accuracy is',
 print('Logistic Regression model F1 score is',
       f1_score(y_test, y_pred_lr, average='macro'))
 
+'''
 # 4.6 Decision Tree Classification
 # to build a classification in a form of tree structure with decision nodes and leaf nodes
 # branches bifurcate based on Y/N or T/F
+'''
 # define Decision Tree classifer object
 dtclassifier = DecisionTreeClassifier(random_state=42)
 dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer
@@ -285,9 +275,11 @@ print('Decision Tree Classification model F1 score is',
       f1_score(y_test, y_pred_dt, average='macro'))
 plt.show()
 
-# 4.7 Support Vector Machine
-# for regression and classification
-# to create the best boundary to separate data into classes by creating a line with the most margin from the data point
+'''
+4.7 Support Vector Machine
+for regression and classification
+to create the best boundary to separate data into classes by creating a line with the most margin from the data point
+'''
 svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
 y_pred_svc = svclassifier.predict(X_test)  # Predict from the test dataset
@@ -300,9 +292,11 @@ print('\nSupport Vector Machine model accuracy is', accuracy_score(
 print('Support Vector Machine model F1 score is',
       f1_score(y_test, y_pred_svc, average='macro'))
 
-# 4.8 Random Forest
-# to create a cluster of decision trees
-# each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+'''
+4.8 Random Forest
+to create a cluster of decision trees
+each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+'''
 rf = RandomForestClassifier(n_estimators=10, n_jobs=-1)
 rf.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with the target values that we already have (y_test)
