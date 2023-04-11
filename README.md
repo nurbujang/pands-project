@@ -47,6 +47,7 @@ Logistic Regression
 Decision Tree Classification
 Support Vector Machine
 Random Forest
+Naive Bayes Classifier
 
 
 ### Conclusion:

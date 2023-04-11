@@ -16,7 +16,6 @@ General Process: Load data, Analyze/visualize dataset, Model training, Model Eva
 '''
 IMPORT MODULES
 '''
-
 import numpy as np # for computational operations
 import pandas as pd # for data loading from other sources and processing
 import seaborn as sns # for data visualization
@@ -28,7 +27,7 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classifica
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-
+from sklearn.naive_bayes import GaussianNB
 '''
 Load data and add column header
 '''
@@ -66,8 +65,9 @@ print(df.drop_duplicates().shape)  # print out remove duplicates
 
 '''
 Question 1. Summary into text file, containing basic statistical analysis
+df. describe to get count, mean, standard deviation, min and max values, lower, mid and upper percentile
 '''
-df.describe()  # to get basic statistical analysis data
+df.describe()  # to get basic statistical analysis data 
 # print (df.describe()) # print out description of data in terminal output, but I do not want this
 
 # So, export data into a .txt file called summary.txt
@@ -126,16 +126,18 @@ plt.show()  # show plot
 # there are overlaps in sepal length and width of all three species.
 
 '''
-4. Other analysis, Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
+Question 4. Other analysis:
+Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
+Basic Machine Learning analysis
 '''
 
 '''
-# 4.1 Perform Pearson correlation analysis to determine the degree of linear relationship between 2 continuous variables
-# correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
+4.1 Pearson correlation analysis 
+to determine the degree of linear relationship between 2 continuous variables
+correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
 corr = df.corr()  # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
-bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(
-    bool)  # eliminate upper triangle for better readibility
+bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper triangle for better readibility
 # Numpy tril function to extract lower triangle or triu to extract upper triangle
 # np.ones returns an array of 1 to create a boolean matrix with the same size as the correlation matrix
 # astype converts the upper triangle values to False, while the lower triangle will have the True values
@@ -144,7 +146,9 @@ print(corr)  # print as terminal output
 # Results:
 # High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
 
-# OR, build a Correlation matrix to visualize the parameters which best correlate with each other easier
+# OR, 
+
+# build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
 fig, ax = plt.subplots(figsize=(9, 6))
 fig.suptitle('Correlation matrix of petal and sepal of three Iris species',
@@ -164,7 +168,8 @@ plt.show()  # show plot
 # Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
 
 '''
-# 4.2 If I group by species, I will get more insights on which attributes are highly correlated for each species:
+4.2 If I group by species:
+to get more insights on which attributes are highly correlated for each species:
 '''
 df.groupby("Iris species").corr(method="pearson")
 # print as terminal output
@@ -175,14 +180,14 @@ print(df.groupby("Iris species").corr(method="pearson"))
 # Iris virginica: high correlation between Petal length & Sepal length
 
 '''
-4.3 Box plot
+4.3 DATA VISUALIZATION: Box plot
+to display data point distribution, variance and outliers
 '''
 def graph(y):  # define graph of Iris species as y axis
     sns.boxplot(x="Iris species", y=y, data=df)
     # add stripplot/jitter plot, set transparency (alpha)
     sns.stripplot(x="Iris species", y=y, data=df,
                   jitter=True, edgecolor="gray", alpha=0.35)
-
 
 plt.figure(figsize=(10, 10))
 plt.subplot(221)  # grid position top left (2 rows, 2 columns, first top)
@@ -201,6 +206,21 @@ plt.show()  # show plot
 # Iris setosa has the least distributed and smallest petal size
 # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
 # Sepal size may not be a good variable to differentiate species
+
+'''
+4.4 DATA VISUALIZATION: Violin Dot Plot
+to give more insight into the density estimate on the y-axis
+'''
+# fig, axs = plt.subplots(1, len(columns)-1, figsize=(15,5))
+
+# for i in range(0,len(columns)-1):
+#     sns.violinplot(x='Iris species', y=df[columns[i]], data=df,ax=axs[i])
+#     axs[i].set_ylabel(columns[i])
+
+# sns.swarmplot(data=df)
+# plt.suptitle('Violin Dot Plot for sepal and petal attributes of three Iris species',
+#              fontweight='bold', size=15)
+# plt.show()
 
 '''
 *************DATA PREPARATION FOR BASIC MACHINE LEARNING***************
@@ -226,7 +246,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 '''
-4.4 kNN Classifier
+4.5 kNN Classifier
 kNN calculates the distance between the data points and predict the correct species class for the datapoint
 where k = number of neighbors/points closest to the test data
 Calculate the accuracy of the model using testing dataset
@@ -238,9 +258,10 @@ for i in np.arange(7, 10):
           y_test)*100)  # keep k small because there are only 3 species, to prevent overfitting
 
 '''
-4.5 Logistic Regression
+4.6 Logistic Regression
 To estimate the relationship between 1 dependent variable and 1 or more independent variables
 Used for classification and prediction analysis
+uses Sigmoid function (logistic function) instead of linear function in Linear regression
 '''
 lr = LogisticRegression(C=0.02)  
 # C value is a model hyperparameter, which is a model criteria outside of the model and its value cannot be estimated from the data
@@ -254,7 +275,7 @@ print('Logistic Regression model F1 score is',
       f1_score(y_test, y_pred_lr, average='macro'))
 
 '''
-# 4.6 Decision Tree Classification
+# 4.7 Decision Tree Classification
 # to build a classification in a form of tree structure with decision nodes and leaf nodes
 # branches bifurcate based on Y/N or T/F
 '''
@@ -265,7 +286,6 @@ dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer
 y_pred_dt = dtclassifier.predict(X_test)
 # Evaluate the model using testing dataset
 disp = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
-#disp = disp.plot(include_values=True, cmap='viridis', ax=None, xticks_rotation='horizontal')
 plt.grid(False)
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
              fontweight='bold', size=10)
@@ -276,7 +296,7 @@ print('Decision Tree Classification model F1 score is',
 plt.show()
 
 '''
-4.7 Support Vector Machine
+4.8 Support Vector Machine
 for regression and classification
 to create the best boundary to separate data into classes by creating a line with the most margin from the data point
 '''
@@ -284,17 +304,18 @@ svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
 y_pred_svc = svclassifier.predict(X_test)  # Predict from the test dataset
 # Summary of the predictions made by the classifier
+
 print(classification_report(y_test, y_pred_svc))
-print(confusion_matrix(y_test, y_pred_svc))
+print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test, y_pred_svc))
 # Accuracy score using testing dataset
-print('\nSupport Vector Machine model accuracy is', accuracy_score(
+print('\nSupport Vector Classifier model accuracy is', accuracy_score(
     y_test, y_pred_svc)*100)  # print out accuracy score
-print('Support Vector Machine model F1 score is',
+print('Support Vector Classifier model F1 score is',
       f1_score(y_test, y_pred_svc, average='macro'))
 
 '''
-4.8 Random Forest
-to create a cluster of decision trees
+4.9 Random Forest
+to create a cluster of decision trees, thus forming a 'forest'
 each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
 '''
 rf = RandomForestClassifier(n_estimators=10, n_jobs=-1)
@@ -312,3 +333,21 @@ print('\nRandom Forest model accuracy score is',
       accuracy_score(y_test, y_pred_rf)*100)
 print('Random Forest model F1 score is', f1_score(
     y_test, y_pred_rf, average='macro'))
+
+'''
+4.10 Naive-Bayes Classifier
+'Naive' because it assumes that each variable are independent of each other
+it predicts the probability of different species based on different attributes
+'''
+gaussian = GaussianNB()
+gaussian.fit(X_train, y_train)
+Y_pred = gaussian.predict(X_test) 
+accuracy_nb=round(accuracy_score(y_test,Y_pred)* 100, 2)
+acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
+
+cm = confusion_matrix(y_test, Y_pred)
+accuracy = accuracy_score(y_test,Y_pred)
+f1 = f1_score(y_test,Y_pred,average='micro')
+print('\nConfusion matrix for Naive Bayes\n',cm)
+print('\nNaive-Bayes model accuracy score is %.3f' %accuracy)
+print('Naive-Bayes model F1 score is %.3f' %f1)
