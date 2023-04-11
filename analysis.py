@@ -35,7 +35,15 @@ Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
 # read the csv file and assign a name to each column
 df = pd.read_csv('iris.data', names=columns)
-print(df.head(2))  # print out first 2 lines
+print(df.head(3))  # print out first 3 lines to see if the names were added properly
+
+'''
+Quick lookover of the dataset, check for missing values, duplicates
+'''
+# Quick lookover of the dataset
+df.value_counts("Iris species")  # how many lines for each species
+print(df.value_counts("Iris species"))  # print how many lines for each species
+# output: 50 lines for each species
 
 # check for missing values
 df.info()  # returns RangeIndex: 150 entries, 0 to 149, so no missing values
@@ -49,12 +57,8 @@ df.isna().sum()
 print(df.drop_duplicates().shape)  # print out remove duplicates
 # output: 150 lines remain, no duplicates exist --x wrong code on line 51
 
-# why do you have this twice?
-df.value_counts("Iris species")  # how many lines for each species
-print(df.value_counts("Iris species"))  # print how many lines for each species
-# output: 50 lines for each species
 
-# 1. Summary into text file, containing basic statistical analysis
+# Question 1. Summary into text file, containing basic statistical analysis
 df.describe()  # to get basic statistical analysis data
 # print (df.describe()) # print out description of data
 
