@@ -1,6 +1,5 @@
 """
 Pands project for Programming and Scripting
-analysis.py
 Author: Nur Bujang
 
 To write a program called analysis.py that:
@@ -9,29 +8,42 @@ To write a program called analysis.py that:
     3. Outputs a scatter plot of each pair of variables.
     4. Perform any other analysis I think is appropriate
 
-Save iris.data file from UCI website and upload into pands-project folder
 General Process: Load data, Analyze/visualize dataset, Model training, Model Evaluation, Model Testing, 
+
+save iris.data file from UCI website and upload into pands-project folder
+analysis.py
 """
 
 """
 IMPORT MODULES
+
+    1. Pandas for data loading
+    2. Numpy for general computations
+    ...
 """
+
+"""
+2. LOAD DATA AND .... Load data and add column header
+"""
+# import metrics for evaluation
+# define column headers
+# import model to split the dataset into training and testing
+# import k-Nearest Neighbor Classifier from sklearn
+# import Random Forest Classifier from sklearn
+# for using Decision Tree Algorithm from sklearn
+# import Logistic Regression from sklearn
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from matplotlib import rcParams
 import seaborn as sns # for data visualization
 import matplotlib.pyplot as plt # for data visualization
-from matplotlib import rcParams
 import numpy as np # for computational operations
 import pandas as pd # for data loading from other sources and processing
-from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC # import Support Vector Machine from sklearn
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-
-"""
-Load data and add column header
-"""
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
 # read the csv file and assign a name to each column
 df = pd.read_csv('iris.data', names=columns)
