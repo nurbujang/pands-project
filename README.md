@@ -45,7 +45,7 @@ Random Forest
 
 
 ### Conclusion:
-A program that outputs all the above was written. Additional analyses done were Pearson Correlation, k-Nearest Neighbor Pearson Correlation k-Nearest Neighbor Classification Logistic Regression Decision Tree Classification Support Vector Machine Random Forest regression. Correlation analysis was done to .K-Nearest Neighbor was done to . Regression was done to .
+A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were Pearson Correlation, box plot, k-Nearest Neighbor, Logistic Regression, Decision Tree Classification, Support Vector Machine and Random Forest. Model accuracy score was displayed for each test.
 
 ### References:
 1. https://data-flair.training/blogs/iris-flower-classification/
