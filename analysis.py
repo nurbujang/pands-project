@@ -206,7 +206,7 @@ plt.show()  # show plot
 # Sepal size may not be a good variable to differentiate species
 
 """
-5. DATA PREPARATION FOR MACHINE LEARNING
+5. DATA PREPARATION FOR BASIC MACHINE LEARNING
 
 5.1 SPLITTING ....
 
