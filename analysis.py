@@ -16,13 +16,13 @@ General Process: Load data, Analyze/visualize dataset, Model training, Model Eva
 """
 IMPORT MODULES
 """
-import seaborn as sns # for data visualization
-import matplotlib.pyplot as plt # for data visualization
-from matplotlib import rcParams
+
 import numpy as np # for computational operations
 import pandas as pd # for data loading from other sources and processing
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC # import Support Vector Machine from sklearn
+import seaborn as sns # for data visualization
+import matplotlib.pyplot as plt # for data visualization
+from sklearn.model_selection import train_test_split # to split data 
+from sklearn.svm import SVC # import Support Vector Classification from sklearn
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score
 from sklearn.linear_model import LogisticRegression
@@ -32,46 +32,51 @@ from sklearn.ensemble import RandomForestClassifier
 """
 Load data and add column header
 """
+# create a list of column names 
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
-# read the csv file and assign a name to each column
-df = pd.read_csv('iris.data', names=columns)
-print(df.head(3))  # print out first 3 lines to see if the names were added properly
+# create a pandas dataframe object called df, read the csv file and assign a name to each column
+df = pd.read_csv('iris.data', names=columns) # df contains iris.data and add column names to the dataframe
+print(df.head(2))  # print out first 2 lines to see if the column names were added properly
+# Output: Column names were added properly
 
 '''
 Quick lookover of the dataset, check for missing values, duplicates
 '''
-# Quick lookover of the dataset
+# Quick lookover of the dataset to see the number of unique values
 df.value_counts("Iris species")  # how many lines for each species
 print(df.value_counts("Iris species"))  # print how many lines for each species
-# output: 50 lines for each species
+# Output: 50 lines for each species
 
-# check for missing values
-df.info()  # returns RangeIndex: 150 entries, 0 to 149, so no missing values
-# print(df.info()) # print out data info
+# basic info about the dataset, column numbers, data types, non-null values
+# can also be used to see of there are missing values
+df.info()  # basic information about the dataframe
+print(df.info()) # print out data info
+# Output: RangeIndex: 150 entries, 0 to 149
 
-# get number of missing values in each column. df.isnull().sum() can also be used
-df.isna().sum()
+# get number of missing values in each column
+df.isnull().sum()
+# print (df.isnull().sum()) # print out number of missing values
+# OR
+# df.isna().sum()
 # print(df.isna().sum()) # print out number of missing values
 
 # df.drop_duplicates() # remove duplicates
 print(df.drop_duplicates().shape)  # print out remove duplicates
 # output: 150 lines remain, no duplicates exist --x wrong code on line 51
 
-
-# Question 1. Summary into text file, containing basic statistical analysis
+'''
+Question 1. Summary into text file, containing basic statistical analysis
+'''
 df.describe()  # to get basic statistical analysis data
-# print (df.describe()) # print out description of data
+# print (df.describe()) # print out description of data in terminal output, but I don't want this
 
-"""
-2.1 Export data
+# So, export data into a .txt file called summary.txt
+# use the built-in open() function
+text_file = open("summary.txt", "wt") # open a new file called summary, mode is w, and t is text mode
 
-Add explanation/comment here
-"""
-
-text_file = open("summary.txt", "wt")  # to write the string into a text file
 # export into text file called summary, convert pandas dataframe to string
-n = text_file.write(df.describe().to_string())
-text_file.close()  # always close file
+n = text_file.write(df.describe().to_string()) # write the converted df.describe() string into a text file
+text_file.close()  # always close file when done
 
 """
 3. DATA VISUALISATION: HISTOGRAM

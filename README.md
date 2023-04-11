@@ -26,10 +26,13 @@ This data can be used to develop Interactive Identification Keys for future taxo
 
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
-2. First, I imported the necessary packages/modules for the project.
-3. Then, I defined the column names, loaded the data () and added the column header to the dataframe ().
+2. First, I imported the necessary packages/modules for the project as shown in W3Schools (3-6) and scikit-learn (7).
+3. Then, I created a list of column names, read the data (8-10) and added the column header to the dataframe (11-13).
+4. I looked at the first 2 lines (14) to see if the column names were added correctly.
+5. A quick lookover the dataset was done to see the replicates on each species (15).
+basic information (16)
 4. I also checked for missing value using the isna() function that returns a True/false if a value is missing () and duplicates
-5. print out df.describe into txt.file ()
+5. print out df.describe into txt.file [abd](https://www.w3schools.com/python/pandas/ref_df_info.asp)
 6. histogram
 scatterplot
 png
@@ -54,31 +57,20 @@ A program that outputs a summary of each variable to a single text file, saves a
 4. https://www.w3schools.com/python/numpy/numpy_intro.asp
 5. https://www.w3schools.com/python/matplotlib_pyplot.asp
 6. https://www.w3schools.com/python/numpy/numpy_random_seaborn.asp
-7. 
-https://matplotlib.org/stable/tutorials/intermediate/legend_guide.html
-https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html
-https://www.w3schools.com/python/pandas/pandas_csv.asp
-https://towardsdatascience.com/how-to-read-csv-file-using-pandas-ab1f5e7e7b58
-https://stackoverflow.com/questions/34091877/how-to-add-header-row-to-a-pandas-dataframe
-https://www.geeksforgeeks.org/how-to-add-header-row-to-a-pandas-dataframe/
-https://practicaldatascience.co.uk/data-science/https://practicaldatascience.co.uk/data-science/how-to-use-isna-to-check-for-missing-values-in-pandas-dataframes
-https://datatofish.com/count-nan-pandas-dataframe/
-https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html
-https://towardsdatascience.com/handling-missing-values-with-pandas-b876bf6f008f
-https://www.w3schools.com/python/pandas/ref_df_describe.asp
-https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html
-https://pythonexamples.org/python-write-string-to-text-file/
-https://www.tutorialkart.com/python/python-write-string-to-text-file/
-https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_string.html
-https://stackoverflow.com/questions/68948981/create-a-subplot-of-multiple-histograms-with-titles
-https://www.statology.org/seaborn-title/
-https://medium.com/@ooemma83/how-to-construct-cool-multiple-histogram-plots-using-seaborn-and-matplotlib-in-python-6c6c7ba6c10b
-https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
-https://seaborn.pydata.org/tutorial/distributions.html
-https://towardsdatascience.com/histograms-with-pythons-matplotlib-b8b768da9305
-https://matplotlib.org/stable/tutorials/intermediate/tight_layout_guide.html
-https://www.kaggle.com/code/dronio/iris-plots-correlation-matrix
-https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
+7. https://scikit-learn.org/stable/modules/classes.html
+8. https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html
+9. https://www.w3schools.com/python/pandas/pandas_csv.asp
+10. https://towardsdatascience.com/how-to-read-csv-file-using-pandas-ab1f5e7e7b58
+11. https://stackoverflow.com/questions/34091877/how-to-add-header-row-to-a-pandas-dataframe
+12. https://www.geeksforgeeks.org/how-to-add-header-row-to-a-pandas-dataframe/
+13. https://www.angela1c.com/projects/iris_project/downloading-iris/
+14. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.head.html
+15. https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html
+16. https://www.w3schools.com/python/pandas/ref_df_info.asp
+
+
+
+
 
 
 
