@@ -211,16 +211,15 @@ plt.show()  # show plot
 4.4 DATA VISUALIZATION: Violin Dot Plot
 to give more insight into the density estimate on the y-axis
 '''
-# fig, axs = plt.subplots(1, len(columns)-1, figsize=(15,5))
+fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5))
+# -1 because it starts with 0, then 1,2,3
+for i in range(0,len(columns)-1):
+    sns.violinplot(x='Iris species', y=df[columns[i]], data=df,ax=axs[i])
+    axs[i].set_ylabel(columns[i])
 
-# for i in range(0,len(columns)-1):
-#     sns.violinplot(x='Iris species', y=df[columns[i]], data=df,ax=axs[i])
-#     axs[i].set_ylabel(columns[i])
-
-# sns.swarmplot(data=df)
-# plt.suptitle('Violin Dot Plot for sepal and petal attributes of three Iris species',
-#              fontweight='bold', size=15)
-# plt.show()
+plt.suptitle('Violin Dot Plot for sepal and petal attributes of three Iris species',
+             fontweight='bold', size=15)
+plt.show()
 
 '''
 *************DATA PREPARATION FOR BASIC MACHINE LEARNING***************
@@ -236,7 +235,7 @@ But, I decided to look at the 4 attributes as a whole because it is unknown whet
 '''
 
 X = df.iloc[:, :-1].values # everything up until the last column but not including the last column (Iris species) 
-y = df.iloc[:, 4].values # # get the 5th column (target variable (Iris species) into labels (y))
+y = df.iloc[:, 4].values # = [:, -1],  get all the rows in the last/5th column (target variable (Iris species) into labels (y))
 print(X.shape, y.shape)  # display number of rows and columns
 # split the dataset into training (80%) and testing (20%)
 X_train, X_test, y_train, y_test = train_test_split(
@@ -271,9 +270,11 @@ lr.fit(X_train, y_train)  # train the model
 y_pred_lr = lr.predict(X_test)
 print('\nLogistic Regression model accuracy is',
       accuracy_score(y_test, y_pred_lr) * 100)
+# Model accuracy score is how many times the model makes correct predictions over the total number of predictions
 print('Logistic Regression model F1 score is',
       f1_score(y_test, y_pred_lr, average='macro'))
-
+# F1 score measures the accuracy of the model, that is how many times it makes a corret prediction in the whole dataset
+# F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
 '''
 # 4.7 Decision Tree Classification
 # to build a classification in a form of tree structure with decision nodes and leaf nodes
@@ -286,6 +287,12 @@ dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer
 y_pred_dt = dtclassifier.predict(X_test)
 # Evaluate the model using testing dataset
 disp = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
+# Confusion matrix contains Actual values of Positive(1) and Negative(0) on the x-axis and Predicted values of Positive(1) and Negative(0) on the y-axis
+# CM for iris contains Actual setosa, versicolor, virginica on the x-axis and Predicted setosa, versicolor, virginica on the y-axis
+# True Positive = the actual and predicted value should be the same = 10
+# True Negative = 9+0+0+11 = 20
+# False Positive = 0+0 (across) = 0
+# False Negative = 0+0 (down) = 0
 plt.grid(False)
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
              fontweight='bold', size=10)
@@ -293,6 +300,9 @@ print('\nDecision Tree Classification model accuracy is',
       accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score
 print('Decision Tree Classification model F1 score is',
       f1_score(y_test, y_pred_dt, average='macro'))
+# Precision = True Positive : (True Positive + False Positive) = 10/(10+0+0 (across)) = 1
+# Recall = True positive : (True Positive + False Negative) = 10/(10+0+0 (down)) = 1
+# F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
 plt.show()
 
 '''
@@ -303,10 +313,15 @@ to create the best boundary to separate data into classes by creating a line wit
 svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
 y_pred_svc = svclassifier.predict(X_test)  # Predict from the test dataset
-# Summary of the predictions made by the classifier
-
-print(classification_report(y_test, y_pred_svc))
+print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc))
+# Classification report results:
+# Precision = True Positive : (True Positive + False Positive): setosa (10/10=1), versicolor (9/9=1), virginica (11/11=1)
+# Recall = True positive : (True Positive + False Negative)
+# F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
+# Support = number of actual occurences of the class
+# Accuracy = correct predictions for all classes / total number of predictions = 10/10 = 1
 print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test, y_pred_svc))
+# Confusion matrix 
 # Accuracy score using testing dataset
 print('\nSupport Vector Classifier model accuracy is', accuracy_score(
     y_test, y_pred_svc)*100)  # print out accuracy score
@@ -335,19 +350,24 @@ print('Random Forest model F1 score is', f1_score(
     y_test, y_pred_rf, average='macro'))
 
 '''
-4.10 Naive-Bayes Classifier
+4.10 Gaussian Naive-Bayes Classifier
 'Naive' because it assumes that each variable are independent of each other
 it predicts the probability of different species based on different attributes
+Use Gaussian because data is continuous, and assumed to be normally-distributed
 '''
 gaussian = GaussianNB()
 gaussian.fit(X_train, y_train)
-Y_pred = gaussian.predict(X_test) 
-accuracy_nb=round(accuracy_score(y_test,Y_pred)* 100, 2)
+y_pred_gs = gaussian.predict(X_test) 
+accuracy_nb=round(accuracy_score(y_test,y_pred_gs)* 100, 2)
 acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
 
-cm = confusion_matrix(y_test, Y_pred)
-accuracy = accuracy_score(y_test,Y_pred)
-f1 = f1_score(y_test,Y_pred,average='micro')
+cm = confusion_matrix(y_test, y_pred_gs)
+accuracy = accuracy_score(y_test,y_pred_gs)*100
+f1 = f1_score(y_test,y_pred_gs,average='micro')
+print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs))
 print('\nConfusion matrix for Naive Bayes\n',cm)
-print('\nNaive-Bayes model accuracy score is %.3f' %accuracy)
-print('Naive-Bayes model F1 score is %.3f' %f1)
+# Accuracy score using testing dataset
+print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point
+print('Naive-Bayes model F1 score is %.3f' %f1) # .3f is float with 3 decimal points
+
+
