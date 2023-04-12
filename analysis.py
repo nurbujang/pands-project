@@ -161,7 +161,7 @@ print(corr)  # print as terminal output
 # set size of whole figure (9 width, 6 height)
 fig, ax = plt.subplots(figsize=(9, 6))
 fig.suptitle('Correlation matrix of petal and sepal of three Iris species',
-             color='#191970', fontweight='bold')  # customize figure's main title
+             color='#191970', fontweight='bold')  # customize figure's main/super title
 h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1,
                 linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9})  # customize heatmap
 # Where:
@@ -215,7 +215,7 @@ graph('Petal length (cm)')
 plt.subplot(224)
 graph('Petal width (cm)')
 plt.suptitle('Box Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15)
+             fontweight='bold', size=15) # customize the figure's super title
 plt.show()  # show plot
 # Results:
 # Iris setosa has the least distributed and smallest petal size
@@ -227,15 +227,20 @@ plt.show()  # show plot
 to give more insight into data distribution and density on the y-axis
 it contains all data points, unlike the box plot which shows minimum, first quartile, median, third quartile and maximum and error bars
 '''
-fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5))
-# -1 because it starts with 0, then 1,2,3
-for i in range(0,len(columns)-1):
+fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) 
+# plot the subplots in 1 row of 4 subplots
+# len starts with 0, then 1,2,3, and excluding the last one (-1)
+# set the figure size to 20 width and 5 height
+for i in range(0,len(columns)-1): 
     sns.violinplot(x='Iris species', y=df[columns[i]], data=df,ax=axs[i])
     axs[i].set_ylabel(columns[i])
-
+# Where:
+# for i in range can be translated to for item in columns 1 to, and excluding the last column
+# seaborn violinplot, x-axis is Iris species, y is each column name, data is iris dataframe, axis is the column list
+# axs[i].set_ylabel(columns[i]) means each column list i is set as the y-axis label
 plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15)
-plt.show()
+             fontweight='bold', size=15) # customize the figure's super title
+plt.show() # show plot
 
 '''
 *************DATA PREPARATION FOR BASIC MACHINE LEARNING***************
