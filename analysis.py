@@ -84,18 +84,25 @@ Question 2. DATA VISUALISATION: Histogram of each variable into png file
 '''
 sns.set(style="whitegrid")  # set background
 # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-fig, axs = plt.subplots(2, 2, figsize=(7, 8))
-fig.suptitle('Petal and sepal dimensions of three Iris species',
-             color='#191970', fontweight='bold')  # customize figure's main title
-# Kernel density estimation (KDE) smooths the replicates with a Gaussian kernel
-sns.histplot(data=df, x="Sepal length (cm)",
-             kde=True, color="olive", ax=axs[0, 0])
-sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green",
-             ax=axs[0, 1])  # ax is the coordinate of each subplot on the figure
-sns.histplot(data=df, x="Petal length (cm)",
-             kde=True, color="blue", ax=axs[1, 0])
-sns.histplot(data=df, x="Petal width (cm)",
-             kde=True, color="purple", ax=axs[1, 1])
+fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # set subplot arrangement (2 by 2) and figure size (width and height)
+sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
+             kde=True, color="olive", ax=axs[0, 0]) # subplot location first row, first column
+# Where:
+# seaborn histplot was used to plot the histogram
+# dataset used was df
+# determine x-axis label
+# display KDE line : Kernel density estimation (KDE) shows the data using a continuous curve
+# creates data 'smoothing' of the density distribution with a Gaussian kernel
+# set the bar color for this plot to olive
+# ax is the coordinate of each subplot on the figure
+sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", # use seaborn histplot, x-axis is sepal  width
+             ax=axs[0, 1])  # subplot location first row, second column
+sns.histplot(data=df, x="Petal length (cm)", # x-axis is petal length
+             kde=True, color="blue", ax=axs[1, 0]) # subplot location second row, first column
+sns.histplot(data=df, x="Petal width (cm)", # x-axis is petal width
+             kde=True, color="purple", ax=axs[1, 1]) # subplot location second row, second column
+fig.suptitle('Histogram of petal and sepal dimensions of three Iris species',
+             color='#191970', fontweight='bold')  # customize figure's super title, font color and bold
 fig.tight_layout()  # to fit all subplots into one figure nicely automatically
 plt.savefig('iris.png')  # save output into png file
 plt.show()  # show plot
@@ -106,19 +113,22 @@ Question 3. DATA VISUALISATION: Scatter plot of each pair of variables
 # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
+# to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
 pp = sns.pairplot(df, hue='Iris species', markers=[
                   "o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws': {'color': 'blue'}})
-plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15)
 # Where:
-# kind='reg' applies a linear regression line to identify the relationship within the scatter plot
-# to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
-# hue distinguishes different colors, palette is set to brg palette
+# dataset used was df
+# seaborn pairplot was used to plot the Scatter Plot
+# The diagonal plots represent each of that column variable's data distribution
+# hue colors the plot based on the different Iris species value
 # marker o is circle, s is square, D is diamond
-# handles = pp._legend_data.values()
-# labels = pp._legend_data.keys()
-# shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
+# palette is set to brg palette
+# kind is a chart type, kind='reg' applies a linear regression line to identify the relationship within the scatter plot
+# plot_kws and pass in a dictionary object to customize the regression fit and line to blue
+plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species',
+             fontweight='bold', size=15) # customize figure's super title, default black in bold, fontsize 15
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
+# shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
 plt.show()  # show plot
 # Results:
 # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
@@ -210,7 +220,7 @@ plt.show()  # show plot
 '''
 4.4 DATA VISUALIZATION: Violin Plot
 to give more insight into data distribution and density on the y-axis
-it contains all data points, unlike the box plot which shows mean and error bars
+it contains all data points, unlike the box plot which shows minimum, first quartile, median, third quartile and maximum and error bars
 '''
 fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5))
 # -1 because it starts with 0, then 1,2,3
@@ -218,7 +228,7 @@ for i in range(0,len(columns)-1):
     sns.violinplot(x='Iris species', y=df[columns[i]], data=df,ax=axs[i])
     axs[i].set_ylabel(columns[i])
 
-plt.suptitle('Violin Dot Plot for sepal and petal attributes of three Iris species',
+plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15)
 plt.show()
 

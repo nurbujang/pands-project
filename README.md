@@ -31,12 +31,11 @@ This data can be used to develop Interactive Identification Keys for future taxo
 5. A quick lookover the dataset was done to see the replicates on each species (15) and other basic information about the dataset (16)
 6. I also checked for missing value using the isnull and isna function that returns a True/false if a value is missing (17-21) and duplicates (22-23).
 7. For Question 1, I used df.describe to get a summary of each variable (24-25). Then I used a built-in open function, converted pandas dataframe to string (26-28) and exported/wrote the converted string into a text file (29-30).
-8. 
+8. For Question 2, I set the background using seaborn, set the grid position of the subplots, and plotted the histogram (31-32). I also added the  kernel density estimation (KDE) according to (33) and added the supertitle (34-35). Tight layout automatically adjusts the subplots to fit nicely into the figure area (36). Then, I saved the histogram into iris.png file using plt.savefig according to (37).
+9. For Question 3, I used seaborn pairplot according to (38-41) based on the hue (42). I customized the color palette according to (43-44). I also added regression lines (45-47) and adjusted the figure size (48).
+10. I performed 10 other analysis for Question 4, consisting of more data visualization techniques and basic Machine Learning analysis. 
 
-histogram
-scatterplot
-png
-visualize the entire dataset using sns.pairplot(1) adjust figsize
+
 boxplot
 Pearson Correlation
 k-Nearest Neighbor Classification
@@ -81,7 +80,24 @@ A program that outputs a summary of each variable to a single text file, saves a
 28. https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_string.html
 29. https://phoenixnap.com/kb/file-handling-in-python
 30. https://www.freecodecamp.org/news/file-handling-in-python/
-
+31. https://medium.com/@ooemma83/how-to-construct-cool-multiple-histogram-plots-using-seaborn-and-matplotlib-in-python-6c6c7ba6c10b
+32. https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
+33. https://seaborn.pydata.org/tutorial/distributions.html
+34. https://stackoverflow.com/questions/68948981/create-a-subplot-of-multiple-histograms-with-titles
+35. https://www.statology.org/seaborn-title/
+36. https://matplotlib.org/stable/tutorials/intermediate/tight_layout_guide.html
+37. https://towardsdatascience.com/histograms-with-pythons-matplotlib-b8b768da9305
+38. https://pro.arcgis.com/en/pro-app/latest/help/analysis/geoprocessing/charts/scatter-plot-matrix.htm
+39. https://www.statology.org/pairs-plot-in-python/
+40. https://vitalflux.com/what-when-how-scatterplot-matrix-pairplot-python/
+41. https://plotly.com/python/splom/
+42. https://www.statology.org/seaborn-pairplot-hue/
+43. https://seaborn.pydata.org/tutorial/color_palettes.html
+44. https://www.codecademy.com/article/seaborn-design-ii
+45. https://towardsdatascience.com/seaborn-pairplot-enhance-your-data-understanding-with-a-single-plot-bf2f44524b22
+46. https://python-charts.com/correlation/scatter-plot-regression-line-seaborn/
+47. https://waynestalk.com/en/python-regression-plot-en/
+48. https://pythonguides.com/matplotlib-subplots_adjust/
 
 
 
