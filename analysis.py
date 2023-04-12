@@ -100,9 +100,8 @@ plt.savefig('iris.png')  # save output into png file
 plt.show()  # show plot
 
 '''
-Question 3. DATA VISUALISATION: SCATTER PLOT MATRIX
+Question 3. DATA VISUALISATION: Scatter plot of each pair of variables
 '''
-# 3. Scatter plot of each pair of variables
 # df contains 3 classes (setosa, virginicus, versicolor) and 50 replicates each
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
@@ -170,6 +169,7 @@ plt.show()  # show plot
 '''
 4.2 If I group by species:
 to get more insights on which attributes are highly correlated for each species:
+###########i have to add more comments here
 '''
 df.groupby("Iris species").corr(method="pearson")
 # print as terminal output
@@ -182,6 +182,7 @@ print(df.groupby("Iris species").corr(method="pearson"))
 '''
 4.3 DATA VISUALIZATION: Box plot
 to display data point distribution, variance and outliers
+###########i have to add more comments here
 '''
 def graph(y):  # define graph of Iris species as y axis
     sns.boxplot(x="Iris species", y=y, data=df)
@@ -210,6 +211,7 @@ plt.show()  # show plot
 '''
 4.4 DATA VISUALIZATION: Violin Dot Plot
 to give more insight into the density estimate on the y-axis
+###########i have to add more comments here
 '''
 fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5))
 # -1 because it starts with 0, then 1,2,3
