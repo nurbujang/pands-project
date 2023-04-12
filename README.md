@@ -34,16 +34,16 @@ This data can be used to develop Interactive Identification Keys for future taxo
 8. For Question 2, I set the background using seaborn, set the grid position of the subplots, and plotted the histogram (31-32). I also added the  kernel density estimation (KDE) according to (33) and added the supertitle (34-35). Tight layout automatically adjusts the subplots to fit nicely into the figure area (36). Then, I saved the histogram into iris.png file using plt.savefig according to (37).
 9. For Question 3, I used seaborn pairplot according to (38-41) based on the hue (42). I customized the color palette according to (43-44). I also added regression lines (45-47) and adjusted the figure size (48).
 10. I performed 10 other analysis for Question 4, consisting of more data visualization techniques and basic Machine Learning analysis. 
-
-
-boxplot
-Pearson Correlation
-k-Nearest Neighbor Classification
-Logistic Regression
-Decision Tree Classification
-Support Vector Machine
-Random Forest
-Naive Bayes Classifier
+11. The first Pearson Correlation analysis was done on all the 4 variables. For better visualization, I also a correlation matrix according to ()
+12. The second Pearson Correlation analysis was done by species group, to better understand which attributes are highly correlated within each species. 
+13. boxplot
+14. violin plot
+15. k-Nearest Neighbor Classifier
+16. Logistic Regression
+17. Decision Tree Classification
+18. Support Vector Machine
+19. Random Forest
+20. Naive-Bayes Classifier
 
 
 ### Conclusion:
