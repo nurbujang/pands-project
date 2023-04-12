@@ -40,7 +40,7 @@ print(df.head(2))  # print out first 2 lines to see if the column names were add
 # Output: Column names were added properly
 
 '''
-PRE-PROCESSING - Quick lookover of the dataset, check for missing values, duplicates
+PRE-PROCESSING - Quick lookover on the dataset, check for missing values, duplicates
 '''
 # Quick lookover of the dataset to see the number of unique values
 df.value_counts("Iris species")  # how many lines for each species
@@ -164,14 +164,17 @@ fig.suptitle('Correlation matrix of petal and sepal of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main title
 h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1,
                 linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9})  # customize heatmap
-# annot=True: if True display the data value in each cell
+# Where:
+# annot=True: if True, the data value in each cell will be displayed
+# coolwarm color palette for the heatmap
 # square = True: cell is square-shaped
+# linewidth is the width of lines separating each cell and the color is yellow
+# I passed arguments into the color bar to show range as label and shrank it to 0.9 times the original size
 # default color bar is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
-# name color bar label as range and make the color bar smaller to 0.9 the original size
-# This sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
 h.set_xticklabels(h.get_xticklabels(), rotation=0, fontsize=10)
-# This sets the yticks "upright" in any figure size
+# This sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
 h.set_yticklabels(h.get_yticklabels(), rotation=0, fontsize=10)
+# This sets the yticks "upright" in any figure size
 plt.show()  # show plot
 # Results:
 # Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
@@ -180,9 +183,8 @@ plt.show()  # show plot
 4.2 If I group by species:
 to get more insights on which attributes are highly correlated for each species:
 '''
-df.groupby("Iris species").corr(method="pearson")
-# print as terminal output
-print(df.groupby("Iris species").corr(method="pearson"))
+df.groupby("Iris species").corr(method="pearson") # grouped by class
+print(df.groupby("Iris species").corr(method="pearson")) # print as terminal output
 # Results:
 # Iris setosa: high correlation between Sepal length & Sepal width
 # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length

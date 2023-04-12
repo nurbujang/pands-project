@@ -34,8 +34,8 @@ This data can be used to develop Interactive Identification Keys for future taxo
 8. For Question 2, I set the background using seaborn, set the grid position of the subplots, and plotted the histogram (31-32). I also added the  kernel density estimation (KDE) according to (33) and added the supertitle (34-35). Tight layout automatically adjusts the subplots to fit nicely into the figure area (36). Then, I saved the histogram into iris.png file using plt.savefig according to (37).
 9. For Question 3, I used seaborn pairplot according to (38-41) based on the hue (42). I customized the color palette according to (43-44). I also added regression lines (45-47) and adjusted the figure size (48).
 10. I performed 10 other analysis for Question 4, consisting of more data visualization techniques and basic Machine Learning analysis. 
-11. The first Pearson Correlation analysis was done on all the 4 variables. For better visualization, I also a correlation matrix according to ()
-12. The second Pearson Correlation analysis was done by species group, to better understand which attributes are highly correlated within each species. 
+11. The first Pearson Correlation analysis was done on all the 4 variables on all three species grouped together using corr with Pearson Correlation as default (49-53). I eliminated the upper triangle for better readability (54). np.ones was used to create a boolean matrix with the same size as the correlation matrix (55) and astype(bool) converts the upper triangle values to False, while the lower triangle will have the True values (56-57). Then, I used pandas corr.where to return the same-sized dataframe, but False is converted to NaN on the upper triangle and finally, I printed the result in the terminal output (56-57). For better visualization, I also a created a correlation matrix using seaborn heatmap according to (58-59), customized the color bar (60) and modified the ticklabels (61-65). 
+12. The second Pearson Correlation analysis was done by species group, to better understand which attributes are highly correlated within each species. This was done using df.groupby class with Iris species (66-68). The results were printed in the terminal. I found that this method offers more information than doing correlation on attributes for all three species grouped together.
 13. boxplot
 14. violin plot
 15. k-Nearest Neighbor Classifier
@@ -98,11 +98,26 @@ A program that outputs a summary of each variable to a single text file, saves a
 46. https://python-charts.com/correlation/scatter-plot-regression-line-seaborn/
 47. https://waynestalk.com/en/python-regression-plot-en/
 48. https://pythonguides.com/matplotlib-subplots_adjust/
-
-
-
-
-
+49. https://www.kaggle.com/code/danalexandru/simple-analysis-of-iris-dataset/notebook
+50. https://www.geeksforgeeks.org/exploratory-data-analysis-on-iris-dataset/
+51. https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
+52. https://www.kaggle.com/code/dronio/iris-plots-correlation-matrix
+53. https://www.kaggle.com/code/sureshmecad/iris-flower-classification
+54. https://numpy.org/doc/stable/reference/generated/numpy.tril.html
+55. https://www.digitalocean.com/community/tutorials/numpy-ones-in-python
+56. https://stackoverflow.com/questions/34417685/melt-the-upper-triangular-matrix-of-a-pandas-dataframe
+57. https://cmdlinetips.com/2020/02/lower-triangle-correlation-heatmap-python/
+58. https://www.educba.com/seaborn-heatmap-size/
+59. https://linuxhint.com/seaborn-heatmap-size/
+60. https://www.geeksforgeeks.org/how-to-change-the-colorbar-size-of-a-seaborn-heatmap-figure-in-python/
+61. https://www.kaggle.com/code/sejalkshirsagar/customize-seaborn-heatmaps
+62. https://www.tutorialspoint.com/rotate-xtick-labels-in-seaborn-boxplot-using-matplotlib
+63. https://stackoverflow.com/questions/44954123/rotate-xtick-labels-in-seaborn-boxplot
+64. https://stackoverflow.com/questions/27037241/changing-the-rotation-of-tick-labels-in-seaborn-heatmap
+65. https://copyprogramming.com/howto/rotate-axis-tick-labels-of-seaborn-plots
+66. https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/correlation-pearson-kendall-spearman/
+67. https://www.angela1c.com/projects/iris_project/iris_notebook/
+68. https://community.rstudio.com/t/how-to-apply-corrr-correlate-by-group/6236
 
  
 
