@@ -28,6 +28,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.naive_bayes import GaussianNB
+
 '''
 Load data and add column header
 '''
@@ -39,7 +40,7 @@ print(df.head(2))  # print out first 2 lines to see if the column names were add
 # Output: Column names were added properly
 
 '''
-Pre-processing - Quick lookover of the dataset, check for missing values, duplicates
+PRE-PROCESSING - Quick lookover of the dataset, check for missing values, duplicates
 '''
 # Quick lookover of the dataset to see the number of unique values
 df.value_counts("Iris species")  # how many lines for each species
@@ -64,7 +65,7 @@ print(df.drop_duplicates().shape)  # print out remove duplicates
 # output: 150 lines remain, no duplicates exist --x wrong code on line 51
 
 '''
-Question 1. Summary into text file, containing basic statistical analysis
+Question 1. SUMMARY into text file, containing basic statistical analysis
 df. describe to get count, mean, standard deviation, min and max values, lower, mid and upper percentile
 '''
 df.describe()  # to get basic statistical analysis data 
@@ -125,13 +126,13 @@ plt.show()  # show plot
 # there are overlaps in sepal length and width of all three species.
 
 '''
-Question 4. Other analysis:
+Question 4. OTHER ANALYSIS:
 Exploratory data analysis (visual techniques to detect outliers, trends/pattern) and Basic Machine Learning analysis
 '''
 
 '''
 4.1 Pearson correlation analysis 
-to determine the degree of linear relationship between 2 continuous variables
+to determine the degree/strength of linear relationship between 2 continuous variables
 correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
 corr = df.corr()  # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
@@ -168,7 +169,6 @@ plt.show()  # show plot
 '''
 4.2 If I group by species:
 to get more insights on which attributes are highly correlated for each species:
-
 '''
 df.groupby("Iris species").corr(method="pearson")
 # print as terminal output
@@ -180,8 +180,8 @@ print(df.groupby("Iris species").corr(method="pearson"))
 
 '''
 4.3 DATA VISUALIZATION: Box plot
-to display data point distribution, variance and outliers
-
+to display data point distribution/spread, skewness, variance and outliers
+shows the minimum, first quartile, median, third quartile and maximum
 '''
 def graph(y):  # define graph of Iris species as y axis
     sns.boxplot(x="Iris species", y=y, data=df)
@@ -208,9 +208,9 @@ plt.show()  # show plot
 # Sepal size may not be a good variable to differentiate species
 
 '''
-4.4 DATA VISUALIZATION: Violin Dot Plot
-to give more insight into the density estimate on the y-axis
-
+4.4 DATA VISUALIZATION: Violin Plot
+to give more insight into data distribution and density on the y-axis
+it contains all data points, unlike the box plot which shows mean and error bars
 '''
 fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5))
 # -1 because it starts with 0, then 1,2,3
@@ -247,6 +247,7 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 
 '''
 4.5 kNN Classifier
+used for regression and classification
 kNN calculates the distance between the data points and predict the correct species class for the datapoint
 where k = number of neighbors/points closest to the test data
 '''
@@ -277,9 +278,10 @@ print('Logistic Regression model F1 score is',
 # F1 score measures the accuracy of the model, that is how many times it makes a corret prediction in the whole dataset
 # F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
 '''
-# 4.7 Decision Tree Classification
-# to build a classification in a form of tree structure with decision nodes and leaf nodes
-# branches bifurcate based on Y/N or T/F
+4.7 Decision Tree Classification
+to build a classification or regression 
+branches bifurcate based on Y/N or T/F and breaks the dataset smaller everytime
+to eventually form a tree structure with decision nodes and leaf nodes
 '''
 # define Decision Tree classifer object
 dtclassifier = DecisionTreeClassifier(random_state=42)
@@ -307,9 +309,10 @@ print('Decision Tree Classification model F1 score is',
 plt.show()
 
 '''
-4.8 Support Vector Machine
+4.8 Support Vector Machine Classifier
 for regression and classification
-to create the best boundary to separate data into classes by creating a line with the most margin from the data point
+to map data points into a high dimensional space
+and then create the best boundary to separate data into classes by creating a hyperplane line with the most margin from the data point
 '''
 svclassifier = SVC()
 svclassifier.fit(X_train, y_train)
@@ -331,8 +334,10 @@ print('Support Vector Classifier model F1 score is',
 
 '''
 4.9 Random Forest
-to create a cluster of decision trees, thus forming a 'forest'
-each bunch is trained on random subsets from training group (drawn with replacement) and features (drawn without replacement)
+used to perform both regression and classification
+to create a cluster of decision trees containing different sub-features from the features, thus forming a 'forest'
+each bunch is trained on random subsets from training group (drawn with replacement and can be used again) and features (drawn without replacement and cannot be reused)
+each tree picks the features randomly, making it possible to find which features are more important than others
 '''
 rf = RandomForestClassifier(n_estimators=10, n_jobs=-1)
 rf.fit(X_train, y_train)  # train the model
