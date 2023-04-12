@@ -39,9 +39,9 @@ print(df.head(2))  # print out first 2 lines to see if the column names were add
 # Output: Column names were added properly
 
 '''
-Quick lookover of the dataset, check for missing values, duplicates
+Pre-processing - Quick lookover of the dataset, check for missing values, duplicates
 '''
-# Quick lookover of the dataset to see the number of unique values - check why the ref have this twice
+# Quick lookover of the dataset to see the number of unique values
 df.value_counts("Iris species")  # how many lines for each species
 print(df.value_counts("Iris species"))  # print how many lines for each species
 # Output: 50 lines for each species
@@ -168,7 +168,7 @@ plt.show()  # show plot
 '''
 4.2 If I group by species:
 to get more insights on which attributes are highly correlated for each species:
-###########i have to add more comments here
+
 '''
 df.groupby("Iris species").corr(method="pearson")
 # print as terminal output
@@ -181,7 +181,7 @@ print(df.groupby("Iris species").corr(method="pearson"))
 '''
 4.3 DATA VISUALIZATION: Box plot
 to display data point distribution, variance and outliers
-###########i have to add more comments here
+
 '''
 def graph(y):  # define graph of Iris species as y axis
     sns.boxplot(x="Iris species", y=y, data=df)
@@ -210,7 +210,7 @@ plt.show()  # show plot
 '''
 4.4 DATA VISUALIZATION: Violin Dot Plot
 to give more insight into the density estimate on the y-axis
-###########i have to add more comments here
+
 '''
 fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5))
 # -1 because it starts with 0, then 1,2,3
@@ -249,13 +249,13 @@ print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
 4.5 kNN Classifier
 kNN calculates the distance between the data points and predict the correct species class for the datapoint
 where k = number of neighbors/points closest to the test data
-Calculate the accuracy of the model using testing dataset
 '''
 for i in np.arange(7, 10):
     knn = KNeighborsClassifier(n_neighbors=i)
     knn.fit(X_train, y_train)
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
-          y_test)*100)  # keep k small because there are only 3 species, to prevent overfitting
+          y_test)*100)  # Calculate the accuracy of the model using testing dataset
+          # keep k small because there are only 3 species, to prevent overfitting
 
 '''
 4.6 Logistic Regression
@@ -354,7 +354,7 @@ print('Random Forest model F1 score is', f1_score(
 4.10 Gaussian Naive-Bayes Classifier
 'Naive' because it assumes that each variable are independent of each other
 it predicts the probability of different species based on different attributes
-Use Gaussian because data is continuous, and assumed to be normally-distributed
+I used Gaussian because data is continuous, and assumed to be normally-distributed
 '''
 gaussian = GaussianNB()
 gaussian.fit(X_train, y_train)
