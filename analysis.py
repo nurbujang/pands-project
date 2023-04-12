@@ -288,7 +288,7 @@ print('Logistic Regression model F1 score is',
 # F1 score measures the accuracy of the model, that is how many times it makes a corret prediction in the whole dataset
 # F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
 '''
-4.7 Decision Tree Classification
+4.7 Decision Tree Classifier
 to build a classification or regression 
 branches bifurcate based on Y/N or T/F and breaks the dataset smaller everytime
 to eventually form a tree structure with decision nodes and leaf nodes
@@ -343,7 +343,7 @@ print('Support Vector Classifier model F1 score is',
       f1_score(y_test, y_pred_svc, average='macro'))
 
 '''
-4.9 Random Forest
+4.9 Random Forest Classifier
 used to perform both regression and classification
 to create a cluster of decision trees containing different sub-features from the features, thus forming a 'forest'
 each bunch is trained on random subsets from training group (drawn with replacement and can be used again) and features (drawn without replacement and cannot be reused)
@@ -366,7 +366,7 @@ print('Random Forest model F1 score is', f1_score(
     y_test, y_pred_rf, average='macro'))
 
 '''
-4.10 Gaussian Naive-Bayes Classifier
+4.10 Gaussian Naïve Bayes Classifier
 'Naive' because it assumes that each variable are independent of each other
 it predicts the probability of different species based on different attributes
 I used Gaussian because data is continuous, and assumed to be normally-distributed

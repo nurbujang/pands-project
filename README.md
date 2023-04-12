@@ -43,11 +43,11 @@ This data can be used to develop Interactive Identification Keys for future taxo
 17. Decision Tree Classification
 18. Support Vector Machine
 19. Random Forest
-20. Naive-Bayes Classifier
+20. Naïve Bayes Classifier using Gaussian Naïve Bayes
 
 
 ### Conclusion:
-A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were Pearson Correlation, box plot, k-Nearest Neighbor, Logistic Regression, Decision Tree Classification, Support Vector Machine and Random Forest. Model accuracy score was displayed for each test.
+A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were Pearson Correlation, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
 
 ### References:
 1. https://data-flair.training/blogs/iris-flower-classification/
