@@ -12,8 +12,6 @@ Morphological analysis for species determination is used to assess biodiversity 
 
 This data can be used to develop Interactive Identification Keys for future taxonomists and researchers as well as species determination using pattern recognition in Machine Learning. It can also be used in phylogenetic studies to identify which species are more closely related to each other and share a common ancestor. 
 
-
-
 ### Task Description:
 *The task is to write a program called analysis.py that:*
 
@@ -40,7 +38,6 @@ scatterplot
 png
 visualize the entire dataset using sns.pairplot(1) adjust figsize
 boxplot
-While most MA examples available uses only 2 variables (sepal length and width only or petal length and width only) to simplify analysis, I used all 4 variables because the best determinants are still unknown at this stage.
 Pearson Correlation
 k-Nearest Neighbor Classification
 Logistic Regression
