@@ -196,11 +196,14 @@ to display data point distribution/spread, skewness, variance and outliers
 shows the minimum, first quartile, median, third quartile and maximum
 '''
 def graph(y):  # define graph of Iris species as y axis
-    sns.boxplot(x="Iris species", y=y, data=df)
-    # add stripplot/jitter plot, set transparency (alpha)
-    sns.stripplot(x="Iris species", y=y, data=df,
+    sns.boxplot(x="Iris species", y=y, data=df) # seaborn boxplot
+# x-axis is Iris species, y-axis is y and the data used is the iris dataframe
+    sns.stripplot(x="Iris species", y=y, data=df, # added a seaborn stripplot/jitter plot over the boxplot
                   jitter=True, edgecolor="gray", alpha=0.35)
-
+# Where:
+# jitter=True will display the dots (jitter)
+# the edgecolor of the jitter is gray for look clearer
+# set transparency (alpha) to 0.35 so it is not too opaque
 plt.figure(figsize=(10, 10))
 plt.subplot(221)  # grid position top left (2 rows, 2 columns, first top)
 graph('Sepal length (cm)')
