@@ -36,7 +36,7 @@ Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
 # create a pandas dataframe object called df, read the csv file and assign a name to each column
 df = pd.read_csv('iris.data', names=columns) # df contains iris.data and add column names to the dataframe
-print(df.head(2))  # print out first 2 lines to see if the column names were added properly
+print('\nThe first 2 lines of the dataset is:\n',df.head(2))  # print out first 2 lines to see if the column names were added properly
 # Output: Column names were added properly
 
 '''
@@ -44,7 +44,7 @@ PRE-PROCESSING - Quick lookover on the dataset, check for missing values, duplic
 '''
 # Quick lookover of the dataset to see the number of unique values
 df.value_counts("Iris species")  # how many lines for each species
-print(df.value_counts("Iris species"))  # print how many lines for each species
+print('\nThe number of rows for each Iris species is:\n',df.value_counts("Iris species"))  # print how many lines for each species
 # Output: 50 lines for each species
 
 # basic info about the dataset, column numbers, data types, non-null values
@@ -55,13 +55,13 @@ print(df.info()) # print out data info
 
 # get number of missing values in each column
 df.isnull().sum()
-# print (df.isnull().sum()) # print out number of missing values
+print ('\nThe number of missing value is:\n',df.isnull().sum()) # print out number of missing values
 # OR
 # df.isna().sum()
 # print(df.isna().sum()) # print out number of missing values
 
-# df.drop_duplicates() # remove duplicates
-print(df.drop_duplicates().shape)  # print out remove duplicates
+df.drop_duplicates() # remove duplicates
+print('\nData shape after duplicate removal is:\n',df.drop_duplicates().shape)  # print out remove duplicates
 # output: 150 lines remain, no duplicates exist --x wrong code on line 51
 
 '''
@@ -145,13 +145,13 @@ Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
 to determine the degree/strength of linear relationship between 2 continuous variables
 correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
-corr = df.corr()  # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
+corr = df.corr(method="pearson")  # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper triangle for better readibility
 # Numpy tril function to extract lower triangle or triu to extract upper triangle
 # np.ones returns an array of 1 to create a boolean matrix with the same size as the correlation matrix
 # astype converts the upper triangle values to False, while the lower triangle will have the True values
 corr = corr.where(bool_upper_matrix) # Pandas where() returns same-sized dataframe, but False is converted to NaN on the upper triangle
-print(corr)  # print as terminal output
+print('\nPearson Correlation by attributes is:\n',corr)  # print as terminal output
 # Results:
 # High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
 
@@ -184,7 +184,7 @@ plt.show()  # show plot
 to get more insights on which attributes are highly correlated for each species:
 '''
 df.groupby("Iris species").corr(method="pearson") # grouped by class
-print(df.groupby("Iris species").corr(method="pearson")) # print as terminal output
+print('\nPearson Correlation by species is:\n',df.groupby("Iris species").corr(method="pearson")) # print as terminal output
 # Results:
 # Iris setosa: high correlation between Sepal length & Sepal width
 # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
@@ -257,13 +257,14 @@ I used all 4 variables because the best determinants are still unknown at this p
 
 X = df.iloc[:, :-1].values # everything up until the last column but not including the last column (Iris species) 
 y = df.iloc[:, 4].values # = [:, -1],  get all the rows in the last/5th column (target variable (Iris species) into labels (y))
-print(X.shape, y.shape)  # display number of rows and columns
+print('\nDataset shape before Train-Test split is',X.shape, y.shape)  # print out the shape (number of rows and columns) before the data split
 # split the dataset into training (80%) and testing (20%)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42)
 # random_state is the seed of randomness to help reproduce the same results everytime
 # display the shape and label of training and testing set
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+print('\nTrain-test split for evaluating Machine Learning algorithms is',X_train.shape, X_test.shape, y_train.shape, y_test.shape) 
+# print out the shape (number of rows and columns) of test and train data in terminal output
 
 '''
 4.5 kNN Classifier

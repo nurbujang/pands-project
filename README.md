@@ -38,12 +38,13 @@ This data can be used to develop Interactive Identification Keys for future taxo
 12. The second Pearson Correlation analysis was done by species group, to better understand which attributes are highly correlated within each species. This was done using df.groupby class with Iris species (66-68). The results were printed in the terminal. I found that this method offers more information than doing correlation on attributes for all three species grouped together.
 13. For another data visualization, I created a Seaborn Box Plot (69-71) and added a Seaborn Jitter Plot over it (72-74). The grid arrangement for the subplots followed that of (75-76). The super title was added as usual and plt.show displayed the plot.
 14. I also created a Seaborn Violin Plot for each variable in a 1x4 grid (77-79) as another data visualization method. 
-15. k-Nearest Neighbor Classifier
-16. Logistic Regression
-17. Decision Tree Classification
-18. Support Vector Machine
-19. Random Forest
-20. Naïve Bayes Classifier using Gaussian Naïve Bayes
+15. In preparation for basic machine learning analysis, split the data into training (80%) and testing (20%) to detect overfitting, and later, the testing dataset will be used to check the accuracy of the model (80-84). While most ML examples available uses only 2 variables (sepal length and width only or petal length and width only) to simplify analysis, I used all 4 variables because the best determinants are still unknown at this point (whether sepal or petal attribute is better than the other).
+16. k-Nearest Neighbor Classifier
+17. Logistic Regression
+18. Decision Tree Classification
+19. Support Vector Machine
+20. Random Forest
+21. Naïve Bayes Classifier using Gaussian Naïve Bayes
 
 ### Conclusion:
 A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were two types of Pearson Correlations, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
@@ -128,7 +129,11 @@ A program that outputs a summary of each variable to a single text file, saves a
 77. https://deepnote.com/@econdesousa/ViolinPlotvsBoxPlot-aadf0c53-53b4-4221-89b9-4388c54c68bd
 78. https://www.nickmccullum.com/python-visualization/subplots/
 79. https://matplotlib.org/stable/gallery/statistics/customized_violin.html
- 
+80. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-1.php
+81. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-2.php
+82. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-3.php
+83. https://stackoverflow.com/questions/37512079/python-pandas-why-does-df-iloc-1-values-for-my-training-data-select-till
+84. https://www.shanelynn.ie/pandas-iloc-loc-select-rows-and-columns-dataframe/
 
 
 
