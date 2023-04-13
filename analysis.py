@@ -21,13 +21,13 @@ import pandas as pd # for data loading from other sources and processing
 import seaborn as sns # for data visualization
 import matplotlib.pyplot as plt # for data visualization
 from sklearn.model_selection import train_test_split # to split data 
-from sklearn.svm import SVC # import Support Vector Classification from sklearn
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
+from sklearn.neighbors import KNeighborsClassifier # import kNN Classifier from sklearn
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # sklearn module to print confusion matrix and report
+from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
+from sklearn.tree import DecisionTreeClassifier # import Decision Tree Classifier from sklearn
+from sklearn.svm import SVC # import Support Vector Machine Classification from sklearn
+from sklearn.ensemble import RandomForestClassifier # import Random Forest Classifier from sklearn
+from sklearn.naive_bayes import GaussianNB # import Gaussian Naïve Bayes from sklearn
 
 '''
 Load data and add column header
