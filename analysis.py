@@ -288,9 +288,12 @@ To estimate the relationship between 1 dependent variable and 1 or more independ
 Used for classification and prediction analysis
 uses Sigmoid function (logistic function) instead of linear function in Linear regression
 '''
-lr = LogisticRegression(C=0.02)  
+lr = LogisticRegression(C=0.5, random_state=42)  
 # C value is a model hyperparameter, which is a model criteria outside of the model and its value cannot be estimated from the data
+# default C is 1.0
 # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
+# I picked 0.5 to be somewhere in the middle
+# random_state is the seed of randomness to help reproduce the same results everytime. It can be any number
 lr.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with target values that we already have (y_test)
 y_pred_lr = lr.predict(X_test)
