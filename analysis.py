@@ -36,7 +36,7 @@ Load data and add column header
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
 # create a pandas dataframe object called df, read the csv file and assign a name to each column
 df = pd.read_csv('iris.data', names=columns) # df contains iris.data and add column names to the dataframe
-print('\nThe first 2 lines of the dataset is:\n',df.head(2))  # print out first 2 lines to see if the column names were added properly
+print('\nThe first 2 lines of the dataset\n',df.head(2))  # print out first 2 lines to see if the column names were added properly
 # Output: Column names were added properly
 
 '''
@@ -44,7 +44,7 @@ PRE-PROCESSING - Quick lookover on the dataset, check for missing values, duplic
 '''
 # Quick lookover of the dataset to see the number of unique values
 df.value_counts("Iris species")  # how many lines for each species
-print('\nThe number of rows for each Iris species is:\n',df.value_counts("Iris species"))  # print how many lines for each species
+print('\nThe number of rows for each Iris species\n',df.value_counts("Iris species"))  # print how many lines for each species
 # Output: 50 lines for each species
 
 # basic info about the dataset, column numbers, data types, non-null values
@@ -55,13 +55,13 @@ print(df.info()) # print out data info
 
 # get number of missing values in each column
 df.isnull().sum()
-print ('\nThe number of missing value is:\n',df.isnull().sum()) # print out number of missing values
+print ('\nThe number of missing value\n',df.isnull().sum()) # print out number of missing values
 # OR
 # df.isna().sum()
 # print(df.isna().sum()) # print out number of missing values
 
 df.drop_duplicates() # remove duplicates
-print('\nData shape after duplicate removal is:\n',df.drop_duplicates().shape)  # print out remove duplicates
+print('\nData shape after duplicate removal is',df.drop_duplicates().shape)  # print out remove duplicates
 # output: 150 lines remain, no duplicates exist --x wrong code on line 51
 
 '''
@@ -151,7 +151,7 @@ bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper
 # np.ones returns an array of 1 to create a boolean matrix with the same size as the correlation matrix
 # astype converts the upper triangle values to False, while the lower triangle will have the True values
 corr = corr.where(bool_upper_matrix) # Pandas where() returns same-sized dataframe, but False is converted to NaN on the upper triangle
-print('\nPearson Correlation by attributes is:\n',corr)  # print as terminal output
+print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 # Results:
 # High positive correlation between Petal length & Petal width, Petal length & Sepal length and Sepal length and petal width
 
@@ -163,13 +163,13 @@ fig, ax = plt.subplots(figsize=(9, 6))
 fig.suptitle('Correlation matrix of petal and sepal of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
 h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1,
-                linecolor='yellow', cbar_kws={'label': 'range', 'shrink': 0.9})  # customize heatmap
+                linecolor='yellow', cbar_kws={'label': 'Range', 'shrink': 0.9})  # customize heatmap
 # Where:
 # annot=True: if True, the data value in each cell will be displayed
 # coolwarm color palette for the heatmap
 # square = True: cell is square-shaped
 # linewidth is the width of lines separating each cell and the color is yellow
-# I passed arguments into the color bar to show range as label and shrank it to 0.9 times the original size
+# I passed arguments into the color bar to show Range as label and shrank it to 0.9 times the original size
 # default color bar is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
 h.set_xticklabels(h.get_xticklabels(), rotation=0, fontsize=10)
 # This sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
@@ -184,7 +184,7 @@ plt.show()  # show plot
 to get more insights on which attributes are highly correlated for each species:
 '''
 df.groupby("Iris species").corr(method="pearson") # grouped by class
-print('\nPearson Correlation by species is:\n',df.groupby("Iris species").corr(method="pearson")) # print as terminal output
+print('\nPearson Correlation by species\n',df.groupby("Iris species").corr(method="pearson")) # print as terminal output
 # Results:
 # Iris setosa: high correlation between Sepal length & Sepal width
 # Iris versicolor: strong correlation between Petal length & Petal width, Petal length & Sepal length
