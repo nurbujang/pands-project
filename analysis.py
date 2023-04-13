@@ -284,9 +284,10 @@ for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at
           y_test)*100)  # Calculate and print the accuracy of the model using testing dataset ranging (from 7-10)*100 
 # %d is a placeholder for a number, %s is for string
 # % on its own means the values of each i in 7-10 range are then passed in through a tuple using the % operator
-    print("\nk-Nearest Neighbor F1 score for k = %d F1 score is" % i, f1_score(y_test, y_pred_knn, average='macro'))  
+    print("k-Nearest Neighbor F1 score for k = %d F1 score is" % i, f1_score(y_test, y_pred_knn, average='micro'))  
     # Calculate and print the F1 score the model using testing dataset ranging (from 7-10)*100 
-    # average setting is macro
+    # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
+    # Other averaging methods are macro (meaning it is calculated using regular/unweighted mean) and weighted (takes into account each class's support)
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
 # F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
       
@@ -309,9 +310,9 @@ print('\nLogistic Regression model accuracy is',
       accuracy_score(y_test, y_pred_lr) * 100) # print accuracy score * 100
 # Model accuracy score is how many times the model makes correct predictions over the total number of predictions
 print('Logistic Regression model F1 score is',
-      f1_score(y_test, y_pred_lr, average='macro'))
+      f1_score(y_test, y_pred_lr, average='micro'))
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
-# average setting is macro
+# Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 '''
 4.7 Decision Tree Classifier
 to build a classification or regression 
@@ -337,12 +338,12 @@ plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of t
 print('\nDecision Tree Classification model accuracy is',
       accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score *100
 print('Decision Tree Classification model F1 score is',
-      f1_score(y_test, y_pred_dt, average='macro'))
+      f1_score(y_test, y_pred_dt, average='micro'))
 # Precision = True Positive : (True Positive + False Positive) = 10/(10+0+0 (across)) = 1
 # Recall = True positive : (True Positive + False Negative) = 10/(10+0+0 (down)) = 1
 # F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
 # that is, F1 = how many times it makes a correct prediction in the whole dataset
-# average setting is macro
+# Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 plt.show()
 
 '''
@@ -367,9 +368,9 @@ print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test
 print('\nSupport Vector Classifier model accuracy is', accuracy_score(
     y_test, y_pred_svc)*100)  # print out accuracy score *100
 print('Support Vector Classifier model F1 score is',
-      f1_score(y_test, y_pred_svc, average='macro'))
+      f1_score(y_test, y_pred_svc, average='micro'))
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
-# average setting is macro
+# Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 
 '''
 4.9 Random Forest Classifier
@@ -392,9 +393,9 @@ plt.show()
 print('\nRandom Forest model accuracy score is',
       accuracy_score(y_test, y_pred_rf)*100) # print accuracy score * 100
 print('Random Forest model F1 score is', f1_score(
-    y_test, y_pred_rf, average='macro')) 
+    y_test, y_pred_rf, average='micro')) 
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
-# average setting is macro
+# Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 
 '''
 4.10 Gaussian Naïve Bayes Classifier
@@ -409,7 +410,7 @@ cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix
 accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score
 # multiply by 100 here because it is too complicated to do so in the print format
 f1 = f1_score(y_test,y_pred_gs,average='micro')
-# average setting is micro
+# Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs)) # print Classification Report in terminal output
 print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in terminal output
 # Accuracy score using testing dataset
