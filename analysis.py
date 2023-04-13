@@ -229,14 +229,15 @@ it contains all data points, unlike the box plot which shows minimum, first quar
 '''
 fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) 
 # plot the subplots in 1 row of 4 subplots
-# len starts with 0, then 1,2,3, and excluding the last one (-1)
+# length -1 means all columns minus one is equal to 4 columns (5-1=4)
 # set the figure size to 20 width and 5 height
 for i in range(0,len(columns)-1): 
-    sns.violinplot(x='Iris species', y=df[columns[i]], data=df,ax=axs[i])
+    sns.violinplot(x='Iris species', y=df[columns[i]], data=df, ax=axs[i])
     axs[i].set_ylabel(columns[i])
 # Where:
-# for i in range can be translated to for item in columns 1 to, and excluding the last column
-# seaborn violinplot, x-axis is Iris species, y is each column name, data is iris dataframe, axis is the column list
+# for i in range can be translated to: for item in columns 1 to 4
+# seaborn violinplot, x-axis is Iris species, y is each column name, data is iris dataframe
+# axis the object to draw the plot into, in this case, the columns
 # axs[i].set_ylabel(columns[i]) means each column list i is set as the y-axis label
 plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15) # customize the figure's super title
