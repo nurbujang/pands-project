@@ -129,6 +129,7 @@ plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species'
              fontweight='bold', size=15) # customize figure's super title, default black in bold, fontsize 15
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
 # shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
+# this was done to show the supertitle properly
 plt.show()  # show plot
 # Results:
 # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
@@ -160,7 +161,7 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 # build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
 fig, ax = plt.subplots(figsize=(9, 6))
-fig.suptitle('Correlation matrix of petal and sepal of three Iris species',
+fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
 h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1,
                 linecolor='yellow', cbar_kws={'label': 'Range', 'shrink': 0.9})  # customize heatmap
@@ -263,7 +264,7 @@ print('\nDataset shape before Train-Test split is',X.shape, y.shape)
 X_train, X_test, y_train, y_test = train_test_split( 
     X, y, test_size=0.2, random_state=42) # split the dataset into training (80%) and testing (20%)
 # test size is 20%, meaning training size is 80%
-# random_state is the seed of randomness to help reproduce the same results everytime. It can be any number, really.
+# random_state is the seed of randomness to help get the same results everytime. It can be any number, really.
 print('\nDataset shape after Train-test split is',X_train.shape, X_test.shape, y_train.shape, y_test.shape) 
 # print out the shape (number of rows and columns) of test and train data AFTER split in terminal output
 
@@ -275,12 +276,19 @@ where k = number of neighbors/points closest to the test data
 '''
 for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at 10
 # keep k small because there are only 3 species, to prevent overfitting
-    knn = KNeighborsClassifier(n_neighbors=i) # number of neighbors range from 7-10
+    knn = KNeighborsClassifier(n_neighbors=i) # instantiate a class and name it knn
+    # number of neighbors range from 7-10
     knn.fit(X_train, y_train) # fits the model to the training set
+    y_pred_knn = knn.predict(X_test)
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
-          y_test)*100)  # Calculate the accuracy of the model using testing dataset ranging (from 7-10)*100 
+          y_test)*100)  # Calculate and print the accuracy of the model using testing dataset ranging (from 7-10)*100 
 # %d is a placeholder for a number, %s is for string
 # % on its own means the values of each i in 7-10 range are then passed in through a tuple using the % operator
+    print("\nk-Nearest Neighbor F1 score for k = %d F1 score is" % i, f1_score(y_test, y_pred_knn, average='macro'))  
+    # Calculate and print the F1 score the model using testing dataset ranging (from 7-10)*100 
+    # average setting is macro
+# F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
+# F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
       
 '''
 4.6 Logistic Regression
@@ -288,22 +296,22 @@ To estimate the relationship between 1 dependent variable and 1 or more independ
 Used for classification and prediction analysis
 uses Sigmoid function (logistic function) instead of linear function in Linear regression
 '''
-lr = LogisticRegression(C=0.5, random_state=42)  
+lr = LogisticRegression(C=0.5, random_state=42)  # instantiate a class and name it lr
 # C value is a model hyperparameter, which is a model criteria outside of the model and its value cannot be estimated from the data
 # default C is 1.0
 # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
 # I picked 0.5 to be somewhere in the middle
-# random_state is the seed of randomness to help reproduce the same results everytime. It can be any number
+# random_state is the seed of randomness to help get the same results everytime. It can be any number
 lr.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with target values that we already have (y_test)
 y_pred_lr = lr.predict(X_test)
 print('\nLogistic Regression model accuracy is',
-      accuracy_score(y_test, y_pred_lr) * 100)
+      accuracy_score(y_test, y_pred_lr) * 100) # print accuracy score * 100
 # Model accuracy score is how many times the model makes correct predictions over the total number of predictions
 print('Logistic Regression model F1 score is',
       f1_score(y_test, y_pred_lr, average='macro'))
-# F1 score measures the accuracy of the model, that is how many times it makes a corret prediction in the whole dataset
-# F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
+# F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
+# average setting is macro
 '''
 4.7 Decision Tree Classifier
 to build a classification or regression 
@@ -311,8 +319,8 @@ branches bifurcate based on Y/N or T/F and breaks the dataset smaller everytime
 to eventually form a tree structure with decision nodes and leaf nodes
 '''
 # define Decision Tree classifer object
-dtclassifier = DecisionTreeClassifier(random_state=42)
-dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer
+dtclassifier = DecisionTreeClassifier(random_state=42) # instantiate a class and name it dtclassifier
+dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer model
 # Predict the response for test dataset
 y_pred_dt = dtclassifier.predict(X_test)
 # Evaluate the model using testing dataset
@@ -327,12 +335,14 @@ plt.grid(False)
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
              fontweight='bold', size=10)
 print('\nDecision Tree Classification model accuracy is',
-      accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score
+      accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score *100
 print('Decision Tree Classification model F1 score is',
       f1_score(y_test, y_pred_dt, average='macro'))
 # Precision = True Positive : (True Positive + False Positive) = 10/(10+0+0 (across)) = 1
 # Recall = True positive : (True Positive + False Negative) = 10/(10+0+0 (down)) = 1
 # F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
+# that is, F1 = how many times it makes a correct prediction in the whole dataset
+# average setting is macro
 plt.show()
 
 '''
@@ -341,23 +351,25 @@ for regression and classification
 to map data points into a high dimensional space
 and then create the best boundary to separate data into classes by creating a hyperplane line with the most margin from the data point
 '''
-svclassifier = SVC()
-svclassifier.fit(X_train, y_train)
+svclassifier = SVC() # instantiate a class and name it svclassifier
+svclassifier.fit(X_train, y_train) # train the model
 y_pred_svc = svclassifier.predict(X_test)  # Predict from the test dataset
 print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc))
 # Classification report results:
-# Precision = True Positive : (True Positive + False Positive): setosa (10/10=1), versicolor (9/9=1), virginica (11/11=1)
-# Recall = True positive : (True Positive + False Negative)
+# Precision = Ratio of True Positive : (True Positive + False Positive. So, setosa (10/10=1), versicolor (9/9=1), virginica (11/11=1)
+# Recall = Ratio of True positive : (True Positive + False Negative)
 # F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
-# Support = number of actual occurences of the class
+# Support = number of actual occurences of that class
 # Accuracy = correct predictions for all classes / total number of predictions = 10/10 = 1
 print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test, y_pred_svc))
 # Confusion matrix 
 # Accuracy score using testing dataset
 print('\nSupport Vector Classifier model accuracy is', accuracy_score(
-    y_test, y_pred_svc)*100)  # print out accuracy score
+    y_test, y_pred_svc)*100)  # print out accuracy score *100
 print('Support Vector Classifier model F1 score is',
       f1_score(y_test, y_pred_svc, average='macro'))
+# F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
+# average setting is macro
 
 '''
 4.9 Random Forest Classifier
@@ -366,7 +378,7 @@ to create a cluster of decision trees containing different sub-features from the
 each bunch is trained on random subsets from training group (drawn with replacement and can be used again) and features (drawn without replacement and cannot be reused)
 each tree picks the features randomly, making it possible to find which features are more important than others
 '''
-rf = RandomForestClassifier(n_estimators=10, n_jobs=-1)
+rf = RandomForestClassifier(n_estimators=10, n_jobs=-1) # instantiate a class and name it rf
 rf.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with the target values that we already have (y_test)
 y_pred_rf = rf.predict(X_test)
@@ -378,9 +390,11 @@ plt.grid(False)
 plt.show()
 # Accuracy score using testing dataset
 print('\nRandom Forest model accuracy score is',
-      accuracy_score(y_test, y_pred_rf)*100)
+      accuracy_score(y_test, y_pred_rf)*100) # print accuracy score * 100
 print('Random Forest model F1 score is', f1_score(
-    y_test, y_pred_rf, average='macro'))
+    y_test, y_pred_rf, average='macro')) 
+# F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
+# average setting is macro
 
 '''
 4.10 Gaussian Naïve Bayes Classifier
@@ -388,19 +402,21 @@ print('Random Forest model F1 score is', f1_score(
 it predicts the probability of different species based on different attributes
 I used Gaussian because data is continuous, and assumed to be normally-distributed
 '''
-gaussian = GaussianNB()
-gaussian.fit(X_train, y_train)
-y_pred_gs = gaussian.predict(X_test) 
-accuracy_nb=round(accuracy_score(y_test,y_pred_gs)* 100, 2)
-acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
-
-cm = confusion_matrix(y_test, y_pred_gs)
-accuracy = accuracy_score(y_test,y_pred_gs)*100
+gaussian = GaussianNB() # instantiate a class and name it gaussian
+gaussian.fit(X_train, y_train) # train the model
+y_pred_gs = gaussian.predict(X_test) # 
+#accuracy_nb=round(accuracy_score(y_test,y_pred_gs)* 100, 2)
+#acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
+cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix
+accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score
+# multiply by 100 here because it is too complicated to do so in the print format
 f1 = f1_score(y_test,y_pred_gs,average='micro')
-print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs))
-print('\nConfusion matrix for Naive Bayes\n',cm)
+# average setting is micro
+print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs)) # print Classification Report in terminal output
+print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in terminal output
 # Accuracy score using testing dataset
 print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point of the accuracy value
 print('Naive-Bayes model F1 score is %.3f' %f1) # .3f is float with 3 decimal points of the f1 value
-# %.1f and %.3f are format specifiers. They begin with %, then followed by character that represents the data type, which is a float
-
+# %.1f and %.3f are format specifiers. They begin with %, then followed by a character that represents the data type, which is a float
+# https://www.kaggle.com/code/vinayshaw/iris-species-100-accuracy-using-naive-bayes
+# F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset

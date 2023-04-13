@@ -39,8 +39,8 @@ This data can be used to develop Interactive Identification Keys for future taxo
 13. For another data visualization, I created a Seaborn Box Plot (69-71) and added a Seaborn Jitter Plot over it (72-74). The grid arrangement for the subplots followed that of (75-76). The super title was added as usual and plt.show displayed the plot.
 14. I also created a Seaborn Violin Plot for each variable in a 1x4 grid (77-80) as another data visualization method. 
 15. In preparation for basic machine learning analysis, I split the data into training (80%) and testing (20%) to detect overfitting, and later, the testing dataset will be used to check the accuracy of the model (81-85). While most ML examples I researched uses only 2 variables (either sepal length and width only or petal length and width only) to simplify analysis, I decided to use all 4 variables together because the best determinants are still unknown at this point (whether sepal or petal attributes are better than the other).
-16. For k-Nearest Neighbor Classifier, I performed the analysis in a range of 7 to 10 (86-90). I kept the number small to prevent overfitting because there are only 3 species in the dataset (91-101). According to the accuracy score results, k=7 is enough to get a very high score on the model. I printed out the accuracy score using the print format as shown in (102-104).
-17. Logistic Regression was performed as shown in (105-109). I decided to perform it at hyperparameter value of 0.5 from the default value 1 to give equal weight on testing and training data, but this C value can be tuned (110-113). An F1 score was added as an extra performance measure (114).
+16. For k-Nearest Neighbor Classifier, I performed the analysis in a range of 7 to 10 (86-90). I kept the number small to prevent overfitting because there are only 3 species in the dataset (91-101). According to the accuracy score results, k=7 is enough to get a very high score on the model. I printed out the accuracy score using the print format as shown in (102-104). An F1 score was added as an extra performance measure (105).
+17. Logistic Regression was performed as shown in (106-110). I decided to perform it at hyperparameter value of 0.5 from the default value 1 to give equal weight on testing and training data, but this C value can be tuned (111-114). 
 18. Decision Tree Classification was done according to (115-117). A customized correlation matrix was displayed for better visualization (118-127). The model accuracy score and F1 score were printed out as usual.
 19. Next, I performed Support Vector Machine Classifier as shown by (1, 128-132). I printed the classification report and interpreted the results according to (133-134). The model accuracy score and F1 score were printed out as well.
 20. For Random Forest, I performed the analysis using examples shown by (135-146). A Confusion Matrix was displayed and model accuracy score and F1 score were printed out in the terminal output.
@@ -154,16 +154,16 @@ A program that outputs a summary of each variable to a single text file, saves a
 102. https://www.edureka.co/community/162168/what-the-difference-between-and-in-python-string-formatting
 103. https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-python-string-formatting
 104. https://www.geeksforgeeks.org/difference-between-s-and-d-in-python-string/
-105. https://towardsdatascience.com/grid-search-for-model-tuning-3319b259367e
-106. https://www.codingninjas.com/codestudio/library/applying-logistic-regression-on-iris-dataset
-107. https://scikit-learn.org/stable/auto_examples/linear_model/plot_iris_logistic.html
-108. https://www.kaggle.com/code/rahulrajpandey31/logistic-regression-from-scratch-iris-data-set/notebook
-109. https://www.aifinesse.com/logistic-regression/logistic-regression-example-iris/
-110. https://stackoverflow.com/questions/67513075/what-is-c-parameter-in-sklearn-logistic-regression
-111. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-scikit-learn-logistic-regression-exercise-3.php
-112. https://www.kaggle.com/code/joparga3/2-tuning-parameters-for-logistic-regression
-113. https://towardsdatascience.com/calculating-and-setting-thresholds-to-optimise-logistic-regression-performance-c77e6d112d7e
-114. https://machinelearningmastery.com/classification-accuracy-is-not-enough-more-performance-measures-you-can-use/
+105. https://machinelearningmastery.com/classification-accuracy-is-not-enough-more-performance-measures-you-can-use/
+106. https://towardsdatascience.com/grid-search-for-model-tuning-3319b259367e
+107. https://www.codingninjas.com/codestudio/library/applying-logistic-regression-on-iris-dataset
+108. https://scikit-learn.org/stable/auto_examples/linear_model/plot_iris_logistic.html
+109. https://www.kaggle.com/code/rahulrajpandey31/logistic-regression-from-scratch-iris-data-set/notebook
+110. https://www.aifinesse.com/logistic-regression/logistic-regression-example-iris/
+111. https://stackoverflow.com/questions/67513075/what-is-c-parameter-in-sklearn-logistic-regression
+112. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-scikit-learn-logistic-regression-exercise-3.php
+113. https://www.kaggle.com/code/joparga3/2-tuning-parameters-for-logistic-regression
+114. https://towardsdatascience.com/calculating-and-setting-thresholds-to-optimise-logistic-regression-performance-c77e6d112d7e
 115. https://thatascience.com/learn-machine-learning/build-decision-tree/
 116. https://www.kaggle.com/code/adityabhat24/iris-data-analysis-and-machine-learning-python
 117. https://www.datacamp.com/tutorial/decision-tree-classification-python
