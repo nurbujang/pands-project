@@ -405,8 +405,6 @@ I used Gaussian because data is continuous, and assumed to be normally-distribut
 gaussian = GaussianNB() # instantiate a class and name it gaussian
 gaussian.fit(X_train, y_train) # train the model
 y_pred_gs = gaussian.predict(X_test) # 
-#accuracy_nb=round(accuracy_score(y_test,y_pred_gs)* 100, 2)
-#acc_gaussian = round(gaussian.score(X_train, y_train) * 100, 2)
 cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix
 accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score
 # multiply by 100 here because it is too complicated to do so in the print format
@@ -418,5 +416,4 @@ print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in ter
 print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point of the accuracy value
 print('Naive-Bayes model F1 score is %.3f' %f1) # .3f is float with 3 decimal points of the f1 value
 # %.1f and %.3f are format specifiers. They begin with %, then followed by a character that represents the data type, which is a float
-# https://www.kaggle.com/code/vinayshaw/iris-species-100-accuracy-using-naive-bayes
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset

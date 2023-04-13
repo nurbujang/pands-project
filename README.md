@@ -39,12 +39,12 @@ This data can be used to develop Interactive Identification Keys for future taxo
 13. For another data visualization, I created a Seaborn Box Plot (69-71) and added a Seaborn Jitter Plot over it (72-74). The grid arrangement for the subplots followed that of (75-76). The super title was added as usual and plt.show displayed the plot.
 14. I also created a Seaborn Violin Plot for each variable in a 1x4 grid (77-80) as another data visualization method. 
 15. In preparation for basic machine learning analysis, I split the data into training (80%) and testing (20%) to detect overfitting, and later, the testing dataset will be used to check the accuracy of the model (81-85). While most ML examples I researched uses only 2 variables (either sepal length and width only or petal length and width only) to simplify analysis, I decided to use all 4 variables together because the best determinants are still unknown at this point (whether sepal or petal attributes are better than the other).
-16. For k-Nearest Neighbor Classifier, I performed the analysis in a range of 7 to 10 (86-90). I kept the number small to prevent overfitting because there are only 3 species in the dataset (91-101). According to the accuracy score results, k=7 is enough to get a very high score on the model. I printed out the accuracy score using the print format as shown in (102-104). An F1 score was added as an extra performance measure (105).
-17. Logistic Regression was performed as shown in (106-110). I decided to perform it at hyperparameter value of 0.5 from the default value 1 to give equal weight on testing and training data, but this C value can be tuned (111-114). 
-18. Decision Tree Classification was done according to (115-117). A customized correlation matrix was displayed for better visualization (118-127). The model accuracy score and F1 score were printed out as usual.
-19. Next, I performed Support Vector Machine Classifier as shown by (1, 128-132). I printed the classification report and interpreted the results according to (133-134). The model accuracy score and F1 score were printed out as well.
-20. For Random Forest, I performed the analysis using examples shown by (135-146). A Confusion Matrix was displayed and model accuracy score and F1 score were printed out in the terminal output.
-21. The last analysis done was Naïve Bayes Classifier using Gaussian Naïve Bayes (147-155). Lastly, I printed out the accuracy score and F1 score using the print format as shown in (156-157).
+16. For k-Nearest Neighbor Classifier, I performed the analysis in a range of 7 to 10 (86-90). I kept the number small to prevent overfitting because there are only 3 species in the dataset (91-101). According to the accuracy score results, k=7 is enough to get a very high score on the model. I printed out the accuracy score using the print format as shown in (102-104). An F1 score was added as an extra performance measure (105-106).
+17. Logistic Regression was performed as shown in (107-111). I decided to perform it at hyperparameter value of 0.5 from the default value 1 to give equal weight on testing and training data, but this C value can be tuned (112-115). 
+18. Decision Tree Classification was done according to (116-118). A customized correlation matrix was displayed for better visualization (119-128). The model accuracy score and F1 score were printed out as usual.
+19. Next, I performed Support Vector Machine Classifier as shown by (1, 129-135). I printed the classification report and interpreted the results according to (136-137). The model accuracy score and F1 score were printed out as well.
+20. For Random Forest, I performed the analysis using examples shown by (138-148). A Confusion Matrix was displayed and model accuracy score and F1 score were printed out in the terminal output.
+21. The last analysis done was Naïve Bayes Classifier using Gaussian Naïve Bayes (149-157). Lastly, I printed out the accuracy score and F1 score using the print format as shown in (158-159).
 
 ### Conclusion:
 A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were two types of Pearson Correlations, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
@@ -155,60 +155,60 @@ A program that outputs a summary of each variable to a single text file, saves a
 103. https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-python-string-formatting
 104. https://www.geeksforgeeks.org/difference-between-s-and-d-in-python-string/
 105. https://machinelearningmastery.com/classification-accuracy-is-not-enough-more-performance-measures-you-can-use/
-106. https://towardsdatascience.com/grid-search-for-model-tuning-3319b259367e
-107. https://www.codingninjas.com/codestudio/library/applying-logistic-regression-on-iris-dataset
-108. https://scikit-learn.org/stable/auto_examples/linear_model/plot_iris_logistic.html
-109. https://www.kaggle.com/code/rahulrajpandey31/logistic-regression-from-scratch-iris-data-set/notebook
-110. https://www.aifinesse.com/logistic-regression/logistic-regression-example-iris/
-111. https://stackoverflow.com/questions/67513075/what-is-c-parameter-in-sklearn-logistic-regression
-112. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-scikit-learn-logistic-regression-exercise-3.php
-113. https://www.kaggle.com/code/joparga3/2-tuning-parameters-for-logistic-regression
-114. https://towardsdatascience.com/calculating-and-setting-thresholds-to-optimise-logistic-regression-performance-c77e6d112d7e
-115. https://thatascience.com/learn-machine-learning/build-decision-tree/
-116. https://www.kaggle.com/code/adityabhat24/iris-data-analysis-and-machine-learning-python
-117. https://www.datacamp.com/tutorial/decision-tree-classification-python
-118. https://onestopdataanalysis.com/confusion-matrix-python/
-119. https://medium.com/@dtuk81/confusion-matrix-visualization-fc31e3f30fea
-120. https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ConfusionMatrixDisplay.html#sklearn.metrics.ConfusionMatrixDisplay.from_estimator
-121. https://www.analyticsvidhya.com/blog/2021/06/confusion-matrix-for-multi-class-classification/
-122. https://towardsdatascience.com/confusion-matrix-for-your-multi-class-machine-learning-model-ff9aa3bf7826
-123. https://towardsdatascience.com/multi-class-classification-extracting-performance-metrics-from-the-confusion-matrix-b379b427a872
-124. https://www.v7labs.com/blog/confusion-matrix-guide
-125. https://stackoverflow.com/questions/61016110/plot-multiple-confusion-matrices-with-plot-confusion-matrix
-126. https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
-127. https://matplotlib.org/stable/gallery/images_contours_and_fields/pcolor_demo.html#sphx-glr-gallery-images-contours-and-fields-pcolor-demo-py
-128. https://aylien.com/blog/support-vector-machines-for-dummies-a-simple-explanation
-129. https://thatascience.com/learn-machine-learning/build-svm/
-130. https://www.kaggle.com/code/adityabhat24/iris-data-analysis-and-machine-learning-python
-131. https://medium.com/@pinnzonandres/iris-classification-with-svm-on-python-c1b6e833522c
-132. https://www.pycodemates.com/2022/10/classification-of-iris-dataset-using-SVM-in-python.html
-131. https://scikit-learn.org/stable/auto_examples/svm/plot_iris_svc.html
-132. https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
-133. https://www.statology.org/sklearn-classification-report/
-134. https://towardsdatascience.com/classification-basics-walk-through-with-the-iris-data-set-d46b0331bf82
-135. https://www.kaggle.com/code/tcvieira/simple-random-forest-iris-dataset/notebook
-136. https://medium.com/edviconedu/random-forest-algorithm-to-classify-iris-flower-datasets-in-google-colab-b0652a8a8a66
-137. https://www.blopig.com/blog/2017/07/using-random-forests-in-python-with-scikit-learn/
-138. https://leandeep.com/datalab-own/Iris-Machine-Learning-Notebook.html
-139. https://www.blopig.com/blog/2017/07/using-random-forests-in-python-with-scikit-learn/
-140. https://www.aifinesse.com/random-forest/random-forest-example-iris/
-141. https://medium.com/edviconedu/random-forest-algorithm-to-classify-iris-flower-datasets-in-google-colab-b0652a8a8a66
-142. https://towardsdatascience.com/random-forest-classification-678e551462f5
-143. https://www.kaggle.com/code/sonalisingh1411/random-forest-algorithm-on-iris-data/notebook
-144. https://www.kaggle.com/code/tcvieira/simple-random-forest-iris-dataset/notebook
-145. https://www.geeksforgeeks.org/random-forest-classifier-using-scikit-learn/
-146. https://towardsdatascience.com/random-forest-explained-6b4849d56a2f
-147. https://www.kaggle.com/code/vinayshaw/iris-species-100-accuracy-using-naive-bayes
-148. https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html
-149. https://towardsdatascience.com/machine-learning-basics-naive-bayes-classification-964af6f2a965
-150. https://github.com/sixteenpython/Naive-Bayes/blob/master/machine-learning-with-iris-dataset.ipynb
-151. https://soumenatta.medium.com/exploring-the-naive-bayes-classifier-algorithm-with-iris-dataset-in-python-372f5a107120
-152. https://holypython.com/nbc/naive-bayes-classifier-simple-implementation/
-153. https://www.kaggle.com/code/bansodesandeep/in-detail-naive-bayes-algorithm-iris-dataset
-154. https://www.analyticsvidhya.com/blog/2022/03/gaussian-naive-bayes-algorithm-for-credit-risk-modelling/
-155. https://www.kaggle.com/code/heng8835/iris-classification-with-machine-learning-basics
-156. https://thepythonguru.com/python-string-formatting/
-157. https://www.freecodecamp.org/news/2f-in-python-what-does-it-mean/
+106. https://towardsdatascience.com/micro-macro-weighted-averages-of-f1-score-clearly-explained-b603420b292f
+107. https://towardsdatascience.com/grid-search-for-model-tuning-3319b259367e
+108. https://www.codingninjas.com/codestudio/library/applying-logistic-regression-on-iris-dataset
+109. https://scikit-learn.org/stable/auto_examples/linear_model/plot_iris_logistic.html
+110. https://www.kaggle.com/code/rahulrajpandey31/logistic-regression-from-scratch-iris-data-set/notebook
+111. https://www.aifinesse.com/logistic-regression/logistic-regression-example-iris/
+112. https://stackoverflow.com/questions/67513075/what-is-c-parameter-in-sklearn-logistic-regression
+113. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-scikit-learn-logistic-regression-exercise-3.php
+114. https://www.kaggle.com/code/joparga3/2-tuning-parameters-for-logistic-regression
+115. https://towardsdatascience.com/calculating-and-setting-thresholds-to-optimise-logistic-regression-performance-c77e6d112d7e
+116. https://thatascience.com/learn-machine-learning/build-decision-tree/
+117. https://www.kaggle.com/code/adityabhat24/iris-data-analysis-and-machine-learning-python
+118. https://www.datacamp.com/tutorial/decision-tree-classification-python
+119. https://onestopdataanalysis.com/confusion-matrix-python/
+120. https://medium.com/@dtuk81/confusion-matrix-visualization-fc31e3f30fea
+121. https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ConfusionMatrixDisplay.html#sklearn.metrics.ConfusionMatrixDisplay.from_estimator
+122. https://www.analyticsvidhya.com/blog/2021/06/confusion-matrix-for-multi-class-classification/
+123. https://towardsdatascience.com/confusion-matrix-for-your-multi-class-machine-learning-model-ff9aa3bf7826
+124. https://towardsdatascience.com/multi-class-classification-extracting-performance-metrics-from-the-confusion-matrix-b379b427a872
+125. https://www.v7labs.com/blog/confusion-matrix-guide
+126. https://stackoverflow.com/questions/61016110/plot-multiple-confusion-matrices-with-plot-confusion-matrix
+127. https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html
+128. https://matplotlib.org/stable/gallery/images_contours_and_fields/pcolor_demo.html#sphx-glr-gallery-images-contours-and-fields-pcolor-demo-py
+129. https://aylien.com/blog/support-vector-machines-for-dummies-a-simple-explanation
+130. https://thatascience.com/learn-machine-learning/build-svm/
+131. https://www.kaggle.com/code/adityabhat24/iris-data-analysis-and-machine-learning-python
+132. https://medium.com/@pinnzonandres/iris-classification-with-svm-on-python-c1b6e833522c
+133. https://www.pycodemates.com/2022/10/classification-of-iris-dataset-using-SVM-in-python.html
+134. https://scikit-learn.org/stable/auto_examples/svm/plot_iris_svc.html
+135. https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
+136. https://www.statology.org/sklearn-classification-report/
+137. https://towardsdatascience.com/classification-basics-walk-through-with-the-iris-data-set-d46b0331bf82
+138. https://www.kaggle.com/code/tcvieira/simple-random-forest-iris-dataset/notebook
+139. https://medium.com/edviconedu/random-forest-algorithm-to-classify-iris-flower-datasets-in-google-colab-b0652a8a8a66
+140. https://www.blopig.com/blog/2017/07/using-random-forests-in-python-with-scikit-learn/
+141. https://leandeep.com/datalab-own/Iris-Machine-Learning-Notebook.html
+142. https://www.blopig.com/blog/2017/07/using-random-forests-in-python-with-scikit-learn/
+143. https://www.aifinesse.com/random-forest/random-forest-example-iris/
+144. https://medium.com/edviconedu/random-forest-algorithm-to-classify-iris-flower-datasets-in-google-colab-b0652a8a8a66
+145. https://towardsdatascience.com/random-forest-classification-678e551462f5
+146. https://www.kaggle.com/code/sonalisingh1411/random-forest-algorithm-on-iris-data/notebook
+147. https://www.geeksforgeeks.org/random-forest-classifier-using-scikit-learn/
+148. https://towardsdatascience.com/random-forest-explained-6b4849d56a2f
+149. https://www.kaggle.com/code/vinayshaw/iris-species-100-accuracy-using-naive-bayes
+150. https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html
+151. https://towardsdatascience.com/machine-learning-basics-naive-bayes-classification-964af6f2a965
+152. https://github.com/sixteenpython/Naive-Bayes/blob/master/machine-learning-with-iris-dataset.ipynb
+153. https://soumenatta.medium.com/exploring-the-naive-bayes-classifier-algorithm-with-iris-dataset-in-python-372f5a107120
+154. https://holypython.com/nbc/naive-bayes-classifier-simple-implementation/
+155. https://www.kaggle.com/code/bansodesandeep/in-detail-naive-bayes-algorithm-iris-dataset
+156. https://www.analyticsvidhya.com/blog/2022/03/gaussian-naive-bayes-algorithm-for-credit-risk-modelling/
+157. https://www.kaggle.com/code/heng8835/iris-classification-with-machine-learning-basics
+158. https://thepythonguru.com/python-string-formatting/
+159. https://www.freecodecamp.org/news/2f-in-python-what-does-it-mean/
 
 
 
