@@ -38,13 +38,13 @@ This data can be used to develop Interactive Identification Keys for future taxo
 12. The second Pearson Correlation analysis was done by species group, to better understand which attributes are highly correlated within each species. This was done using df.groupby class with Iris species (66-68). The results were printed in the terminal. I found that this method offers more information than doing correlation on attributes for all three species grouped together.
 13. For another data visualization, I created a Seaborn Box Plot (69-71) and added a Seaborn Jitter Plot over it (72-74). The grid arrangement for the subplots followed that of (75-76). The super title was added as usual and plt.show displayed the plot.
 14. I also created a Seaborn Violin Plot for each variable in a 1x4 grid (77-80) as another data visualization method. 
-15. In preparation for basic machine learning analysis, split the data into training (80%) and testing (20%) to detect overfitting, and later, the testing dataset will be used to check the accuracy of the model (81-85). While most ML examples available uses only 2 variables (sepal length and width only or petal length and width only) to simplify analysis, I used all 4 variables because the best determinants are still unknown at this point (whether sepal or petal attribute is better than the other).
-16. k-Nearest Neighbor Classifier
-17. Logistic Regression
-18. Decision Tree Classification
-19. Support Vector Machine
-20. Random Forest
-21. Naïve Bayes Classifier using Gaussian Naïve Bayes
+15. In preparation for basic machine learning analysis, split the data into training (80%) and testing (20%) to detect overfitting, and later, the testing dataset will be used to check the accuracy of the model (81-85). While most ML examples available uses only 2 variables (sepal length and width only or petal length and width only) to simplify analysis, I decided to use all 4 variables because the best determinants are still unknown at this point (whether sepal or petal attribute is better than the other).
+16. For k-Nearest Neighbor Classifier, I performed the analysis in a range of 7 to 10 (86-90). I kept the number small to prevent overfitting because there are only 3 species (91-101). According to the accuracy score results, k=7 is enough to get a very high score on the model. I printed out the accuracy score using the format as shown in (102-104).
+17. For Logistic Regression, 
+18. For Decision Tree Classification
+19. For Support Vector Machine
+20. For Random Forest
+21. The last analysis done was Naïve Bayes Classifier using Gaussian Naïve Bayes
 
 ### Conclusion:
 A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were two types of Pearson Correlations, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
@@ -135,6 +135,25 @@ A program that outputs a summary of each variable to a single text file, saves a
 83. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-3.php
 84. https://stackoverflow.com/questions/37512079/python-pandas-why-does-df-iloc-1-values-for-my-training-data-select-till
 85. https://www.shanelynn.ie/pandas-iloc-loc-select-rows-and-columns-dataframe/
+86. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-5.php
+87. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-6.php
+88. https://www.w3resource.com/machine-learning/scikit-learn/iris/python-machine-learning-k-nearest-neighbors-algorithm-exercise-7.php
+89. https://deepchecks.com/how-to-check-the-accuracy-of-your-machine-learning-model/
+90. https://numpy.org/doc/stable/reference/generated/numpy.arange.html
+91. https://numpy.org/doc/stable/reference/generated/numpy.arange.html
+92. https://thatascience.com/learn-machine-learning/iris-dataset/
+93. https://thatascience.com/learn-machine-learning/build-knearestneighbors/
+94. https://towardsdatascience.com/knn-using-scikit-learn-c6bed765be75
+95. https://scikit-learn.org/stable/modules/neighbors.html
+96. https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html#sphx-glr-auto-examples-neighbors-plot-classification-py
+97. https://vitalflux.com/k-nearest-neighbors-explained-with-python-examples/
+98. https://rstudio-pubs-static.s3.amazonaws.com/369869_fe1a8a1a1b1c4145b5b6f22b96df8345.html
+99. https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
+100. https://deepnote.com/@ndungu/Implementing-KNN-Algorithm-on-the-Iris-Dataset-e7c16493-500c-4248-be54-9389de603f16
+101. https://www.datacamp.com/tutorial/introduction-machine-learning-python
+102. https://www.edureka.co/community/162168/what-the-difference-between-and-in-python-string-formatting
+103. https://stackoverflow.com/questions/4288973/whats-the-difference-between-s-and-d-in-python-string-formatting
+104. https://www.geeksforgeeks.org/difference-between-s-and-d-in-python-string/
 
 
 

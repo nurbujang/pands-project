@@ -237,7 +237,7 @@ for i in range(0,len(columns)-1):
 # Where:
 # for i in range can be translated to: for item in columns 1 to 4
 # seaborn violinplot, x-axis is Iris species, y is each column name, data is iris dataframe
-# axis the object to draw the plot into, in this case, the columns
+# ax the object to draw the plot into, in this case, the columns
 # axs[i].set_ylabel(columns[i]) means each column list i is set as the y-axis label
 plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15) # customize the figure's super title
@@ -258,14 +258,14 @@ I used all 4 variables because the best determinants are still unknown at this p
 
 X = df.iloc[:, :-1].values # everything up until the last column but not including the last column (Iris species) 
 y = df.iloc[:, 4].values # = [:, -1],  get all the rows in the last/5th column (target variable (Iris species) into labels (y))
-print('\nDataset shape before Train-Test split is',X.shape, y.shape)  # print out the shape (number of rows and columns) before the data split
-# split the dataset into training (80%) and testing (20%)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42)
-# random_state is the seed of randomness to help reproduce the same results everytime
-# display the shape and label of training and testing set
-print('\nTrain-test split for evaluating Machine Learning algorithms is',X_train.shape, X_test.shape, y_train.shape, y_test.shape) 
-# print out the shape (number of rows and columns) of test and train data in terminal output
+print('\nDataset shape before Train-Test split is',X.shape, y.shape)  
+# print out the shape (number of rows and columns) AFTER the data split
+X_train, X_test, y_train, y_test = train_test_split( 
+    X, y, test_size=0.2, random_state=42) # split the dataset into training (80%) and testing (20%)
+# test size is 20%, meaning training size is 80%
+# random_state is the seed of randomness to help reproduce the same results everytime. It can be any number, really.
+print('\nDataset shape after Train-test split is',X_train.shape, X_test.shape, y_train.shape, y_test.shape) 
+# print out the shape (number of rows and columns) of test and train data AFTER split in terminal output
 
 '''
 4.5 kNN Classifier
@@ -273,13 +273,15 @@ used for regression and classification
 kNN calculates the distance between the data points and predict the correct species class for the datapoint
 where k = number of neighbors/points closest to the test data
 '''
-for i in np.arange(7, 10):
-    knn = KNeighborsClassifier(n_neighbors=i)
-    knn.fit(X_train, y_train)
+for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at 10
+# keep k small because there are only 3 species, to prevent overfitting
+    knn = KNeighborsClassifier(n_neighbors=i) # number of neighbors range from 7-10
+    knn.fit(X_train, y_train) # fits the model to the training set
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
-          y_test)*100)  # Calculate the accuracy of the model using testing dataset
-          # keep k small because there are only 3 species, to prevent overfitting
-
+          y_test)*100)  # Calculate the accuracy of the model using testing dataset ranging (from 7-10)*100 
+# %d is a placeholder for a number, %s is for string
+# % on its own means the values of each i in 7-10 range are then passed in through a tuple using the % operator
+      
 '''
 4.6 Logistic Regression
 To estimate the relationship between 1 dependent variable and 1 or more independent variables
@@ -395,7 +397,7 @@ f1 = f1_score(y_test,y_pred_gs,average='micro')
 print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs))
 print('\nConfusion matrix for Naive Bayes\n',cm)
 # Accuracy score using testing dataset
-print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point
-print('Naive-Bayes model F1 score is %.3f' %f1) # .3f is float with 3 decimal points
-
+print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point of the accuracy value
+print('Naive-Bayes model F1 score is %.3f' %f1) # .3f is float with 3 decimal points of the f1 value
+# %.1f and %.3f are format specifiers. They begin with %, then followed by character that represents the data type, which is a float
 
