@@ -58,15 +58,15 @@ df.info()  # print out in terminal output the basic information about the datafr
 # 4 float datatypes and 1 object
 
 # get number of missing values in each column
-df.isnull().sum()
+df.isnull().sum() # sum of null values in the dataset
 print ('\nThe number of missing value\n',df.isnull().sum()) # print out number of missing values
 # OR
-# df.isna().sum()
+# df.isna().sum() # sum of na values
 # print(df.isna().sum()) # print out number of missing values
 
-df.drop_duplicates() # remove duplicates
-print('\nData shape after duplicate removal is',df.drop_duplicates().shape)  # print out remove duplicates
-# output: 150 lines remain, no duplicates exist --x wrong code on line 51
+df.drop_duplicates() # remove duplicates from the dataset
+print('\nData shape after duplicate removal is',df.drop_duplicates().shape)  # print out the shape of the dataset after duplicate removal
+# output: 147 rows, 5 columns, meaning 3 rows were removed
 
 '''
 Question 1. SUMMARY into text file, containing basic statistical analysis
@@ -88,8 +88,9 @@ Question 2. DATA VISUALISATION: Histogram of each variable into png file
 '''
 sns.set(style="whitegrid")  # set background
 # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # create a figure containing multiple axes
-# set subplot arrangement (2 by 2) and figure size (width and height)
+fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # create a figure containing subplots with multiple axes 
+# set subplot arrangement in 2 directions (2D grid) (2 by 2) 
+# set figure size (width and height)
 sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
              kde=True, color="olive", ax=axs[0, 0]) # subplot location first row, first column
 # Where:
@@ -119,7 +120,7 @@ Question 3. DATA VISUALISATION: Scatter plot of each pair of variables
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
-pp = sns.pairplot(df, hue='Iris species', markers=[
+pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pairplot called pp
                   "o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws': {'color': 'blue'}})
 # Where:
 # dataset used was df
@@ -143,7 +144,7 @@ plt.show()  # show plot
 
 '''
 Question 4. OTHER ANALYSIS:
-Exploratory data analysis (visual techniques to detect outliers, trends/pattern) and Basic Machine Learning analysis
+Data visualization to detect outliers, trends/pattern and Basic Machine Learning analysis
 '''
 
 '''
@@ -166,10 +167,10 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 
 # build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
-fig, ax = plt.subplots(figsize=(9, 6)) # create a figure containing a single axis
+fig, ax = plt.subplots(figsize=(9, 6)) # create 1 figure and a single axis
 fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
-h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1,
+hm = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1, # create a seaborn heatmap called hm
                 linecolor='yellow', cbar_kws={'label': 'Range', 'shrink': 0.9})  # customize heatmap
 # Where:
 # annot=True: if True, the data value in each cell will be displayed
@@ -178,10 +179,10 @@ h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidth
 # linewidth is the width of lines separating each cell and the color is yellow
 # I passed arguments into the color bar to show Range as label and shrank it to 0.9 times the original size
 # default color bar is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
-h.set_xticklabels(h.get_xticklabels(), rotation=0, fontsize=10)
+hm.set_xticklabels(hm.get_xticklabels(), rotation=0, fontsize=10)
 # set the label for x-axis to follow each column name
 # rotation sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
-h.set_yticklabels(h.get_yticklabels(), rotation=0, fontsize=10)
+hm.set_yticklabels(hm.get_yticklabels(), rotation=0, fontsize=10)
 # set the label for y axis to follow each column name
 # rotation sets the yticks "upright" in any figure size
 plt.show()  # show plot
@@ -190,7 +191,7 @@ plt.show()  # show plot
 
 '''
 4.2 If I group by species:
-to get more insights on which attributes are highly correlated for each species:
+to get more insights on which attributes are highly correlated for each Iris species:
 '''
 df.groupby("Iris species").corr(method="pearson") # Pearson Correlation, but grouped by class
 print('\nPearson Correlation by species\n',df.groupby("Iris species").corr(method="pearson")) # print as terminal output
@@ -204,25 +205,26 @@ print('\nPearson Correlation by species\n',df.groupby("Iris species").corr(metho
 to display data point distribution/spread, skewness, variance and outliers
 shows the minimum, first quartile, median, third quartile and maximum
 '''
-def graph(y):  # define graph of Iris species as y axis
-    sns.boxplot(x="Iris species", y=y, data=df) # seaborn boxplot
-# x-axis is Iris species, y-axis is y and the data used is the iris dataframe
+def graph(y):  # define a graph function of y axis
+    sns.boxplot(x="Iris species", y=y, data=df) # seaborn boxplot, with Iris species on x-axis
+# on x-axis is Iris species, on y-axis is y (attributes) and the data used is the iris dataframe
     sns.stripplot(x="Iris species", y=y, data=df, # added a seaborn stripplot/jitter plot over the boxplot
-                  jitter=True, edgecolor="gray", alpha=0.35)
+                  jitter=True, edgecolor="red", alpha=0.35, linewidth=1)
 # Where:
+# on x-axis is Iris species, on y-axis is y (attributes) and the data used is the iris dataframe
 # jitter=True will display the dots (jitter)
-# the edgecolor of the jitter is gray for look clearer
+# the edgecolor of the jitter/dots is red to make the dots look clearer
+# linewidth is width of line around the dots, it has to be set to >0 to be visible
 # set transparency (alpha) to 0.35 so it is not too opaque
 plt.figure(figsize=(10, 10))
 plt.subplot(221)  # grid position top left (2 rows, 2 columns, first top)
-graph('Sepal length (cm)')
+graph('Sepal length (cm)') # y-axis is Sepal length (cm)
 plt.subplot(222)  # grid position top right (2 rows, 2 columns, second top)
-graph('Sepal width (cm)')
+graph('Sepal width (cm)') # y-axis is Sepal width (cm)
 plt.subplot(223)  # grid position bottom left (2 rows, 2 columns, first bottom)
-graph('Petal length (cm)')
-# grid position bottom right (2 rows, 2 columns, second bottom)
-plt.subplot(224)
-graph('Petal width (cm)')
+graph('Petal length (cm)') # y-axis is Petal length (cm)
+plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
+graph('Petal width (cm)') # y-axis is Petal width (cm)
 plt.suptitle('Box Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15) # customize the figure's super title
 plt.show()  # show plot
@@ -236,8 +238,8 @@ plt.show()  # show plot
 to give more insight into data distribution and density on the y-axis
 it contains all data points, unlike the box plot which shows minimum, first quartile, median, third quartile and maximum and error bars
 '''
-fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) # create a figure containing multiple axes
-# plot the subplots in 1 row of 4 subplots
+fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) # create a figure containing subplots with multiple axes 
+# plot the subplots in 1 row of 4 subplots (stacked in 1 direction only, but still use axs because each has their own axes)
 # length -1 means all columns (5) -1 = 4 columns
 # set the figure size to 20 width and 5 height
 for i in range(0,len(columns)-1): 
