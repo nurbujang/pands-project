@@ -49,9 +49,13 @@ print('\nThe number of rows for each Iris species\n',df.value_counts("Iris speci
 
 # basic info about the dataset, column numbers, data types, non-null values
 # can also be used to see of there are missing values from the number of non-null values
-# df.info()  # commented out because it will  print out in terminal
-print(df.info()) # call to print in terminal output the basic information about the dataframe
-# Output: RangeIndex: 150 entries, 0 to 149, 5 data columns and number of non-null values (data that is not missing), 4 float datatypes and 1 object
+df.info()  # print out in terminal output the basic information about the dataframe
+# print(df.info()) # commented out because I don't want to print it twice
+# Output: 
+# It is a dataframe
+# 150 rows, 0 to 149, 5 data columns and column names
+# number of non-null values (data that is not missing) in each column
+# 4 float datatypes and 1 object
 
 # get number of missing values in each column
 df.isnull().sum()
