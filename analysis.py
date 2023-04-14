@@ -167,7 +167,7 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 
 # build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
-fig, ax = plt.subplots(figsize=(9, 6)) # create 1 figure and a single axis
+fig, ax = plt.subplots(figsize=(9, 6)) # create 1 figure and a single axes
 fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
 hm = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1, # create a seaborn heatmap called hm
