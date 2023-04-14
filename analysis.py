@@ -49,9 +49,9 @@ print('\nThe number of rows for each Iris species\n',df.value_counts("Iris speci
 
 # basic info about the dataset, column numbers, data types, non-null values
 # can also be used to see of there are missing values from the number of non-null values
-df.info()  # basic information about the dataframe
-print(df.info()) # print out data info
-# Output: RangeIndex: 150 entries, 0 to 149
+# df.info()  # commented out because it will  print out in terminal
+print(df.info()) # call to print in terminal output the basic information about the dataframe
+# Output: RangeIndex: 150 entries, 0 to 149, 5 data columns and number of non-null values (data that is not missing), 4 float datatypes and 1 object
 
 # get number of missing values in each column
 df.isnull().sum()
@@ -84,7 +84,8 @@ Question 2. DATA VISUALISATION: Histogram of each variable into png file
 '''
 sns.set(style="whitegrid")  # set background
 # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # set subplot arrangement (2 by 2) and figure size (width and height)
+fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # create a figure containing multiple axes
+# set subplot arrangement (2 by 2) and figure size (width and height)
 sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
              kde=True, color="olive", ax=axs[0, 0]) # subplot location first row, first column
 # Where:
@@ -128,7 +129,7 @@ pp = sns.pairplot(df, hue='Iris species', markers=[
 plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15) # customize figure's super title, default black in bold, fontsize 15
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
-# shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
+# fig.subplots_adjust shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
 # this was done to show the supertitle properly
 plt.show()  # show plot
 # Results:
@@ -146,7 +147,8 @@ Exploratory data analysis (visual techniques to detect outliers, trends/pattern)
 to determine the degree/strength of linear relationship between 2 continuous variables
 correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
-corr = df.corr(method="pearson")  # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
+corr = df.corr(method="pearson")  # create/instantiate an object called corr 
+# default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper triangle for better readibility
 # Numpy tril function to extract lower triangle or triu to extract upper triangle
 # np.ones returns an array of 1 to create a boolean matrix with the same size as the correlation matrix
@@ -160,7 +162,7 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 
 # build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
-fig, ax = plt.subplots(figsize=(9, 6))
+fig, ax = plt.subplots(figsize=(9, 6)) # create a figure containing a single axis
 fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
 h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1,
@@ -173,9 +175,11 @@ h = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidth
 # I passed arguments into the color bar to show Range as label and shrank it to 0.9 times the original size
 # default color bar is vertical, but to move it to the bottom, just add 'orientation': 'horizontal' to cbar argument
 h.set_xticklabels(h.get_xticklabels(), rotation=0, fontsize=10)
-# This sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
+# set the label for x-axis to follow each column name
+# rotation sets the xticks "upright" as opposed to sideways in any figure size, just to read easier
 h.set_yticklabels(h.get_yticklabels(), rotation=0, fontsize=10)
-# This sets the yticks "upright" in any figure size
+# set the label for y axis to follow each column name
+# rotation sets the yticks "upright" in any figure size
 plt.show()  # show plot
 # Results:
 # Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
@@ -184,7 +188,7 @@ plt.show()  # show plot
 4.2 If I group by species:
 to get more insights on which attributes are highly correlated for each species:
 '''
-df.groupby("Iris species").corr(method="pearson") # grouped by class
+df.groupby("Iris species").corr(method="pearson") # Pearson Correlation, but grouped by class
 print('\nPearson Correlation by species\n',df.groupby("Iris species").corr(method="pearson")) # print as terminal output
 # Results:
 # Iris setosa: high correlation between Sepal length & Sepal width
@@ -228,9 +232,9 @@ plt.show()  # show plot
 to give more insight into data distribution and density on the y-axis
 it contains all data points, unlike the box plot which shows minimum, first quartile, median, third quartile and maximum and error bars
 '''
-fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) 
+fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) # create a figure containing multiple axes
 # plot the subplots in 1 row of 4 subplots
-# length -1 means all columns minus one is equal to 4 columns (5-1=4)
+# length -1 means all columns (5) -1 = 4 columns
 # set the figure size to 20 width and 5 height
 for i in range(0,len(columns)-1): 
     sns.violinplot(x='Iris species', y=df[columns[i]], data=df, ax=axs[i])
