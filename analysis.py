@@ -152,7 +152,7 @@ Data visualization to detect outliers, trends/pattern and Basic Machine Learning
 to determine the degree/strength of linear relationship between 2 continuous variables
 correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
-corr = df.corr(method="pearson")  # create/instantiate a corr method and call corr 
+corr = df.corr(method="pearson")  # instantiate a corr method and call corr 
 # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper triangle for better readibility
 # Numpy tril function to extract lower triangle or triu to extract upper triangle
