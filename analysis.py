@@ -289,7 +289,7 @@ for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at
     knn = KNeighborsClassifier(n_neighbors=i) # instantiate a class and name it knn
     # number of neighbors range from 7-10
     knn.fit(X_train, y_train) # fits the model to the training set
-    y_pred_knn = knn.predict(X_test) # Predict the model using the test dataset
+    y_pred_knn = knn.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_knn
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
           y_test)*100)  # Calculate and print the accuracy of the model using testing dataset ranging (from 7-10)*100 
 # %d is a placeholder for a number, %s is for string
@@ -315,7 +315,7 @@ lr = LogisticRegression(C=0.5, random_state=42)  # instantiate a class and name 
 # random_state is the seed of randomness to help get the same results everytime. It can be any number
 lr.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with target values that we already have (y_test)
-y_pred_lr = lr.predict(X_test) # Predict the model using the test dataset
+y_pred_lr = lr.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_lr
 print('\nLogistic Regression model accuracy is',
       accuracy_score(y_test, y_pred_lr) * 100) # print accuracy score * 100
 # Model accuracy score is how many times the model makes correct predictions over the total number of predictions
@@ -333,9 +333,9 @@ to eventually form a tree structure with decision nodes and leaf nodes
 dtclassifier = DecisionTreeClassifier(random_state=42) # instantiate a class and name it dtclassifier
 dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer model
 # Predict the response for test dataset
-y_pred_dt = dtclassifier.predict(X_test) # Predict the model using the test dataset
+y_pred_dt = dtclassifier.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_dt
 # Evaluate the model using testing dataset
-disp = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
+dispdt = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test) # instantiate a ConfusionMatrixDisplay class and from_estimator method and call it dispdt
 # Confusion matrix contains Actual values of Positive(1) and Negative(0) on the x-axis and Predicted values of Positive(1) and Negative(0) on the y-axis
 # CM for iris contains Actual setosa, versicolor, virginica on the x-axis and Predicted setosa, versicolor, virginica on the y-axis
 # True Positive = the actual and predicted value should be the same = 10
@@ -365,7 +365,7 @@ and then create the best boundary to separate data into classes by creating a hy
 '''
 svclassifier = SVC() # instantiate a class and name it svclassifier
 svclassifier.fit(X_train, y_train) # train the model
-y_pred_svc = svclassifier.predict(X_test)  # Predict the model using the test dataset
+y_pred_svc = svclassifier.predict(X_test)  # instantiate a predict method using the test dataset and call it y_pred_svc
 print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc)) # print out classification report in terminal output
 # Classification report results:
 # Precision = Ratio of True Positive : (True Positive + False Positive. So, setosa (10/10=1), versicolor (9/9=1), virginica (11/11=1)
@@ -391,9 +391,9 @@ each tree picks the features randomly, making it possible to find which features
 rf = RandomForestClassifier(n_estimators=10, n_jobs=-1) # instantiate a class and name it rf
 rf.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with the target values that we already have (y_test)
-y_pred_rf = rf.predict(X_test) # Predict the model using the test dataset
+y_pred_rf = rf.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_rf
 # Random Forest visualization using confusion matrix
-disp= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
+disprf= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test) # instantiate a ConfusionMatrixDisplay class and from_estimator method and call it disprf
 plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species',
              fontweight='bold', size=10) # customize super title
 plt.grid(False) # eliminate white grid within the confusion matrix
@@ -413,11 +413,11 @@ I used Gaussian because data is continuous, and assumed to be normally-distribut
 '''
 gaussian = GaussianNB() # instantiate a class and name it gaussian
 gaussian.fit(X_train, y_train) # train the model
-y_pred_gs = gaussian.predict(X_test) # Predict the model using the test dataset
-cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix
-accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score
+y_pred_gs = gaussian.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_gs
+cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix function and call it cm
+accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score function and call it accuracy
 # multiply by 100 here because it is too complicated to do so in the print format
-f1 = f1_score(y_test,y_pred_gs,average='micro') # instantiate an object and name it f1
+f1 = f1_score(y_test,y_pred_gs,average='micro') # instantiate an f1 score function and name it f1
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs)) # print Classification Report in terminal output
 print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in terminal output
