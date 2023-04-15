@@ -43,7 +43,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 17. Logistic Regression was performed as shown in (107-111). I decided to perform it at hyperparameter value of 0.5 from the default value 1 to give equal weight on testing and training data, but this C value can be tuned (112-115). 
 18. Decision Tree Classifier was done according to (116-118). A customized correlation matrix was displayed for better visualization (119-128). The model accuracy score and F1 score were printed out as usual.
 19. Next, I performed Support Vector Machine Classifier as shown by (1, 129-135). I printed the classification report and interpreted the results according to (136-137). The model accuracy score and F1 score were printed out as well.
-20. For Random Forest, I performed the analysis using examples shown by (138-148). A Confusion Matrix was displayed and model accuracy score and F1 score were printed out in the terminal output.
+20. For Random Forest Classifier, I performed the analysis using examples shown by (138-148). A Confusion Matrix was displayed and model accuracy score and F1 score were printed out in the terminal output.
 21. The last analysis done was Naïve Bayes Classifier using Gaussian Naïve Bayes (149-157). Lastly, I printed out the accuracy score and F1 score using the print format as shown in (158-159).
 
 ### Conclusion:
