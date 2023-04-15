@@ -295,9 +295,9 @@ for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at
 # %d is a placeholder for a number, %s is for string
 # % on its own means the values of each i in 7-10 range are then passed in through a tuple using the % operator
     print("k-Nearest Neighbor F1 score for k = %d F1 score is" % i, f1_score(y_test, y_pred_knn, average='micro'))  
-    # Calculate and print the F1 score the model using testing dataset ranging (from 7-10)*100 
-    # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
-    # Other averaging methods are macro (meaning it is calculated using regular/unweighted mean) and weighted (takes into account each class's support)
+# Calculate and print the F1 score the model using testing dataset ranging (from 7-10)*100 
+# Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
+# Other averaging methods are macro (meaning it is calculated using regular/unweighted mean) and weighted (takes into account each class's support)
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
 # F1 combines precision (% of correct predictions) and recall (proportion of correct predictions over total occurences)
       
@@ -342,9 +342,10 @@ disp = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
 # True Negative = 9+0+0+11 = 20
 # False Positive = 0+0 (across) = 0
 # False Negative = 0+0 (down) = 0
-plt.grid(False) # eliminate white grid within the confusion matrix
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=10)
+             fontweight='bold', size=10) # customize super title
+plt.grid(False) # eliminate white grid within the confusion matrix
+plt.show() # display Confusion Matrix
 print('\nDecision Tree Classification model accuracy is',
       accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score *100
 print('Decision Tree Classification model F1 score is',
@@ -354,7 +355,7 @@ print('Decision Tree Classification model F1 score is',
 # F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
 # that is, F1 = how many times it makes a correct prediction in the whole dataset
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
-plt.show()
+
 
 '''
 4.8 Support Vector Machine Classifier
@@ -365,16 +366,14 @@ and then create the best boundary to separate data into classes by creating a hy
 svclassifier = SVC() # instantiate a class and name it svclassifier
 svclassifier.fit(X_train, y_train) # train the model
 y_pred_svc = svclassifier.predict(X_test)  # Predict the model using the test dataset
-print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc))
+print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc)) # print out classification report in terminal output
 # Classification report results:
 # Precision = Ratio of True Positive : (True Positive + False Positive. So, setosa (10/10=1), versicolor (9/9=1), virginica (11/11=1)
 # Recall = Ratio of True positive : (True Positive + False Negative)
 # F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
 # Support = number of actual occurences of that class
 # Accuracy = correct predictions for all classes / total number of predictions = 10/10 = 1
-print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test, y_pred_svc))
-# Confusion matrix 
-# Accuracy score using testing dataset
+print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test, y_pred_svc)) # print out Confusion matrix in terminal output
 print('\nSupport Vector Classifier model accuracy is', accuracy_score(
     y_test, y_pred_svc)*100)  # print out accuracy score *100
 print('Support Vector Classifier model F1 score is',
@@ -396,10 +395,9 @@ y_pred_rf = rf.predict(X_test) # Predict the model using the test dataset
 # Random Forest visualization using confusion matrix
 disp= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
 plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=10)
+             fontweight='bold', size=10) # customize super title
 plt.grid(False) # eliminate white grid within the confusion matrix
 plt.show() # show plot
-# Accuracy score using testing dataset
 print('\nRandom Forest model accuracy score is',
       accuracy_score(y_test, y_pred_rf)*100) # print accuracy score * 100
 print('Random Forest model F1 score is', f1_score(
@@ -419,11 +417,10 @@ y_pred_gs = gaussian.predict(X_test) # Predict the model using the test dataset
 cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix
 accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score
 # multiply by 100 here because it is too complicated to do so in the print format
-f1 = f1_score(y_test,y_pred_gs,average='micro')
+f1 = f1_score(y_test,y_pred_gs,average='micro') # instantiate an object and name it f1
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs)) # print Classification Report in terminal output
 print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in terminal output
-# Accuracy score using testing dataset
 print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point of the accuracy value
 print('Naive-Bayes model F1 score is %.3f' %f1) # # print out F1 score, .3f is float with 3 decimal points of the f1 value
 # %.1f and %.3f are format specifiers. They begin with %, then followed by a character that represents the data type, which is a float
