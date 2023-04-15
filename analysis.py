@@ -32,9 +32,9 @@ from sklearn.naive_bayes import GaussianNB # import Gaussian Naïve Bayes from s
 '''
 Load data and add column header
 '''
-# create a list of column names 
+# instantiate a list of column names 
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
-# create a pandas dataframe object called df, read the csv file and assign a name to each column
+# instantiate a pandas dataframe object called df, read the csv file with the read_csv funtion and assign a name to each column
 df = pd.read_csv('iris.data', names=columns) # df contains iris.data and add column names to the dataframe
 print('\nThe first 2 lines of the dataset\n',df.head(2))  # print out first 2 lines to see if the column names were added properly
 # Output: Column names were added properly
@@ -88,7 +88,7 @@ Question 2. DATA VISUALISATION: Histogram of each variable into png file
 '''
 sns.set(style="whitegrid")  # set background
 # set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
-fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # create a figure containing subplots with multiple axes 
+fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # with subplots function, create a figure containing subplots with multiple axes 
 # set subplot arrangement in 2 directions (2D grid) (2 by 2) 
 # set figure size (width and height)
 sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
@@ -152,7 +152,7 @@ Data visualization to detect outliers, trends/pattern and Basic Machine Learning
 to determine the degree/strength of linear relationship between 2 continuous variables
 correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
-corr = df.corr(method="pearson")  # create/instantiate an object called corr 
+corr = df.corr(method="pearson")  # create/instantiate a corr method and call corr 
 # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper triangle for better readibility
 # Numpy tril function to extract lower triangle or triu to extract upper triangle
@@ -167,10 +167,10 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 
 # build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
-fig, ax = plt.subplots(figsize=(9, 6)) # create 1 figure and a single axes
+fig, ax = plt.subplots(figsize=(9, 6)) # with subplots function, create 1 figure and a single axes and set the figgure size to ve width=9 and height=6
 fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
-hm = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1, # create a seaborn heatmap called hm
+hm = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1, # using heatmap function, create a seaborn heatmap called hm
                 linecolor='yellow', cbar_kws={'label': 'Range', 'shrink': 0.9})  # customize heatmap
 # Where:
 # annot=True: if True, the data value in each cell will be displayed
@@ -238,7 +238,7 @@ plt.show()  # show plot
 to give more insight into data distribution and density on the y-axis
 it contains all data points, unlike the box plot which shows minimum, first quartile, median, third quartile and maximum and error bars
 '''
-fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) # create a figure containing subplots with multiple axes 
+fig, axs = plt.subplots(1, len(columns)-1, figsize=(20,5)) # using subplot function, create a figure containing subplots with multiple axes 
 # plot the subplots in 1 row of 4 subplots (stacked in 1 direction only, but still use axs because each has their own axes)
 # length -1 means all columns (5) -1 = 4 columns
 # set the figure size to 20 width and 5 height
@@ -248,7 +248,7 @@ for i in range(0,len(columns)-1):
 # Where:
 # for i in range can be translated to: for item in columns 1 to 4
 # seaborn violinplot, x-axis is Iris species, y is each column name, data is iris dataframe
-# ax the object to draw the plot into, in this case, the columns
+# ax is the object to draw the plot into, in this case, the columns
 # axs[i].set_ylabel(columns[i]) means each column list i is set as the y-axis label
 plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
              fontweight='bold', size=15) # customize the figure's super title
@@ -267,8 +267,8 @@ y = df.iloc[:,4] # store the target variable (Iris species) into labels (y)
 I used all 4 variables because the best determinants are still unknown at this point (whether sepal or petal attribute is better than the other).
 '''
 
-X = df.iloc[:, :-1].values # everything up until the last column but not including the last column (Iris species) 
-y = df.iloc[:, 4].values # = [:, -1],  get all the rows in the last/5th column (target variable (Iris species) into labels (y))
+X = df.iloc[:, :-1].values # X dataset is everything up until the last column but not including the last column (Iris species) 
+y = df.iloc[:, 4].values # = [:, -1],  y dataset gets all the rows in the last/5th column (target variable (Iris species) into labels (y))
 print('\nDataset shape before Train-Test split is',X.shape, y.shape)  
 # print out the shape (number of rows and columns) AFTER the data split
 X_train, X_test, y_train, y_test = train_test_split( 
@@ -329,7 +329,6 @@ to build a classification or regression
 branches bifurcate based on Y/N or T/F and breaks the dataset smaller everytime
 to eventually form a tree structure with decision nodes and leaf nodes
 '''
-# define Decision Tree classifer object
 dtclassifier = DecisionTreeClassifier(random_state=42) # instantiate a class and name it dtclassifier
 dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer model
 # Predict the response for test dataset
