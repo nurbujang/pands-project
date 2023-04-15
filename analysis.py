@@ -148,11 +148,11 @@ Data visualization to detect outliers, trends/pattern and Basic Machine Learning
 '''
 
 '''
-4.1 Pearson correlation analysis 
+4.1 Pearson correlation analysis by attributes
 to determine the degree/strength of linear relationship between 2 continuous variables
 correlation efficient closer to 1 indicates a strong +ve relationship, closer to -1 indicates a strong -ve relationship
 '''
-corr = df.corr(method="pearson")  # instantiate a corr method and call corr 
+corr = df.corr(method="pearson")  # instantiate a corr method and call it corr 
 # default is already Pearson Correlation (for linear), but can be changed to Kendall and Spearman for non-parametric. eg: method="Spearman"
 bool_upper_matrix = np.tril(np.ones(corr.shape)).astype(bool)  # eliminate upper triangle for better readibility
 # Numpy tril function to extract lower triangle or triu to extract upper triangle
@@ -190,8 +190,8 @@ plt.show()  # show plot
 # Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
 
 '''
-4.2 If I group by species:
-to get more insights on which attributes are highly correlated for each Iris species:
+4.2 Pearson correlation analysis by species
+If I group them by species, I will get more insights on which attributes are highly correlated for each Iris species:
 '''
 df.groupby("Iris species").corr(method="pearson") # Pearson Correlation, but grouped by class
 print('\nPearson Correlation by species\n',df.groupby("Iris species").corr(method="pearson")) # print as terminal output
