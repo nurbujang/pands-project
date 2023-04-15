@@ -289,7 +289,7 @@ for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at
     knn = KNeighborsClassifier(n_neighbors=i) # instantiate a class and name it knn
     # number of neighbors range from 7-10
     knn.fit(X_train, y_train) # fits the model to the training set
-    y_pred_knn = knn.predict(X_test)
+    y_pred_knn = knn.predict(X_test) # Predict the model using the test dataset
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
           y_test)*100)  # Calculate and print the accuracy of the model using testing dataset ranging (from 7-10)*100 
 # %d is a placeholder for a number, %s is for string
@@ -315,12 +315,12 @@ lr = LogisticRegression(C=0.5, random_state=42)  # instantiate a class and name 
 # random_state is the seed of randomness to help get the same results everytime. It can be any number
 lr.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with target values that we already have (y_test)
-y_pred_lr = lr.predict(X_test)
+y_pred_lr = lr.predict(X_test) # Predict the model using the test dataset
 print('\nLogistic Regression model accuracy is',
       accuracy_score(y_test, y_pred_lr) * 100) # print accuracy score * 100
 # Model accuracy score is how many times the model makes correct predictions over the total number of predictions
 print('Logistic Regression model F1 score is',
-      f1_score(y_test, y_pred_lr, average='micro'))
+      f1_score(y_test, y_pred_lr, average='micro')) # print out F1 score
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 '''
@@ -333,7 +333,7 @@ to eventually form a tree structure with decision nodes and leaf nodes
 dtclassifier = DecisionTreeClassifier(random_state=42) # instantiate a class and name it dtclassifier
 dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer model
 # Predict the response for test dataset
-y_pred_dt = dtclassifier.predict(X_test)
+y_pred_dt = dtclassifier.predict(X_test) # Predict the model using the test dataset
 # Evaluate the model using testing dataset
 disp = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
 # Confusion matrix contains Actual values of Positive(1) and Negative(0) on the x-axis and Predicted values of Positive(1) and Negative(0) on the y-axis
@@ -342,13 +342,13 @@ disp = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test)
 # True Negative = 9+0+0+11 = 20
 # False Positive = 0+0 (across) = 0
 # False Negative = 0+0 (down) = 0
-plt.grid(False)
+plt.grid(False) # eliminate white grid within the confusion matrix
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
              fontweight='bold', size=10)
 print('\nDecision Tree Classification model accuracy is',
       accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score *100
 print('Decision Tree Classification model F1 score is',
-      f1_score(y_test, y_pred_dt, average='micro'))
+      f1_score(y_test, y_pred_dt, average='micro')) # print out F1 score
 # Precision = True Positive : (True Positive + False Positive) = 10/(10+0+0 (across)) = 1
 # Recall = True positive : (True Positive + False Negative) = 10/(10+0+0 (down)) = 1
 # F1 score = 2*((precision*recall)/(precision+recall)) = 2(1/2) = 1
@@ -364,7 +364,7 @@ and then create the best boundary to separate data into classes by creating a hy
 '''
 svclassifier = SVC() # instantiate a class and name it svclassifier
 svclassifier.fit(X_train, y_train) # train the model
-y_pred_svc = svclassifier.predict(X_test)  # Predict from the test dataset
+y_pred_svc = svclassifier.predict(X_test)  # Predict the model using the test dataset
 print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc))
 # Classification report results:
 # Precision = Ratio of True Positive : (True Positive + False Positive. So, setosa (10/10=1), versicolor (9/9=1), virginica (11/11=1)
@@ -378,7 +378,7 @@ print('Confusion matrix for Support Vector Classifier\n',confusion_matrix(y_test
 print('\nSupport Vector Classifier model accuracy is', accuracy_score(
     y_test, y_pred_svc)*100)  # print out accuracy score *100
 print('Support Vector Classifier model F1 score is',
-      f1_score(y_test, y_pred_svc, average='micro'))
+      f1_score(y_test, y_pred_svc, average='micro')) # print out F1 score
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 
@@ -392,18 +392,18 @@ each tree picks the features randomly, making it possible to find which features
 rf = RandomForestClassifier(n_estimators=10, n_jobs=-1) # instantiate a class and name it rf
 rf.fit(X_train, y_train)  # train the model
 # compare model’s output (y_pred) with the target values that we already have (y_test)
-y_pred_rf = rf.predict(X_test)
+y_pred_rf = rf.predict(X_test) # Predict the model using the test dataset
 # Random Forest visualization using confusion matrix
 disp= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test)
 plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species',
              fontweight='bold', size=10)
-plt.grid(False)
-plt.show()
+plt.grid(False) # eliminate white grid within the confusion matrix
+plt.show() # show plot
 # Accuracy score using testing dataset
 print('\nRandom Forest model accuracy score is',
       accuracy_score(y_test, y_pred_rf)*100) # print accuracy score * 100
 print('Random Forest model F1 score is', f1_score(
-    y_test, y_pred_rf, average='micro')) 
+    y_test, y_pred_rf, average='micro')) # print out F1 score
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 
@@ -415,7 +415,7 @@ I used Gaussian because data is continuous, and assumed to be normally-distribut
 '''
 gaussian = GaussianNB() # instantiate a class and name it gaussian
 gaussian.fit(X_train, y_train) # train the model
-y_pred_gs = gaussian.predict(X_test) # 
+y_pred_gs = gaussian.predict(X_test) # Predict the model using the test dataset
 cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix
 accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score
 # multiply by 100 here because it is too complicated to do so in the print format
@@ -425,6 +425,6 @@ print('\nClassification report for Naive-Bayes Classifier\n',classification_repo
 print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in terminal output
 # Accuracy score using testing dataset
 print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point of the accuracy value
-print('Naive-Bayes model F1 score is %.3f' %f1) # .3f is float with 3 decimal points of the f1 value
+print('Naive-Bayes model F1 score is %.3f' %f1) # # print out F1 score, .3f is float with 3 decimal points of the f1 value
 # %.1f and %.3f are format specifiers. They begin with %, then followed by a character that represents the data type, which is a float
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
