@@ -285,7 +285,7 @@ for i in np.arange(7, 10): # for i in numpy arange starting at 7 and stopping at
 # keep k small because there are only 3 species, to prevent overfitting
     knn = KNeighborsClassifier(n_neighbors=i) # instantiate a class and name it knn
     # number of neighbors range from 7-10
-    knn.fit(X_train, y_train) # fits the model to the training set
+    knn.fit(X_train, y_train) # fit method fits the model to the training set
     y_pred_knn = knn.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_knn
     print("\nk-Nearest Neighbor model accuracy for k = %d accuracy is" % i, knn.score(X_test,
           y_test)*100)  # Calculate and print the accuracy of the model using testing dataset ranging (from 7-10)*100 
@@ -310,7 +310,7 @@ lr = LogisticRegression(C=0.5, random_state=42)  # instantiate a class and name 
 # High C value means training data is more reliable (reflects real world data), low C value means training data may not reflect real world data
 # I picked 0.5 to be somewhere in the middle
 # random_state is the seed of randomness to help get the same results everytime. It can be any number
-lr.fit(X_train, y_train)  # train the model
+lr.fit(X_train, y_train)  # fit method fits the model to the training set
 # compare model’s output (y_pred) with target values that we already have (y_test)
 y_pred_lr = lr.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_lr
 print('\nLogistic Regression model accuracy is',
@@ -327,7 +327,7 @@ branches bifurcate based on Y/N or T/F and breaks the dataset smaller everytime
 to eventually form a tree structure with decision nodes and leaf nodes
 '''
 dtclassifier = DecisionTreeClassifier(random_state=42) # instantiate a class and name it dtclassifier
-dtclassifier.fit(X_train, y_train)  # Train Decision Tree Classifer model
+dtclassifier.fit(X_train, y_train)  # fit method fits the model to the training set
 # Predict the response for test dataset
 y_pred_dt = dtclassifier.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_dt
 # Evaluate the model using testing dataset
@@ -360,7 +360,7 @@ to map data points into a high dimensional space
 and then create the best boundary to separate data into classes by creating a hyperplane line with the most margin from the data point
 '''
 svclassifier = SVC() # instantiate a class and name it svclassifier
-svclassifier.fit(X_train, y_train) # train the model
+svclassifier.fit(X_train, y_train) # fit method fits the model to the training set
 y_pred_svc = svclassifier.predict(X_test)  # instantiate a predict method using the test dataset and call it y_pred_svc
 print('\nClassification report for Support Vector Classifier\n',classification_report(y_test, y_pred_svc)) # print out classification report in terminal output
 # Classification report results:
@@ -385,7 +385,7 @@ each bunch is trained on random subsets from training group (drawn with replacem
 each tree picks the features randomly, making it possible to find which features are more important than others
 '''
 rf = RandomForestClassifier(n_estimators=10, n_jobs=-1) # instantiate a class and name it rf
-rf.fit(X_train, y_train)  # train the model
+rf.fit(X_train, y_train)  # fit method fits the model to the training set
 # compare model’s output (y_pred) with the target values that we already have (y_test)
 y_pred_rf = rf.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_rf
 # Random Forest visualization using confusion matrix
@@ -408,7 +408,7 @@ it predicts the probability of different species based on different attributes
 I used Gaussian because data is continuous, and assumed to be normally-distributed
 '''
 gaussian = GaussianNB() # instantiate a class and name it gaussian
-gaussian.fit(X_train, y_train) # train the model
+gaussian.fit(X_train, y_train) # fit method fits the model to the training set
 y_pred_gs = gaussian.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_gs
 cm = confusion_matrix(y_test, y_pred_gs) # instantiate confusion matrix function and call it cm
 accuracy = accuracy_score(y_test,y_pred_gs)*100 # instantiate accuracy score function and call it accuracy

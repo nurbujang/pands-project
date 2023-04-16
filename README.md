@@ -47,7 +47,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 21. The last analysis done was Naïve Bayes Classifier using Gaussian Naïve Bayes (149-157). Lastly, I printed out the accuracy score and F1 score using the print format as shown in (158-159).
 
 ### Conclusion:
-A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were Pearson Correlation on sepal and petal attributes, Pearson Correlation by species, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
+A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were Pearson Correlation by sepal and petal attributes, Pearson Correlation by species, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
 
 ### References:
 1. https://data-flair.training/blogs/iris-flower-classification/
