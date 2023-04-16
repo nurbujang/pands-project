@@ -30,7 +30,7 @@ from sklearn.ensemble import RandomForestClassifier # import Random Forest Class
 from sklearn.naive_bayes import GaussianNB # import Gaussian Naïve Bayes from sklearn
 
 '''
-Load data and add column header
+LOAD DATA AND ADD COLUMN HEADER
 '''
 columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # instantiate a list of column names 
 # instantiate a pandas dataframe object called df, read the csv file with the read_csv funtion and assign a name to each column
@@ -42,13 +42,13 @@ print('\nThe first 2 lines of the dataset\n',df.head(2))  # print out first 2 li
 PRE-PROCESSING - Quick lookover on the dataset, check for missing values, duplicates
 '''
 # QUICK LOOKOVER OF THE DATASET
-df.value_counts("Iris species")  # how many lines for each species
+df.value_counts("Iris species")  # value_counts funtion to see how many lines for each species
 print('\nThe number of rows for each Iris species\n',df.value_counts("Iris species"))  # print how many lines for each species
 # Output: 50 lines for each species
 
 # BASIC INFO ABOUT THE DATASET, COLUMN NUMBERS, DATA TYPES, NON-NULL VALUES
 # can also be used to see of there are missing values from the number of non-null values
-df.info()  # print out in terminal output the basic information about the dataframe
+df.info()  # method to print out in terminal output the basic information about the dataframe
 # print(df.info()) # commented out because I don't want to print it twice
 # Output: 
 # It is a dataframe
@@ -57,14 +57,14 @@ df.info()  # print out in terminal output the basic information about the datafr
 # 4 float datatypes and 1 object
 
 # GET NUMBER OF MISSING VALUES IN EACH COLUMN
-df.isnull().sum() # sum of null values in the dataset
+df.isnull().sum() # method to get sum of null values in the dataset
 print ('\nThe number of missing value\n',df.isnull().sum()) # print out number of missing values
 # OR
 # df.isna().sum() # sum of na values
 # print(df.isna().sum()) # print out number of missing values
 
 # REMOVE DUPLICATES
-df.drop_duplicates() # remove duplicates from the dataset
+df.drop_duplicates() # method to remove duplicates from the dataset
 print('\nData shape after duplicate removal is',df.drop_duplicates().shape)  # print out the shape of the dataset after duplicate removal
 # output: 147 rows, 5 columns, meaning 3 rows were removed
 
@@ -72,25 +72,22 @@ print('\nData shape after duplicate removal is',df.drop_duplicates().shape)  # p
 Question 1. SUMMARY into text file, containing basic statistical analysis
 df. describe to get count, mean, standard deviation, min and max values, lower, mid and upper percentile
 '''
-df.describe()  # to get basic statistical analysis data 
+df.describe()  # describe method to get basic statistical analysis data 
 # print (df.describe()) # print out description of data in terminal output, but I do not want this
-
-# So, export data into a .txt file called summary.txt
+# What I want is to export data into a .txt file called summary.txt
 # use the built-in open() function
-text_file = open("summary.txt", "wt") # open a new file called summary, mode is w, and t is text mode
-
-# export into text file called summary, convert pandas dataframe to string
-n = text_file.write(df.describe().to_string()) # write the converted df.describe() string into a text file
+text_file = open("summary.txt", "wt") # with open function, open a new file called summary, mode is w, and t is text mode and call it text_file
+# then, export into text file called summary, convert pandas dataframe to string
+n = text_file.write(df.describe().to_string()) # with write mehtod, write the converted df.describe() string into a text file, and name it n
 text_file.close()  # ALWAYS close file when done
 
 '''
 Question 2. DATA VISUALISATION: Histogram of each variable into png file
 '''
-sns.set(style="whitegrid")  # set background
-# set grid position of subplots (2 down, 2 across), set size of whole figure (7 width, 8 height)
+sns.set(style="whitegrid")  # set background od seaborn histogram to whitegrid
 fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # with subplots function, create a figure containing subplots with multiple axes 
-# set subplot arrangement in 2 directions (2D grid) (2 by 2) 
-# set figure size (width and height)
+# set subplot arrangement/grid position in 2 directions (2D grid) (2 down by 2 across) 
+# set size of whole figure (7 width, 8 height))
 sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
              kde=True, color="olive", ax=axs[0, 0]) # subplot location first row, first column
 # Where:
@@ -98,7 +95,7 @@ sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
 # dataset used was df
 # determine x-axis label
 # display KDE line : Kernel density estimation (KDE) shows the data using a continuous curve
-# creates data 'smoothing' of the density distribution with a Gaussian kernel
+# KDE creates data 'smoothing' of the density distribution with a Gaussian kernel
 # set the bar color for this plot to olive
 # ax is the coordinate of each subplot on the figure
 sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", # use seaborn histplot, x-axis is sepal  width
