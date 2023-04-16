@@ -206,12 +206,12 @@ def graph(y):  # define a graph function of y axis
     sns.boxplot(x="Iris species", y=y, data=df) # seaborn boxplot, with Iris species on x-axis
 # on x-axis is Iris species, on y-axis is y (attributes) and the data used is the iris dataframe
     sns.stripplot(x="Iris species", y=y, data=df, # added a seaborn stripplot/jitter plot over the boxplot
-                  jitter=True, edgecolor="red", alpha=0.35, linewidth=1)
+                  jitter=True, linewidth=1, edgecolor="red", alpha=0.35)
 # Where:
 # on x-axis is Iris species, on y-axis is y (attributes) and the data used is the iris dataframe
 # jitter=True will display the dots (jitter)
-# the edgecolor of the jitter/dots is red to make the dots look clearer
 # linewidth is width of line around the dots, it has to be set to >0 to be visible
+# the edgecolor of the jitter/dots is red to make the dots look clearer
 # set transparency (alpha) to 0.35 so it is not too opaque
 plt.figure(figsize=(10, 10))
 plt.subplot(221)  # grid position top left (2 rows, 2 columns, first top)
