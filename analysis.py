@@ -56,13 +56,14 @@ df.info()  # print out in terminal output the basic information about the datafr
 # number of non-null values (data that is not missing) in each column
 # 4 float datatypes and 1 object
 
-# get number of missing values in each column
+# GET NUMBER OF MISSING VALUES IN EACH COLUMN
 df.isnull().sum() # sum of null values in the dataset
 print ('\nThe number of missing value\n',df.isnull().sum()) # print out number of missing values
 # OR
 # df.isna().sum() # sum of na values
 # print(df.isna().sum()) # print out number of missing values
 
+# REMOVE DUPLICATES
 df.drop_duplicates() # remove duplicates from the dataset
 print('\nData shape after duplicate removal is',df.drop_duplicates().shape)  # print out the shape of the dataset after duplicate removal
 # output: 147 rows, 5 columns, meaning 3 rows were removed
