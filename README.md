@@ -1,5 +1,5 @@
 # pands-project
-Pands project for Programming and Scripting
+## Pands project for Programming and Scripting
 
 Author: Nur Bujang
 
