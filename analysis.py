@@ -89,26 +89,26 @@ fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # with subplots function, create a
 # set subplot arrangement/grid position in 2 directions (2D grid) (2 down by 2 across) 
 # set size of whole figure (7 width, 8 height))
 sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
-             kde=True, color="olive", ax=axs[0, 0]) # subplot location first row, first column
+             kde=True, color="olive", ax=axs[0, 0]) # ax lists the subplot location at first row, first column
 # Where:
-# seaborn histplot was used to plot the histogram
+# seaborn histplot function was used to plot the histogram
 # dataset used was df
 # determine x-axis label
 # display KDE line : Kernel density estimation (KDE) shows the data using a continuous curve
 # KDE creates data 'smoothing' of the density distribution with a Gaussian kernel
-# set the bar color for this plot to olive
-# ax is the coordinate of each subplot on the figure
-sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", # use seaborn histplot, x-axis is sepal  width
-             ax=axs[0, 1])  # subplot location first row, second column
-sns.histplot(data=df, x="Petal length (cm)", # x-axis is petal length
-             kde=True, color="blue", ax=axs[1, 0]) # subplot location second row, first column
-sns.histplot(data=df, x="Petal width (cm)", # x-axis is petal width
-             kde=True, color="purple", ax=axs[1, 1]) # subplot location second row, second column
+# set the histogram bar color for this plot to olive
+# ax list contains the coordinate of each subplot on the figure
+sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", # x-axis is sepal width, histogram bar color is green
+             ax=axs[0, 1])  # list of subplot location at first row, second column
+sns.histplot(data=df, x="Petal length (cm)", # x-axis is petal length, histogram bar color is blue
+             kde=True, color="blue", ax=axs[1, 0]) # list of subplot location at second row, first column
+sns.histplot(data=df, x="Petal width (cm)", # x-axis is petal width, histogram bar color is purple
+             kde=True, color="purple", ax=axs[1, 1]) # list of subplot location at second row, second column
 fig.suptitle('Histogram of petal and sepal dimensions of three Iris species',
-             color='#191970', fontweight='bold')  # customize figure's super title, font color and bold
-fig.tight_layout()  # to fit all subplots into one figure nicely automatically
-plt.savefig('iris.png')  # save output into png file
-plt.show()  # show plot
+             color='#191970', fontweight='bold')  # function to customize figure's super title, font color and bold
+fig.tight_layout()  # method to fit all subplots into one figure nicely automatically
+plt.savefig('iris.png')  # function to save output into png file
+plt.show()  # function to show plot
 
 '''
 Question 3. DATA VISUALISATION: Scatter plot of each pair of variables
@@ -117,7 +117,7 @@ Question 3. DATA VISUALISATION: Scatter plot of each pair of variables
 # within that, the variables are Petal length, Petal width, Sepal length and Sepal width
 # Perform a Scatter Plot matrix (aka Pair Plot) to see the relationship between a pair of variables within a combination of multiple variables
 # to visualize the whole dataset, using 'Iris species' variable to assign different color to different species
-pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pairplot called pp
+pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pairplot function called pp
                   "o", "s", "D"], palette='brg', kind='reg', plot_kws={'line_kws': {'color': 'blue'}})
 # Where:
 # dataset used was df
@@ -129,11 +129,11 @@ pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pair
 # kind is a chart type, kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # plot_kws and pass in a dictionary object to customize the regression fit and line to blue
 plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15) # customize figure's super title, default black in bold, fontsize 15
+             fontweight='bold', size=15) # function to customize figure's super title, default black in bold, fontsize 15
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
-# fig.subplots_adjust shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
-# this was done to show the supertitle properly
-plt.show()  # show plot
+# fig.subplots_adjust function shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
+# this had to be done to show the super title properly
+plt.show()  # function to show plot
 # Results:
 # I. setosa is distinctly different and forms a separate cluster from I. virginica and I. versicolor, which shows some pairwise relationship between these two
 # The petal length and width of I. setosa have much narrower distribution compared to the other two species.
@@ -164,7 +164,7 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 
 # build a Correlation matrix to visualize the parameters which best correlate with each other easier
 # set size of whole figure (9 width, 6 height)
-fig, ax = plt.subplots(figsize=(9, 6)) # with subplots function, create 1 figure and a single axes and set the figgure size to ve width=9 and height=6
+fig, ax = plt.subplots(figsize=(9, 6)) # with subplots function, create 1 figure and a single axes and set the figure size to be width=9 and height=6
 fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
              color='#191970', fontweight='bold')  # customize figure's main/super title
 hm = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1, # using heatmap function, create a seaborn heatmap called hm
@@ -182,7 +182,7 @@ hm.set_xticklabels(hm.get_xticklabels(), rotation=0, fontsize=10)
 hm.set_yticklabels(hm.get_yticklabels(), rotation=0, fontsize=10)
 # set the label for y axis to follow each column name
 # rotation sets the yticks "upright" in any figure size
-plt.show()  # show plot
+plt.show()  # function to show plot
 # Results:
 # Strong positive correlation between Petal length & Petal width, Petal length & Sepal length, Sepal length & Petal width (same as above)
 
@@ -205,7 +205,7 @@ shows the minimum, first quartile, median, third quartile and maximum
 def graph(y):  # define a graph function of y axis
     sns.boxplot(x="Iris species", y=y, data=df) # seaborn boxplot, with Iris species on x-axis
 # on x-axis is Iris species, on y-axis is y (attributes) and the data used is the iris dataframe
-    sns.stripplot(x="Iris species", y=y, data=df, # added a seaborn stripplot/jitter plot over the boxplot
+    sns.stripplot(x="Iris species", y=y, data=df, # function to add a seaborn stripplot/jitter plot over the boxplot
                   jitter=True, linewidth=1, edgecolor="red", alpha=0.35)
 # Where:
 # on x-axis is Iris species, on y-axis is y (attributes) and the data used is the iris dataframe
@@ -214,17 +214,17 @@ def graph(y):  # define a graph function of y axis
 # the edgecolor of the jitter/dots is red to make the dots look clearer
 # set transparency (alpha) to 0.35 so it is not too opaque
 plt.figure(figsize=(10, 10))
-plt.subplot(221)  # grid position top left (2 rows, 2 columns, first top)
+plt.subplot(221)  # function to set grid position to top left (2 rows, 2 columns, first top)
 graph('Sepal length (cm)') # y-axis is Sepal length (cm)
-plt.subplot(222)  # grid position top right (2 rows, 2 columns, second top)
+plt.subplot(222)  # function to set grid position to top right (2 rows, 2 columns, second top)
 graph('Sepal width (cm)') # y-axis is Sepal width (cm)
-plt.subplot(223)  # grid position bottom left (2 rows, 2 columns, first bottom)
+plt.subplot(223)  # function to set grid position to bottom left (2 rows, 2 columns, first bottom)
 graph('Petal length (cm)') # y-axis is Petal length (cm)
-plt.subplot(224) # grid position bottom right (2 rows, 2 columns, second bottom)
+plt.subplot(224) # function to set grid position to bottom right (2 rows, 2 columns, second bottom)
 graph('Petal width (cm)') # y-axis is Petal width (cm)
 plt.suptitle('Box Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15) # customize the figure's super title
-plt.show()  # show plot
+             fontweight='bold', size=15) # function to customize the figure's super title
+plt.show()  # function to show plot
 # Results:
 # Iris setosa has the least distributed and smallest petal size
 # Iris virginica has the biggest petal size, and Iris versicolor's petal size is between Iris setosa and virginica
@@ -248,8 +248,8 @@ for i in range(0,len(columns)-1):
 # ax is the object to draw the plot into, in this case, the columns
 # axs[i].set_ylabel(columns[i]) means each column list i is set as the y-axis label
 plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15) # customize the figure's super title
-plt.show() # show plot
+             fontweight='bold', size=15) # function to customize the figure's super title
+plt.show() # function to show plot
 
 '''
 *************DATA PREPARATION FOR BASIC MACHINE LEARNING***************
@@ -339,9 +339,9 @@ dispdt = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test) # i
 # False Positive = 0+0 (across) = 0
 # False Negative = 0+0 (down) = 0
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=10) # customize super title
-plt.grid(False) # eliminate white grid within the confusion matrix
-plt.show() # display Confusion Matrix
+             fontweight='bold', size=10) # function to customize super title
+plt.grid(False) # function to eliminate white grid within the confusion matrix
+plt.show() # function to display Confusion Matrix
 print('\nDecision Tree Classification model accuracy is',
       accuracy_score(y_test, y_pred_dt)*100)  # print out accuracy score *100
 print('Decision Tree Classification model F1 score is',
@@ -391,9 +391,9 @@ y_pred_rf = rf.predict(X_test) # instantiate a predict method using the test dat
 # Random Forest visualization using confusion matrix
 disprf= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test) # instantiate a ConfusionMatrixDisplay class and from_estimator method and call it disprf
 plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=10) # customize super title
-plt.grid(False) # eliminate white grid within the confusion matrix
-plt.show() # show plot
+             fontweight='bold', size=10) # function to customize super title
+plt.grid(False) # function to eliminate white grid within the confusion matrix
+plt.show() # function to show plot
 print('\nRandom Forest model accuracy score is',
       accuracy_score(y_test, y_pred_rf)*100) # print accuracy score * 100
 print('Random Forest model F1 score is', f1_score(
