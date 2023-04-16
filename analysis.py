@@ -417,7 +417,7 @@ f1 = f1_score(y_test,y_pred_gs,average='micro') # instantiate an f1 score functi
 # Average method setting is set to micro, meaning the average takes into account the sum of True Positive, False Negative and False Positive
 print('\nClassification report for Naive-Bayes Classifier\n',classification_report(y_test, y_pred_gs)) # print Classification Report in terminal output
 print('\nConfusion matrix for Naive Bayes\n',cm) # print confusion matrix in terminal output
-print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # .1f is float with 1 decimal point of the accuracy value
+print('\nNaive-Bayes model accuracy score is %.1f' %accuracy) # print out accuracy score, .1f is float with 1 decimal point of the accuracy value
 print('Naive-Bayes model F1 score is %.3f' %f1) # # print out F1 score, .3f is float with 3 decimal points of the f1 value
 # %.1f and %.3f are format specifiers. They begin with %, then followed by a character that represents the data type, which is a float
 # F1 score measures the accuracy of the model, that is how many times it makes a correct prediction in the whole dataset
