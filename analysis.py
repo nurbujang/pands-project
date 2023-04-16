@@ -22,7 +22,7 @@ import seaborn as sns # for data visualization
 import matplotlib.pyplot as plt # for data visualization
 from sklearn.model_selection import train_test_split # to split data 
 from sklearn.neighbors import KNeighborsClassifier # import kNN Classifier from sklearn
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # sklearn module to print confusion matrix and report
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, f1_score, accuracy_score # import sklearn module to print confusion matrix and report
 from sklearn.linear_model import LogisticRegression # import Logistic Regression from sklearn
 from sklearn.tree import DecisionTreeClassifier # import Decision Tree Classifier from sklearn
 from sklearn.svm import SVC # import Support Vector Machine Classification from sklearn
@@ -32,8 +32,7 @@ from sklearn.naive_bayes import GaussianNB # import Gaussian Naïve Bayes from s
 '''
 Load data and add column header
 '''
-# instantiate a list of column names 
-columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species']
+columns = ['Sepal length (cm)', 'Sepal width (cm)', 'Petal length (cm)', 'Petal width (cm)', 'Iris species'] # instantiate a list of column names 
 # instantiate a pandas dataframe object called df, read the csv file with the read_csv funtion and assign a name to each column
 df = pd.read_csv('iris.data', names=columns) # df contains iris.data and add column names to the dataframe
 print('\nThe first 2 lines of the dataset\n',df.head(2))  # print out first 2 lines to see if the column names were added properly
@@ -42,12 +41,12 @@ print('\nThe first 2 lines of the dataset\n',df.head(2))  # print out first 2 li
 '''
 PRE-PROCESSING - Quick lookover on the dataset, check for missing values, duplicates
 '''
-# Quick lookover of the dataset to see the number of unique values
+# QUICK LOOKOVER OF THE DATASET
 df.value_counts("Iris species")  # how many lines for each species
 print('\nThe number of rows for each Iris species\n',df.value_counts("Iris species"))  # print how many lines for each species
 # Output: 50 lines for each species
 
-# basic info about the dataset, column numbers, data types, non-null values
+# BASIC INFO ABOUT THE DATASET, COLUMN NUMBERS, DATA TYPES, NON-NULL VALUES
 # can also be used to see of there are missing values from the number of non-null values
 df.info()  # print out in terminal output the basic information about the dataframe
 # print(df.info()) # commented out because I don't want to print it twice
