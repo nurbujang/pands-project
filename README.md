@@ -24,7 +24,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 *4. Performs any other analysis that I think is appropriate*
 
 ### Method:
-1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (1). The iris.data file was saved from the UCI website (2) and uploaded into pands-project folder.
+1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (2). The iris.data file was saved from the UCI website (1) and uploaded into pands-project folder.
 2. First, I imported the necessary packages/modules for the project as shown in W3Schools (3-6) and scikit-learn (7).
 3. Then, I created a list of column names, read the data (8-10) and added the column header to the dataframe (11-13).
 4. I looked at the first 2 lines (14) to see if the column names were added correctly.
@@ -42,7 +42,7 @@ This data can be used to develop Interactive Identification Keys for future taxo
 16. For k-Nearest Neighbor Classifier, I performed the analysis in a range of 7 to 10 (86-90). I kept the number small to prevent overfitting because there are only 3 species in the dataset (91-101). According to the accuracy score results, k=7 is enough to get a very high score on the model. I printed out the accuracy score using the print format as shown in (102-104). An F1 score was added as an extra performance measure (105-106).
 17. Logistic Regression was performed as shown in (107-111). I decided to perform it at hyperparameter value of 0.5 from the default value 1 to give equal weight on testing and training data, but this C value can be fine-tuned (112-115). 
 18. Decision Tree Classifier was done according to (116-118). A customized correlation matrix was displayed for better visualization (119-128). The model accuracy score and F1 score were printed out as usual.
-19. Next, I performed Support Vector Machine Classifier as shown by (1, 129-135). I printed the classification report and interpreted the results according to (136-137). The model accuracy score and F1 score were printed out as well.
+19. Next, I performed Support Vector Machine Classifier as shown by (2, 129-135). I printed the classification report and interpreted the results according to (136-137). The model accuracy score and F1 score were printed out as well.
 20. For Random Forest Classifier, I performed the analysis using examples shown by (138-148). A Confusion Matrix was displayed and model accuracy score and F1 score were printed out in the terminal output.
 21. The last analysis done was Naïve Bayes Classifier using Gaussian Naïve Bayes (149-157). Lastly, I printed out the accuracy score and F1 score using the print format as shown in (158-159).
 
@@ -50,8 +50,8 @@ This data can be used to develop Interactive Identification Keys for future taxo
 A program that outputs a summary of each variable to a single text file, saves a histogram of each variable to png files, and a scatter plot of each pair of variables was written. Additional analyses done were Pearson Correlation by sepal and petal attributes, Pearson Correlation by species, Box plot, Violin Plot, k-Nearest Neighbor Classifier, Logistic Regression, Decision Tree Classification, Support Vector Machine Classifier, Random Forest and Naïve Bayes Classifier. 
 
 ### References:
-1. https://data-flair.training/blogs/iris-flower-classification/
-2. http://archive.ics.uci.edu/ml/datasets/Iris
+1. http://archive.ics.uci.edu/ml/datasets/Iris
+2. https://data-flair.training/blogs/iris-flower-classification/
 3. https://www.w3schools.com/python/pandas/default.asp
 4. https://www.w3schools.com/python/numpy/numpy_intro.asp
 5. https://www.w3schools.com/python/matplotlib_pyplot.asp
