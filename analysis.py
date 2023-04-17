@@ -73,18 +73,18 @@ Question 1. SUMMARY into text file, containing basic statistical analysis
 df. describe to get count, mean, standard deviation, min and max values, lower, mid and upper percentile
 '''
 df.describe()  # describe method to get basic statistical analysis data 
-# print (df.describe()) # print out description of data in terminal output, but I do not want this
+# print (df.describe()) # to print out description of data in terminal output, but I do not want this
 # What I want is to export data into a .txt file called summary.txt
 # use the built-in open() function
 text_file = open("summary.txt", "wt") # with open function, open a new file called summary, mode is w, and t is text mode and call it text_file
 # then, export into text file called summary, convert pandas dataframe to string
-n = text_file.write(df.describe().to_string()) # with write mehtod, write the converted df.describe() string into a text file, and name it n
+n = text_file.write(df.describe().to_string()) # with write method, write the converted df.describe() string into a text file, and call it n
 text_file.close()  # ALWAYS close file when done
 
 '''
 Question 2. DATA VISUALISATION: Histogram of each variable into png file
 '''
-sns.set(style="whitegrid")  # set background od seaborn histogram to whitegrid
+sns.set(style="whitegrid")  # set background of seaborn histogram to whitegrid
 fig, axs = plt.subplots(2, 2, figsize=(7, 8)) # with subplots function, create a figure containing subplots with multiple axes 
 # set subplot arrangement/grid position in 2 directions (2D grid) (2 down by 2 across) 
 # set size of whole figure (7 width, 8 height))
@@ -97,7 +97,7 @@ sns.histplot(data=df, x="Sepal length (cm)", # x-axis is sepal length
 # display KDE line : Kernel density estimation (KDE) shows the data using a continuous curve
 # KDE creates data 'smoothing' of the density distribution with a Gaussian kernel
 # set the histogram bar color for this plot to olive
-# ax list contains the coordinate of each subplot on the figure
+# ax list contains the coordinate/grid location of each subplot on the figure
 sns.histplot(data=df, x="Sepal width (cm)", kde=True, color="green", # x-axis is sepal width, histogram bar color is green
              ax=axs[0, 1])  # list of subplot location at first row, second column
 sns.histplot(data=df, x="Petal length (cm)", # x-axis is petal length, histogram bar color is blue
@@ -105,7 +105,7 @@ sns.histplot(data=df, x="Petal length (cm)", # x-axis is petal length, histogram
 sns.histplot(data=df, x="Petal width (cm)", # x-axis is petal width, histogram bar color is purple
              kde=True, color="purple", ax=axs[1, 1]) # list of subplot location at second row, second column
 fig.suptitle('Histogram of petal and sepal dimensions of three Iris species',
-             fontweight='bold')  # function to customize figure's super title, default font color is black, fontweight is bold
+             fontweight='bold', size=14)  # function to customize figure's super title, default font color is black, fontweight is bold, fontsize is 14
 fig.tight_layout()  # method to fit all subplots into one figure nicely automatically
 plt.savefig('iris.png')  # function to save output into png file
 plt.show()  # function to show plot
@@ -129,7 +129,7 @@ pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pair
 # kind is a chart type, kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # plot_kws and pass in a dictionary object to customize the regression fit and line to blue
 plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species', color='#3D3F38',
-             fontweight='bold', size=15) # function to customize figure's super title, font color is hex number 3D3F38, fontweight is bold, fontsize 15
+             fontweight='bold', size=20) # function to customize figure's super title, font color is hex number 3D3F38, fontweight is bold, fontsize 20
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
 # fig.subplots_adjust function shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
 # this had to be done to show the super title properly
@@ -338,8 +338,8 @@ dispdt = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test) # i
 # True Negative = 9+0+0+11 = 20
 # False Positive = 0+0 (across) = 0
 # False Negative = 0+0 (down) = 0
-plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
-             color='#3D3F38', fontweight='bold', size=10) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 10
+plt.suptitle('Decision Tree Confusion Matrix for sepal and petal \nattributes of three Iris species',
+             color='#3D3F38', fontweight='bold', size=15) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 15
 plt.grid(False) # function to eliminate white grid within the confusion matrix
 plt.show() # function to display Confusion Matrix
 print('\nDecision Tree Classification model accuracy is',
@@ -390,8 +390,8 @@ rf.fit(X_train, y_train)  # fit method fits the model to the training set
 y_pred_rf = rf.predict(X_test) # instantiate a predict method using the test dataset and call it y_pred_rf
 # Random Forest visualization using confusion matrix
 disprf= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test) # instantiate a ConfusionMatrixDisplay class and from_estimator method and call it disprf
-plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species',
-             color='#3D3F38', fontweight='bold', size=10) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 10
+plt.suptitle('Random Forest Confusion Matrix for sepal and petal \nattributes of three Iris species',
+             color='#3D3F38', fontweight='bold', size=15) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 15
 plt.grid(False) # function to eliminate white grid within the confusion matrix
 plt.show() # function to show plot
 print('\nRandom Forest model accuracy score is',
