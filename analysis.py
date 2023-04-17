@@ -129,7 +129,7 @@ pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pair
 # kind is a chart type, kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # plot_kws and pass in a dictionary object to customize the regression fit and line to blue
 plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species', color='#3D3F38',
-             fontweight='bold', size=20) # function to customize figure's super title, font color is hex number 3D3F38, fontweight is bold, fontsize 20
+             fontweight='bold', size=17) # function to customize figure's super title, font color is hex number 3D3F38, fontweight is bold, fontsize 17
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
 # fig.subplots_adjust function shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
 # this had to be done to show the super title properly
@@ -223,7 +223,7 @@ graph('Petal length (cm)') # y-axis is Petal length (cm)
 plt.subplot(224) # function to set grid position to bottom right (2 rows, 2 columns, second bottom)
 graph('Petal width (cm)') # y-axis is Petal width (cm)
 plt.suptitle('Box Plot for sepal and petal attributes of three Iris species', color='#3D3F38',
-             fontweight='bold', size=15) # function to customize the figure's super title, color is hex number 3D3F38, fontweight bold, font size 15
+             fontweight='bold', size=17) # function to customize the figure's super title, color is hex number 3D3F38, fontweight bold, font size 17
 plt.show()  # function to show plot
 # Results:
 # Iris setosa has the least distributed and smallest petal size
@@ -339,7 +339,7 @@ dispdt = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test) # i
 # False Positive = 0+0 (across) = 0
 # False Negative = 0+0 (down) = 0
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal \nattributes of three Iris species',
-             color='#3D3F38', fontweight='bold', size=15) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 15
+             color='#3D3F38', fontweight='bold', size=13) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 13
 plt.grid(False) # function to eliminate white grid within the confusion matrix
 plt.show() # function to display Confusion Matrix
 print('\nDecision Tree Classification model accuracy is',
@@ -391,7 +391,7 @@ y_pred_rf = rf.predict(X_test) # instantiate a predict method using the test dat
 # Random Forest visualization using confusion matrix
 disprf= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test) # instantiate a ConfusionMatrixDisplay class and from_estimator method and call it disprf
 plt.suptitle('Random Forest Confusion Matrix for sepal and petal \nattributes of three Iris species',
-             color='#3D3F38', fontweight='bold', size=15) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 15
+             color='#3D3F38', fontweight='bold', size=13) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 13
 plt.grid(False) # function to eliminate white grid within the confusion matrix
 plt.show() # function to show plot
 print('\nRandom Forest model accuracy score is',
