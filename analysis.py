@@ -105,7 +105,7 @@ sns.histplot(data=df, x="Petal length (cm)", # x-axis is petal length, histogram
 sns.histplot(data=df, x="Petal width (cm)", # x-axis is petal width, histogram bar color is purple
              kde=True, color="purple", ax=axs[1, 1]) # list of subplot location at second row, second column
 fig.suptitle('Histogram of petal and sepal dimensions of three Iris species',
-             color='#191970', fontweight='bold')  # function to customize figure's super title, font color and bold
+             fontweight='bold')  # function to customize figure's super title, default font color is black, fontweight is bold
 fig.tight_layout()  # method to fit all subplots into one figure nicely automatically
 plt.savefig('iris.png')  # function to save output into png file
 plt.show()  # function to show plot
@@ -128,8 +128,8 @@ pp = sns.pairplot(df, hue='Iris species', markers=[ # instantiate a seaborn pair
 # palette is set to brg palette
 # kind is a chart type, kind='reg' applies a linear regression line to identify the relationship within the scatter plot
 # plot_kws and pass in a dictionary object to customize the regression fit and line to blue
-plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15) # function to customize figure's super title, default black in bold, fontsize 15
+plt.suptitle('Scatter Plot for sepal and petal attributes of three Iris species', color='#3D3F38',
+             fontweight='bold', size=15) # function to customize figure's super title, font color is hex number 3D3F38, fontweight is bold, fontsize 15
 pp.fig.subplots_adjust(top=0.92, bottom=0.08)
 # fig.subplots_adjust function shifts the pairplot position, 0.92 of the default 0.9 for the top edge and 0.08 of the default 0.1 for the bottom edge
 # this had to be done to show the super title properly
@@ -166,7 +166,7 @@ print('\nPearson Correlation by attributes\n',corr)  # print as terminal output
 # set size of whole figure (9 width, 6 height)
 fig, ax = plt.subplots(figsize=(9, 6)) # with subplots function, create 1 figure and a single axes and set the figure size to be width=9 and height=6
 fig.suptitle('Correlation matrix for petal and sepal attributes of three Iris species',
-             color='#191970', fontweight='bold')  # customize figure's main/super title
+             color='#3D3F38', fontweight='bold')  # customize figure's main/super title, color is hex number 3D3F38, fontweight bold
 hm = sns.heatmap(corr, annot=True, ax=ax, cmap='coolwarm', square=True, linewidths=0.1, # using heatmap function, create a seaborn heatmap called hm
                 linecolor='yellow', cbar_kws={'label': 'Range', 'shrink': 0.9})  # customize heatmap
 # Where:
@@ -222,8 +222,8 @@ plt.subplot(223)  # function to set grid position to bottom left (2 rows, 2 colu
 graph('Petal length (cm)') # y-axis is Petal length (cm)
 plt.subplot(224) # function to set grid position to bottom right (2 rows, 2 columns, second bottom)
 graph('Petal width (cm)') # y-axis is Petal width (cm)
-plt.suptitle('Box Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15) # function to customize the figure's super title
+plt.suptitle('Box Plot for sepal and petal attributes of three Iris species', color='#3D3F38',
+             fontweight='bold', size=15) # function to customize the figure's super title, color is hex number 3D3F38, fontweight bold, font size 15
 plt.show()  # function to show plot
 # Results:
 # Iris setosa has the least distributed and smallest petal size
@@ -247,8 +247,8 @@ for i in range(0,len(columns)-1):
 # seaborn violinplot, x-axis is Iris species, y is each column name, data is iris dataframe
 # ax is the object to draw the plot into, in this case, the columns
 # axs[i].set_ylabel(columns[i]) means each column list i is set as the y-axis label
-plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=15) # function to customize the figure's super title
+plt.suptitle('Violin Plot for sepal and petal attributes of three Iris species', color='#3D3F38', 
+             fontweight='bold', size=15) # function to customize the figure's super title, color is hex number 3D3F38, fontweight bold, font size 15
 plt.show() # function to show plot
 
 '''
@@ -339,7 +339,7 @@ dispdt = ConfusionMatrixDisplay.from_estimator(dtclassifier, X_test, y_test) # i
 # False Positive = 0+0 (across) = 0
 # False Negative = 0+0 (down) = 0
 plt.suptitle('Decision Tree Confusion Matrix for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=10) # function to customize super title
+             color='#3D3F38', fontweight='bold', size=10) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 10
 plt.grid(False) # function to eliminate white grid within the confusion matrix
 plt.show() # function to display Confusion Matrix
 print('\nDecision Tree Classification model accuracy is',
@@ -391,7 +391,7 @@ y_pred_rf = rf.predict(X_test) # instantiate a predict method using the test dat
 # Random Forest visualization using confusion matrix
 disprf= ConfusionMatrixDisplay.from_estimator(rf, X_test, y_test) # instantiate a ConfusionMatrixDisplay class and from_estimator method and call it disprf
 plt.suptitle('Random Forest Confusion Matrix for sepal and petal attributes of three Iris species',
-             fontweight='bold', size=10) # function to customize super title
+             color='#3D3F38', fontweight='bold', size=10) # function to customize super title, font color is hex number 3D3F38, fontweight bold, font size 10
 plt.grid(False) # function to eliminate white grid within the confusion matrix
 plt.show() # function to show plot
 print('\nRandom Forest model accuracy score is',
