@@ -1,9 +1,9 @@
 # pands-project
 ## Pands project for Programming and Scripting
 
-Author: Nur Bujang
-
 ## **analysis.py**
+
+Author: Nur Bujang
 
 ### Dataset Summary
 Dataset iris.data (1) contains 5 columns and 150 lines (replicates). From that, it contains 3 classes of 50 instances each. A quick look through the data file indicates that the dataset consists of four measurement of a particular external flower structure to morphologically determine/identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. However, a closer look at the description file indicates that these measurements are the length (in cm) and width (in cm) of two structures: the sepal and petal. The color attribute is probably unreliable because of color polymorphism within the species or population. The dataset itself is complete and contains no missing and duplicating values.
