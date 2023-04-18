@@ -26,10 +26,10 @@ This data can be used to develop Interactive Identification Keys for future taxo
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (2). The iris.data file was saved from the UCI website (1) and uploaded into pands-project folder.
 2. First, I imported the necessary packages/modules for the project as shown in W3Schools (3-6) and scikit-learn (7).
-3. Then, I created a list of column names, read the data (8-10) and added the column header to the dataframe (11-13).
+3. Then, I created a list of column names, read the data (8-10) and added the column header to the dataframe (11-13). 
 4. I looked at the first 2 lines (14) to see if the column names were added correctly.
 5. A quick lookover of the dataset was done to see the number of rows on each species (15) and other basic information about the dataset (16).
-6. I also checked for missing value using the isnull and isna function that returns a True/false if a value is missing (17-21) and dropped duplicate values (22-23).
+6. I also checked for missing values using the isnull and isna function that returns a True/false if a value is missing (17-21) and dropped duplicate values from the dataset (22-23).
 7. For Question 1, I used df.describe to get a summary of each variable (24-25). Then I used a built-in open function, converted pandas dataframe to string (26-28) and exported/wrote the converted string into a text file (29-30).
 8. For Question 2, I set the background using seaborn, set the grid position of the subplots, and plotted the histogram (31-32). I also added the kernel density estimation (KDE) according to (33) and added the supertitle (34-35). Tight layout automatically adjusts the subplots to fit nicely into the figure area (36). Then, I saved the histogram into iris.png file using plt.savefig according to (37).
 9. For Question 3, I used seaborn pairplot according to (38-41) based on the hue (42). I customized the color palette according to (43-44). I also added regression lines (45-47) and adjusted the figure size (48).
