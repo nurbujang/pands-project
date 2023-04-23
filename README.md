@@ -6,11 +6,11 @@
 Author: Nur Bujang
 
 ### Dataset Summary
-The dataset iris.data (1) contains 5 columns and 150 lines (replicates), consisting of 3 classes of 50 instances each. There are four measurement of a particular external flower structure to morphologically determine/identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. The description file indicates that these measurements are the length (in cm) and width (in cm) of two structures: the sepal and petal. The color attribute is probably unreliable because of color polymorphism within the species or population. The dataset itself is complete and contains no missing and duplicating values.
+The dataset iris.data (1) contains 5 columns and 150 lines (replicates), consisting of 3 classes of 50 instances each. There are four measurement of a particular external flower structure to morphologically determine or identify whether it is one of three species: *Iris setosa, I. versicolor or I. virginica*. The description file indicates that these measurements are the length (in cm) and width (in cm) of two structures: the sepal and petal. The color attribute is probably unreliable because of color polymorphism within the species or population. The dataset itself is complete and does not contain missing or duplicating values.
 
 Morphological analysis for species determination is used to assess biodiversity in an ecosystem. It could be used to identify new species or rectify previous species misidentification. While there are other more accurate methods for species identification such as DNA Barcoding and protein-based methods, morphological analysis is quick, cheap and particularly useful for researchers in the field. 
 
-This data can be used to develop Interactive Identification Keys for future taxonomists and researchers as well as species determination using pattern recognition in Machine Learning. It can also be used alongside phylogenetic studies to identify which species are more closely related to each other and share a common ancestor. 
+This data can be used to develop Interactive Identification Keys for future taxonomists and researchers, as well as species determination using pattern recognition in Machine Learning. It can also be used alongside phylogenetic studies to identify which species are more closely related to each other and share a common ancestor. 
 
 ### Task Description:
 *The task is to write a program called analysis.py that:*
