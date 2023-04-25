@@ -15,13 +15,13 @@ This data can be used to develop Interactive Identification Keys for future taxo
 ### Task Description:
 *The task is to write a program called analysis.py that:*
 
-*1. Outputs a SUMMARY OF EACH VARIABLE to a single text file,*
+*1. outputs a SUMMARY OF EACH VARIABLE to a single text file,*
 	
-*2. Saves a HISTOGRAM OF EACH VARIABLE to png files,*
+*2. saves a HISTOGRAM OF EACH VARIABLE to png files,*
 	
-*3. Outputs a SCATTER PLOT OF EACH PAIR OF VARIABLES.*
+*3. outputs a SCATTER PLOT OF EACH PAIR OF VARIABLES*
 	
-*4. Performs any other analysis that I think is appropriate*
+*4. performs any other analysis that I think is appropriate.*
 
 ### Method:
 1. The general processes in data analysis are data loading, dataset analyzing and visualization, model training, model evaluation, model testing (2). The iris.data file was saved from the UCI website (1) and uploaded into pands-project folder.
